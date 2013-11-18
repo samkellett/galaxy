@@ -1,6 +1,8 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
+#include <string>
+
 #define int8 char
 #define int16 short
 #define int32 int
