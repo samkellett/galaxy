@@ -5,10 +5,11 @@ include_directories(
 )
 
 set(GALAXY_SOURCES
-  src/galaxy.cpp
+  src/galaxy/game.cpp
+  src/galaxy/galaxy.cpp
 )
 
-file(GLOB GALAXY_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/*.h)
+file(GLOB_RECURSE GALAXY_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/*.h)
 
 add_library(${PROJECT_NAME} SHARED
   ${GALAXY_HEADERS}

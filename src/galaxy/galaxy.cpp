@@ -1,8 +1,11 @@
 #include "galaxy.h"
 
+#include "game.h"
+
 namespace galaxy {
 
-Galaxy::Galaxy()
+Galaxy::Galaxy(Game &game) :
+  game_(game)
 {
 }
 

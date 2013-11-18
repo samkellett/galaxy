@@ -1,5 +1,5 @@
-#ifndef GLOBAL_H
-#define GLOBAL_H
+#ifndef GALAXY_GLOBAL_H
+#define GALAXY_GLOBAL_H
 
 #include <string>
 
@@ -18,4 +18,4 @@
 #define foreach(ONE, ALL) for(ONE : ALL)
 #define forever for(;;)
 
-#endif
+#endif // GALAXY_GLOBAL_H
