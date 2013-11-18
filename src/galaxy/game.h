@@ -6,7 +6,12 @@ namespace galaxy {
 class Game
 {
 public:
-  Game();
+  Game(const char *title);
+
+  const char *title() const;
+
+protected:
+  const char *title_;
 };
 
 } // namespace galaxy

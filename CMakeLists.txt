@@ -2,6 +2,8 @@ project(galaxy)
 
 include_directories(
   ${Boost_INCLUDE_DIR}
+
+  ${CMAKE_SOURCE_DIR}/glfw/include
 )
 
 set(GALAXY_SOURCES
@@ -18,4 +20,5 @@ add_library(${PROJECT_NAME} SHARED
 
 target_link_libraries(${PROJECT_NAME}
   ${Boost_LIBRARIES}
+  ${GLFW_LIBRARIES}
 )

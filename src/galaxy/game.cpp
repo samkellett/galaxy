@@ -2,8 +2,14 @@
 
 namespace galaxy {
 
-Game::Game()
+Game::Game(const char *title) :
+  title_(title)
 {
+}
+
+const char *Game::title() const
+{
+  return title_;
 }
 
 } // namespace galaxy
