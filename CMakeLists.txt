@@ -1,9 +1,32 @@
 project(galaxy)
+message("[CMake]: Processing Galaxy library")
+
+set(Boost_USE_STATIC_LIBS ON)
+find_package(Boost 1.55 COMPONENTS REQUIRED)
+find_package(OpenGL REQUIRED)
+
+find_package(PkgConfig REQUIRED)
+pkg_search_module(GLFW REQUIRED glfw3)
+
+find_library(COCOA_LIBRARY Cocoa)
+find_library(IOKIT_LIBRARY IOKit)
+find_library(COREVIDEO_LIBRARY CoreVideo)
+
+message("[CMake]: Cocoa: ${COCOA_LIBRARY}")
+message("[CMake]: IOKit: ${IOKIT_LIBRARY}")
+message("[CMake]: CoreVideo: ${COREVIDEO_LIBRARY}")
+
+message("[CMake]: GLFW include dirs: ${GLFW_INCLUDE_DIRS}")
+message("[CMake]: GLFW static libs: ${GLFW_STATIC_LIBRARIES}")
 
 include_directories(
+#  ${OPENGL_INCLUDE_PATH}
   ${Boost_INCLUDE_DIR}
+  ${GLFW_INCLUDE_DIRS}
+)
 
-  ${CMAKE_SOURCE_DIR}/glfw/include
+link_directories(
+  /usr/local/lib
 )
 
 set(GALAXY_SOURCES
@@ -19,6 +42,11 @@ add_library(${PROJECT_NAME} SHARED
 )
 
 target_link_libraries(${PROJECT_NAME}
+  ${COCOA_LIBRARY}
+  ${OPENGL_LIBRARIES}
+  ${IOKIT_LIBRARY}
+  ${COREVIDEO_LIBRARY}
+
   ${Boost_LIBRARIES}
-  ${GLFW_LIBRARIES}
+  ${GLFW_STATIC_LIBRARIES}
 )
