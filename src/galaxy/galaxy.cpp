@@ -15,7 +15,7 @@ Galaxy::~Galaxy()
 {
 }
 
-int32 Galaxy::exec()
+int32_t Galaxy::exec()
 {
   GLFWwindow *window = nullptr;
   if (!glfwInit()) {
