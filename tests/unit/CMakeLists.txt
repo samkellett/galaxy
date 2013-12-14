@@ -1,8 +1,6 @@
 project(unit)
 message("[CMake]: Processing ${PROJECT_NAME} project")
 
-enable_testing()
-
 include_directories(
   ${gtest_SOURCE_DIR}
   ${gtest_SOURCE_DIR}/include
@@ -22,7 +20,7 @@ target_link_libraries(${PROJECT_NAME}
 )
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-  COMMAND ln -s ${PROJECT_BINARY_DIR}/${PROJECT_NAME} ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.run
+  COMMAND ln -fs ${PROJECT_BINARY_DIR}/${PROJECT_NAME} ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.run
+  COMMENT "[CMake]: Creating symlink to unit tests"
 )
 
-add_test(unit ${PROJECT_NAME})
