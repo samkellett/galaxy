@@ -6,7 +6,4 @@
 
 #include <string>
 
-#define foreach(ONE, ALL) for(ONE : ALL)
-#define forever for(;;)
-
 #endif // GALAXY_GLOBAL_H

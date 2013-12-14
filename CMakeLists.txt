@@ -1,6 +1,8 @@
 project(galaxy)
 message("[CMake]: Processing Galaxy library")
 
+set(GALAXY_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+
 set(Boost_USE_STATIC_LIBS ON)
 find_package(Boost 1.55 COMPONENTS REQUIRED)
 find_package(OpenGL REQUIRED)
@@ -50,3 +52,6 @@ target_link_libraries(${PROJECT_NAME}
   ${Boost_LIBRARIES}
   ${GLFW_STATIC_LIBRARIES}
 )
+
+# Tests
+add_subdirectory(tests)
