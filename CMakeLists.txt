@@ -4,9 +4,6 @@ message("[CMake]: Processing Galaxy library")
 set(GALAXY_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(GALAXY_BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR})
 
-add_subdirectory(ext/gtest)
-add_subdirectory(ext/assimp)
-
 set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-include ${GALAXY_SOURCE_DIR}/src/galaxy/global.h")
 
 set(Boost_USE_STATIC_LIBS ON)
@@ -76,4 +73,8 @@ if(DOXYGEN_FOUND)
 endif()
 
 # Tests
+add_subdirectory(ext/gtest)
+
 add_subdirectory(tests)
+
+add_dependencies(unit gtest)
