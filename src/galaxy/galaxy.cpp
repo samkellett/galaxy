@@ -9,21 +9,25 @@ namespace galaxy {
 Galaxy::Galaxy(Game &game) :
   game_(game)
 {
+  LOG(INFO) << "Initialising Galaxy";
 }
 
 Galaxy::~Galaxy()
 {
 }
 
-int32_t Galaxy::exec()
+int Galaxy::exec()
 {
   GLFWwindow *window = nullptr;
   if (!glfwInit()) {
+    LOG(ERROR) << "Failed to initialise GLFW.";
     return 1;
   }
   
   window = glfwCreateWindow(640, 480, game_.title(), nullptr, nullptr);
+  LOG(INFO) << "Window: " << window;
   if (!window) {
+    LOG(ERROR) << "Could not create a GLFW window.";
     glfwTerminate();
     return 1;
   }
@@ -34,13 +38,15 @@ int32_t Galaxy::exec()
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
   glfwMakeContextCurrent(window);
-  
+
+  LOG(INFO) << "Beginning game loop";  
   while(!glfwWindowShouldClose(window)) {
     // rendering
     
     glfwSwapBuffers(window);
     glfwPollEvents();
   }
+  LOG(INFO) << "Exited game loop";
 
   glfwTerminate();
   return 0;

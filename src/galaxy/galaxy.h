@@ -11,7 +11,7 @@ public:
   Galaxy(Game &game);
   ~Galaxy();
   
-  int32_t exec();
+  int exec();
   
 private:
   Game &game_;

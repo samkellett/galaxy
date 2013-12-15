@@ -4,7 +4,10 @@ message("[CMake]: Processing Galaxy library")
 set(GALAXY_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(GALAXY_BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR})
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${GALAXY_SOURCE_DIR}/cmake)
 set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-include ${GALAXY_SOURCE_DIR}/src/galaxy/global.h")
+
+find_package(GLog REQUIRED)
 
 set(Boost_USE_STATIC_LIBS ON)
 find_package(Boost 1.55 COMPONENTS REQUIRED)
@@ -17,6 +20,8 @@ find_library(COCOA_LIBRARY Cocoa)
 find_library(IOKIT_LIBRARY IOKit)
 find_library(COREVIDEO_LIBRARY CoreVideo)
 
+message("[CMake]: glog: ${GLOG_LIBRARY}")
+
 message("[CMake]: Cocoa: ${COCOA_LIBRARY}")
 message("[CMake]: IOKit: ${IOKIT_LIBRARY}")
 message("[CMake]: CoreVideo: ${COREVIDEO_LIBRARY}")
@@ -25,6 +30,8 @@ message("[CMake]: GLFW include dirs: ${GLFW_INCLUDE_DIRS}")
 message("[CMake]: GLFW static libs: ${GLFW_STATIC_LIBRARIES}")
 
 include_directories(
+  ${GLOG_INCLUDE_DIR}
+
   ${Boost_INCLUDE_DIR}
   ${OPENGL_INCLUDE_PATH}
   ${GLFW_INCLUDE_DIRS}
@@ -38,6 +45,7 @@ link_directories(
 set(GALAXY_SOURCES
   src/galaxy/game.cpp
   src/galaxy/galaxy.cpp
+  src/galaxy/logger.cpp
 )
 
 file(GLOB_RECURSE GALAXY_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/*.h)
@@ -48,12 +56,15 @@ add_library(${PROJECT_NAME} SHARED
 )
 
 target_link_libraries(${PROJECT_NAME}
+  ${GLOG_LIBRARY}
+
+  ${Boost_LIBRARIES}
+
   ${COCOA_LIBRARY}
   ${OPENGL_LIBRARIES}
   ${IOKIT_LIBRARY}
   ${COREVIDEO_LIBRARY}
 
-  ${Boost_LIBRARIES}
   ${GLFW_STATIC_LIBRARIES}
 )
 
@@ -74,7 +85,6 @@ endif()
 
 # Tests
 add_subdirectory(ext/gtest)
-
 add_subdirectory(tests)
 
 add_dependencies(unit gtest)

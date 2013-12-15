@@ -6,6 +6,8 @@
 
 #include <string>
 
+#include <glog/logging.h>
+
 #include "glm/glm.hpp"
 
 #endif // GALAXY_GLOBAL_H
