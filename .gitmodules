@@ -4,3 +4,6 @@
 [submodule "ext/gtest"]
 	path = ext/gtest
 	url = http://git.chromium.org/external/googletest.git
+[submodule "ext/assimp"]
+	path = ext/assimp
+	url = https://github.com/assimp/assimp.git
