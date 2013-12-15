@@ -6,4 +6,6 @@
 
 #include <string>
 
+#include "glm/glm.hpp"
+
 #endif // GALAXY_GLOBAL_H

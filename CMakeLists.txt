@@ -2,6 +2,7 @@ project(galaxy)
 message("[CMake]: Processing Galaxy library")
 
 set(GALAXY_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(GALAXY_BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR})
 
 set(Boost_USE_STATIC_LIBS ON)
 find_package(Boost 1.55 COMPONENTS REQUIRED)
@@ -22,9 +23,10 @@ message("[CMake]: GLFW include dirs: ${GLFW_INCLUDE_DIRS}")
 message("[CMake]: GLFW static libs: ${GLFW_STATIC_LIBRARIES}")
 
 include_directories(
-#  ${OPENGL_INCLUDE_PATH}
   ${Boost_INCLUDE_DIR}
+  ${OPENGL_INCLUDE_PATH}
   ${GLFW_INCLUDE_DIRS}
+  ${GALAXY_SOURCE_DIR}/ext/glm
 )
 
 link_directories(
@@ -61,12 +63,14 @@ if(DOXYGEN_FOUND)
     ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY
   )
 
-  add_custom_target(docs
+  add_custom_target(doc
     ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/doc
     COMMENT "[CMake]: Generating API documentation with Doxygen" VERBATIM
   )
 endif()
 
 # Tests
+add_subdirectory(ext/googletest)
+
 add_subdirectory(tests)
