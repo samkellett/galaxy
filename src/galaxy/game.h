@@ -6,12 +6,19 @@ namespace galaxy {
 class Game
 {
 public:
-  Game(const char *title);
+  Game();
+  Game(const char * const title);
+  Game(const char * const title, const uint32_t width, const uint32_t height);
 
-  const char *title() const;
+  const char * const title() const;
+  const uint32_t width() const;
+  const uint32_t height() const;
 
 protected:
-  const char *title_;
+  const char * const title_;
+
+  const uint32_t width_;
+  const uint32_t height_;
 };
 
 } // namespace galaxy

@@ -5,7 +5,10 @@ set(GALAXY_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(GALAXY_BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR})
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${GALAXY_SOURCE_DIR}/cmake)
-set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-include ${GALAXY_SOURCE_DIR}/src/galaxy/global.h")
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include ${GALAXY_SOURCE_DIR}/src/galaxy/global.h")
 
 find_package(GLog REQUIRED)
 
@@ -33,9 +36,9 @@ include_directories(
   ${GLOG_INCLUDE_DIR}
 
   ${Boost_INCLUDE_DIR}
+
   ${OPENGL_INCLUDE_PATH}
   ${GLFW_INCLUDE_DIRS}
-  ${GALAXY_SOURCE_DIR}/ext/glm
 )
 
 link_directories(

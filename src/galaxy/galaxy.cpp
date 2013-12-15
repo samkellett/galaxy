@@ -24,7 +24,7 @@ int Galaxy::exec()
     return 1;
   }
   
-  window = glfwCreateWindow(640, 480, game_.title(), nullptr, nullptr);
+  window = glfwCreateWindow(game_.width(), game_.height(), game_.title(), nullptr, nullptr);
   LOG(INFO) << "Window: " << window;
   if (!window) {
     LOG(ERROR) << "Could not create a GLFW window.";
