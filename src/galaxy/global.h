@@ -4,6 +4,8 @@
 #include <cstdint>
 #include <cassert>
 
+#include <memory>
+
 #include <string>
 
 #include <glog/logging.h>

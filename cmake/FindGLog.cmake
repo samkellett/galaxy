@@ -1,5 +1,4 @@
 
-set(GLOG_FOUND false)
 set(GLOG_INCLUDE_DIR)
 set(GLOG_LIBRARY)
 

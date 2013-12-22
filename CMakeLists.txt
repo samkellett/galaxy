@@ -46,9 +46,11 @@ link_directories(
 )
 
 set(GALAXY_SOURCES
-  src/galaxy/game.cpp
   src/galaxy/galaxy.cpp
+  src/galaxy/game.cpp
+  src/galaxy/gamestate.cpp
   src/galaxy/logger.cpp
+  src/galaxy/statemanager.cpp
 )
 
 file(GLOB_RECURSE GALAXY_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/*.h)
