@@ -10,6 +10,16 @@ StateManager::~StateManager()
 {
 }
 
+const std::shared_ptr<GameState> StateManager::at(int32_t i)
+{
+  return states_.at(i);
+}
+
+const int32_t StateManager::size()
+{
+  return states_.size();
+}
+
 const std::shared_ptr<GameState> StateManager::pop_front()
 {
   assert(!states_.empty());

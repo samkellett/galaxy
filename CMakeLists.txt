@@ -89,7 +89,8 @@ if(DOXYGEN_FOUND)
 endif()
 
 # Tests
-add_subdirectory(ext/gtest)
+add_subdirectory(ext/gmock)
+# add_subdirectory(ext/gtest)
 add_subdirectory(tests)
 
 add_dependencies(unit gtest)

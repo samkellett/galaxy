@@ -16,6 +16,9 @@ public:
   template <typename State>
   void push();
 
+  const std::shared_ptr<GameState> at(int32_t i);
+  const int32_t size();
+
   const std::shared_ptr<GameState> pop_front();
   const std::shared_ptr<GameState> pop_back();
 
