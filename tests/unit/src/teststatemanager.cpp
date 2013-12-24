@@ -82,7 +82,7 @@ TEST_F(StateManagerTest, Back)
 
   states()->pop_back();
   states()->pop_back();
-  ASSERT_EQ(states()->size(), 0);
+  ASSERT_EQ(states()->size(), 0); 
 }
 
 } // namespace unit

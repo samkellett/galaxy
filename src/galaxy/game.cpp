@@ -1,5 +1,7 @@
 #include "game.h"
 
+#include <chrono>
+
 #include "gamestate.h"
 #include "statemanager.h"
 
@@ -32,6 +34,26 @@ const uint32_t Game::width() const
 const uint32_t Game::height() const
 {
   return height_;
+}
+
+void Game::update(const std::chrono::nanoseconds &dt)
+{
+  for (int32_t i = 0; i < states()->size(); ++i) {
+  	auto state = states()->at(i);
+  	assert(state);
+
+  	state->update(dt);
+  }
+}
+
+void Game::render(const std::chrono::nanoseconds &dt)
+{
+  for (int32_t i = 0; i < states()->size(); ++i) {
+  	auto state = states()->at(i);
+  	assert(state);
+
+  	state->render(dt);
+  }
 }
 
 const std::shared_ptr<StateManager> Game::states() const

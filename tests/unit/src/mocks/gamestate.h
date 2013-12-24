@@ -8,24 +8,24 @@ namespace mocks {
 class GameStateOne : public galaxy::GameState
 {
   MOCK_METHOD0(init, void());
-  MOCK_METHOD0(update, void());
-  MOCK_METHOD0(render, void());
+  MOCK_METHOD1(update, void(const std::chrono::nanoseconds &dt));
+  MOCK_METHOD1(render, void(const std::chrono::nanoseconds &dt));
   MOCK_METHOD0(destroy, void());
 };
 
 class GameStateTwo : public galaxy::GameState
 {
   MOCK_METHOD0(init, void());
-  MOCK_METHOD0(update, void());
-  MOCK_METHOD0(render, void());
+  MOCK_METHOD1(update, void(const std::chrono::nanoseconds &dt));
+  MOCK_METHOD1(render, void(const std::chrono::nanoseconds &dt));
   MOCK_METHOD0(destroy, void());
 };
 
 class GameStateThree : public galaxy::GameState
 {
   MOCK_METHOD0(init, void());
-  MOCK_METHOD0(update, void());
-  MOCK_METHOD0(render, void());
+  MOCK_METHOD1(update, void(const std::chrono::nanoseconds &dt));
+  MOCK_METHOD1(render, void(const std::chrono::nanoseconds &dt));
   MOCK_METHOD0(destroy, void());
 };
 

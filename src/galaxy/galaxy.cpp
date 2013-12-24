@@ -1,5 +1,7 @@
 #include "galaxy.h"
 
+#include <chrono>
+
 #include <GLFW/glfw3.h>
 
 #include "game.h"
@@ -39,12 +41,19 @@ int Galaxy::exec()
 
   glfwMakeContextCurrent(window);
 
-  LOG(INFO) << "Beginning game loop";  
+  LOG(INFO) << "Beginning game loop";
+  std::chrono::nanoseconds dt;
   while(!glfwWindowShouldClose(window)) {
-    // rendering
+    auto start = std::chrono::high_resolution_clock::now();
+
+    game_.update(dt);
+    game_.render(dt);
     
     glfwSwapBuffers(window);
     glfwPollEvents();
+
+    auto end = std::chrono::high_resolution_clock::now();
+    dt = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
   }
   LOG(INFO) << "Exited game loop";
 

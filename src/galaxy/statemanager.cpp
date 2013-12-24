@@ -23,7 +23,7 @@ const int32_t StateManager::size()
 const std::shared_ptr<GameState> StateManager::pop_front()
 {
   assert(!states_.empty());
-  const std::shared_ptr<GameState> front = states_.front();
+  const auto front = states_.front();
   states_.pop_front();
 
   return front;
@@ -32,7 +32,7 @@ const std::shared_ptr<GameState> StateManager::pop_front()
 const std::shared_ptr<GameState> StateManager::pop_back()
 {
   assert(!states_.empty());
-  const std::shared_ptr<GameState> back = states_.back();
+  const auto back = states_.back();
   states_.pop_back();
 
   return back;
