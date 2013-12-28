@@ -6,31 +6,44 @@ set(GALAXY_BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR})
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${GALAXY_SOURCE_DIR}/cmake)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+endif()
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include ${GALAXY_SOURCE_DIR}/src/galaxy/global.h")
 
 find_package(GLog REQUIRED)
 
 set(Boost_USE_STATIC_LIBS ON)
-find_package(Boost 1.55 COMPONENTS REQUIRED)
+find_package(Boost 1.49 COMPONENTS REQUIRED)
 find_package(OpenGL REQUIRED)
 
 find_package(PkgConfig REQUIRED)
 pkg_search_module(GLFW REQUIRED glfw3)
+if(APPLE)
+  set(GLFW_LIB ${GLFW_STATIC_LIBRARIES})
+elseif(UNIX)
+  set(GLFW_LIB ${GLFW_LIBRARIES})
+endif()
 
-find_library(COCOA_LIBRARY Cocoa)
-find_library(IOKIT_LIBRARY IOKit)
-find_library(COREVIDEO_LIBRARY CoreVideo)
+if(APPLE)
+  find_library(COCOA_LIBRARY Cocoa)
+  find_library(IOKIT_LIBRARY IOKit)
+  find_library(COREVIDEO_LIBRARY CoreVideo)
+  message("[CMake]: Cocoa: ${COCOA_LIBRARY}")
+  message("[CMake]: IOKit: ${IOKIT_LIBRARY}")
+  message("[CMake]: CoreVideo: ${COREVIDEO_LIBRARY}")
+endif()
 
 message("[CMake]: glog: ${GLOG_LIBRARY}")
 
-message("[CMake]: Cocoa: ${COCOA_LIBRARY}")
-message("[CMake]: IOKit: ${IOKIT_LIBRARY}")
-message("[CMake]: CoreVideo: ${COREVIDEO_LIBRARY}")
-
 message("[CMake]: GLFW include dirs: ${GLFW_INCLUDE_DIRS}")
 message("[CMake]: GLFW static libs: ${GLFW_STATIC_LIBRARIES}")
+message("[CMake]: GLFW libs: ${GLFW_LIBRARIES}")
 
 include_directories(
   ${GLOG_INCLUDE_DIR}
@@ -70,7 +83,7 @@ target_link_libraries(${PROJECT_NAME}
   ${IOKIT_LIBRARY}
   ${COREVIDEO_LIBRARY}
 
-  ${GLFW_STATIC_LIBRARIES}
+  ${GLFW_LIB}
 )
 
 # add a target to generate API documentation with Doxygen

@@ -1,6 +1,8 @@
 #ifndef GALAXY_GAME_H
 #define GALAXY_GAME_H
 
+#include <chrono>
+
 namespace galaxy {
 
 class StateManager;

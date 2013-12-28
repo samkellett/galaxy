@@ -1,6 +1,7 @@
 #ifndef GALAXY_GAMESTATE_H
 #define GALAXY_GAMESTATE_H
 
+#include <chrono>
 #include <map>
 
 #include "components.h"
