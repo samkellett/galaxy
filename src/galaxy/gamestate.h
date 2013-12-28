@@ -2,13 +2,11 @@
 #define GALAXY_GAMESTATE_H
 
 #include <chrono>
-#include <map>
+#include <vector>
 
-#include "components.h"
+#include "gameobject.h"
 
 namespace galaxy {
-
-class Component;
 
 class GameState
 {
@@ -22,10 +20,11 @@ public:
   virtual void destroy() = 0;
 
 protected:
-  std::multimap<Components, Component *> *components() const;
+  typedef std::unique_ptr<GameObject> GameObjectPtr;
+  std::vector<GameObjectPtr> objects() const;  
 
 private:
-  std::multimap<Components, Component *> components_;
+  std::vector<GameObjectPtr> objects_;
 };
 
 } // namespace galaxy

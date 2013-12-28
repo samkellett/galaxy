@@ -5,8 +5,6 @@ namespace galaxy {
 
 enum class Components
 {
-  OrthographicPosition,
-  PerspectivePosition,
   Text
 };
 
