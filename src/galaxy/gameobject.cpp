@@ -11,6 +11,20 @@ GameObject::~GameObject()
 {
 }
 
+void GameObject::update(std::chrono::nanoseconds &dt)
+{
+  for (auto iterator = components_.begin(); iterator != components_.end(); ++iterator) {
+    (*iterator)->update(dt);
+  }
+}
+
+void GameObject::render(std::chrono::nanoseconds &dt)
+{
+  for (auto iterator = components_.begin(); iterator != components_.end(); ++iterator) {
+    (*iterator)->render(dt);
+  }
+}
+
 const GameObject::Projection GameObject::projection() const
 {
   return projection_;

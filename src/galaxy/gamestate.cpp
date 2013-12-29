@@ -18,4 +18,9 @@ void GameState::render(const std::chrono::nanoseconds &dt)
 {
 }
 
+std::vector<std::shared_ptr<GameObject>> GameState::objects()
+{
+  return objects_;
+}
+
 } // namespace galaxy

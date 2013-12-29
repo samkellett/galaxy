@@ -20,11 +20,10 @@ public:
   virtual void destroy() = 0;
 
 protected:
-  typedef std::unique_ptr<GameObject> GameObjectPtr;
-  std::vector<GameObjectPtr> objects() const;  
+  std::vector<std::shared_ptr<GameObject>> objects();  
 
 private:
-  std::vector<GameObjectPtr> objects_;
+  std::vector<std::shared_ptr<GameObject>> objects_;
 };
 
 } // namespace galaxy

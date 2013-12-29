@@ -45,6 +45,8 @@ message("[CMake]: GLFW static libs: ${GLFW_STATIC_LIBRARIES}")
 message("[CMake]: GLFW libs: ${GLFW_LIBRARIES}")
 
 include_directories(
+  src/galaxy
+
   ${GLOG_INCLUDE_DIR}
 
   ${Boost_INCLUDE_DIR}
@@ -58,12 +60,15 @@ link_directories(
 )
 
 set(GALAXY_SOURCES
+  src/galaxy/component.cpp
   src/galaxy/galaxy.cpp
   src/galaxy/game.cpp
   src/galaxy/gameobject.cpp
   src/galaxy/gamestate.cpp
   src/galaxy/logger.cpp
   src/galaxy/statemanager.cpp
+
+  src/galaxy/objects/text2d.cpp
 )
 
 file(GLOB_RECURSE GALAXY_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/*.h)

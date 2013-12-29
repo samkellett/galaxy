@@ -2,33 +2,31 @@
 
 #include <chrono>
 
-#include <GLFW/glfw3.h>
-
 #include "game.h"
 
 namespace galaxy {
 
 Galaxy::Galaxy(Game &game) :
-  game_(game)
+  window_(nullptr), game_(game)
 {
   LOG(INFO) << "Initialising Galaxy";
 }
 
 Galaxy::~Galaxy()
 {
+  delete window_;
 }
 
 int Galaxy::exec()
 {
-  GLFWwindow *window = nullptr;
   if (!glfwInit()) {
     LOG(ERROR) << "Failed to initialise GLFW.";
     return 1;
   }
   
-  window = glfwCreateWindow(game_.width(), game_.height(), game_.title(), nullptr, nullptr);
-  LOG(INFO) << "Window: " << window;
-  if (!window) {
+  window_ = glfwCreateWindow(game_.width(), game_.height(), game_.title(), nullptr, nullptr);
+  LOG(INFO) << "Window: " << window_;
+  if (!window_) {
     LOG(ERROR) << "Could not create a GLFW window.";
     glfwTerminate();
     return 1;
@@ -38,18 +36,17 @@ int Galaxy::exec()
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-  glfwMakeContextCurrent(window);
+  glfwMakeContextCurrent(window_);
 
   LOG(INFO) << "Beginning game loop";
   std::chrono::nanoseconds dt;
-  while(!glfwWindowShouldClose(window)) {
+  while(!glfwWindowShouldClose(window_)) {
     auto start = std::chrono::high_resolution_clock::now();
 
     game_.update(dt);
     game_.render(dt);
     
-    glfwSwapBuffers(window);
+    glfwSwapBuffers(window_);
     glfwPollEvents();
 
     auto end = std::chrono::high_resolution_clock::now();

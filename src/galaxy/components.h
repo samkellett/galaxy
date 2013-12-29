@@ -3,7 +3,7 @@
 
 namespace galaxy {
 
-enum class Components
+enum class ComponentType
 {
   Text
 };
