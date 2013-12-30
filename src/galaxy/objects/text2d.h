@@ -9,8 +9,19 @@ namespace object {
 class Text2D : public GameObject
 {
 public:
-  Text2D(const double x, const double y);
+  struct Data
+  {
+    Data(const double x, const double y);
 
+    double x;
+    double y;
+  };
+
+  Text2D(const Data &data);
+
+private:
+  double x_;
+  double y_;
 };
 
 } // namespace object

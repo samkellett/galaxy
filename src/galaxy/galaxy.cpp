@@ -14,7 +14,6 @@ Galaxy::Galaxy(Game &game) :
 
 Galaxy::~Galaxy()
 {
-  delete window_;
 }
 
 int Galaxy::exec()

@@ -2,9 +2,8 @@
 #define GALAXY_GAMESTATE_H
 
 #include <chrono>
-#include <vector>
 
-#include "gameobject.h"
+#include "objectmanager.h"
 
 namespace galaxy {
 
@@ -20,10 +19,10 @@ public:
   virtual void destroy() = 0;
 
 protected:
-  std::vector<std::shared_ptr<GameObject>> objects();  
+  const std::shared_ptr<ObjectManager> objects();  
 
 private:
-  std::vector<std::shared_ptr<GameObject>> objects_;
+  std::shared_ptr<ObjectManager> objects_;
 };
 
 } // namespace galaxy
