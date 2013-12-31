@@ -2,9 +2,12 @@
 
 namespace galaxy {
 
-GameObject::GameObject(const Projection projection, const glm::vec3 &position) :
-  projection_(projection), position_(position)
+GameObject::GameObject(const std::shared_ptr<GameObject> &parent) :
+  components_(std::shared_ptr<ComponentManager>(new ComponentManager)), parent_(parent)
 {
+  if (parent) {
+    parent->addChild(shared_from_this());
+  }
 }
 
 GameObject::~GameObject()
@@ -13,34 +16,48 @@ GameObject::~GameObject()
 
 void GameObject::update(std::chrono::nanoseconds &dt)
 {
-  for (auto iterator = components_.begin(); iterator != components_.end(); ++iterator) {
+  for (auto iterator = components_->begin(); iterator != components_->end(); ++iterator) {
     (*iterator)->update(dt);
   }
 }
 
 void GameObject::render(std::chrono::nanoseconds &dt)
 {
-  for (auto iterator = components_.begin(); iterator != components_.end(); ++iterator) {
+  for (auto iterator = components_->begin(); iterator != components_->end(); ++iterator) {
     (*iterator)->render(dt);
   }
 }
 
-const GameObject::Projection GameObject::projection() const
+const std::shared_ptr<ComponentManager> GameObject::components() const
 {
-  return projection_;
+  return components_;
 }
 
-const glm::vec3 &GameObject::position() const
+void GameObject::setParent(const std::shared_ptr<GameObject> &parent)
 {
-  return position_;
+  parent_ = parent;
+
+#ifdef GALAXY_DEBUG
+  auto children = parent_->children();
+
+  assert(std::find(children.begin(), children.end(), shared_from_this()) != children.end());
+#endif
 }
 
-std::shared_ptr<GameObject> GameObject::parent() const
+const std::shared_ptr<GameObject> GameObject::parent() const
 {
   return parent_;
 }
 
-std::vector<std::shared_ptr<GameObject>> GameObject::children() const
+void GameObject::addChild(const std::shared_ptr<GameObject> &child)
+{
+  children_.push_back(child);
+  if (child->parent().get() != this) {
+    child->setParent(shared_from_this());
+  }
+}
+
+const std::vector<std::shared_ptr<GameObject>> GameObject::children() const
 {
   return children_;
 }

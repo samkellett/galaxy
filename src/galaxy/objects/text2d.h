@@ -18,10 +18,6 @@ public:
   };
 
   Text2D(const Data &data);
-
-private:
-  double x_;
-  double y_;
 };
 
 } // namespace object

@@ -14,7 +14,7 @@ public:
   ~ObjectManager();
 
   template <typename Obj>
-  void push(const typename Obj::Data &data);
+  std::shared_ptr<GameObject> push(const typename Obj::Data &data);
 
 private:
   std::vector<std::shared_ptr<GameObject>> objects_;

@@ -5,6 +5,8 @@ namespace galaxy {
 
 enum class ComponentType
 {
+  Transform,
+  Transform2D,
   Text
 };
 

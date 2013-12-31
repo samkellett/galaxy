@@ -2,7 +2,8 @@
 
 namespace galaxy {
 
-GameState::GameState()
+GameState::GameState() : 
+  objects_(std::shared_ptr<ObjectManager>(new ObjectManager))
 {
 }
 

@@ -14,7 +14,7 @@ public:
   ~StateManager();
 
   template <typename State>
-  void push();
+  std::shared_ptr<GameState> push();
 
   const std::shared_ptr<GameState> at(int32_t i);
   const int32_t size();

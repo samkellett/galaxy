@@ -4,42 +4,32 @@
 #include <chrono>
 #include <map>
 
-#include "component.h"
+#include "componentmanager.h"
 
 namespace galaxy {
 
-class GameObject
+class GameObject : public std::enable_shared_from_this<GameObject>
 {
 public:
-  enum class Projection
-  {
-    Perspective,
-    Orthographic
-  };
-
-  GameObject(const Projection projection = Projection::Perspective, const glm::vec3 &position = glm::vec3(0, 0, 0));
+  GameObject(const std::shared_ptr<GameObject> &parent = nullptr);
   ~GameObject();
 
   void update(std::chrono::nanoseconds &dt);
   void render(std::chrono::nanoseconds &dt);
 
-  const Projection projection() const;
-  const glm::vec3 &position() const;
+  const std::shared_ptr<ComponentManager> components() const;
 
-  std::shared_ptr<GameObject> parent() const;
-  std::vector<std::shared_ptr<GameObject>> children() const;
+  void setParent(const std::shared_ptr<GameObject> &parent);
+  const std::shared_ptr<GameObject> parent() const;
 
-  // std::vector<std::shared_ptr<Component>> components() const;
-  // void addComponent
+  void addChild(const std::shared_ptr<GameObject> &child);
+  const std::vector<std::shared_ptr<GameObject>> children() const;
 
 private:
   std::shared_ptr<GameObject> parent_;
   std::vector<std::shared_ptr<GameObject>> children_;
 
-  Projection projection_;
-  glm::vec3 position_;
-
-  std::vector<std::shared_ptr<Component>> components_;
+  std::shared_ptr<ComponentManager> components_;
 };
 
 } // namespace galaxy

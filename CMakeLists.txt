@@ -14,6 +14,7 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include ${GALAXY_SOURCE_DIR}/src/galaxy/global.h")
+set(CMAKE_CXX_FLAGS_DEBUG "-DGALAXY_DEBUG")
 
 find_package(GLog REQUIRED)
 
@@ -61,6 +62,7 @@ link_directories(
 
 set(GALAXY_SOURCES
   src/galaxy/component.cpp
+  src/galaxy/componentmanager.cpp
   src/galaxy/galaxy.cpp
   src/galaxy/game.cpp
   src/galaxy/gameobject.cpp

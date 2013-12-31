@@ -38,7 +38,7 @@ int Galaxy::exec()
   glfwMakeContextCurrent(window_);
 
   LOG(INFO) << "Beginning game loop";
-  std::chrono::nanoseconds dt;
+  std::chrono::nanoseconds dt(0);
   while(!glfwWindowShouldClose(window_)) {
     auto start = std::chrono::high_resolution_clock::now();
 
