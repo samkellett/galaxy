@@ -20,9 +20,6 @@ public:
   const uint32_t width() const;
   const uint32_t height() const;
 
-  template <typename State>
-  void registerState();
-
   void update(const std::chrono::nanoseconds &dt);
   void render(const std::chrono::nanoseconds &dt);
 
