@@ -1,5 +1,7 @@
 #include "statemanager.h"
 
+#include <cassert>
+
 namespace galaxy {
 
 StateManager::StateManager()

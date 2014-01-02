@@ -1,5 +1,7 @@
 #include "gameobject.h"
 
+#include <cassert>
+
 namespace galaxy {
 
 GameObject::GameObject(const std::shared_ptr<GameObject> &parent) :

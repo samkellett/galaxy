@@ -1,7 +1,9 @@
 #ifndef GALAXY_STATEMANAGER_H
 #define GALAXY_STATEMANAGER_H
 
+#include <cstdint>
 #include <deque>
+#include <memory>
 
 namespace galaxy {
 

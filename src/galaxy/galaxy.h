@@ -1,8 +1,6 @@
 #ifndef GALAXY_GALAXY_H
 #define GALAXY_GALAXY_H
 
-#include <GLFW/glfw3.h>
-
 namespace galaxy {
 
 class Game;
@@ -16,7 +14,6 @@ public:
   int exec();
   
 private:
-  GLFWwindow *window_;
   Game &game_;
 };
 

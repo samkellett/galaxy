@@ -1,6 +1,7 @@
 #ifndef GALAXY_OBJECTMANAGER_H
 #define GALAXY_OBJECTMANAGER_H
 
+#include <memory>
 #include <vector>
 
 #include "gameobject.h"

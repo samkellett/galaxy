@@ -2,6 +2,7 @@
 #define GALAXY_GAMESTATE_H
 
 #include <chrono>
+#include <memory>
 
 #include "objectmanager.h"
 

@@ -1,6 +1,8 @@
 #include "game.h"
 
+#include <cassert>
 #include <chrono>
+#include <glog/logging.h>
 
 #include "gamestate.h"
 #include "statemanager.h"

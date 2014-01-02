@@ -2,6 +2,8 @@
 #define GALAXY_GAME_H
 
 #include <chrono>
+#include <cstdint>
+#include <memory>
 
 namespace galaxy {
 

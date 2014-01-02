@@ -1,6 +1,7 @@
 #ifndef GALAXY_COMPONENTMANAGER_H
 #define GALAXY_COMPONENTMANAGER_H
 
+#include <memory>
 #include <vector>
 
 #include "component.h"

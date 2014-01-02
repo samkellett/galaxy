@@ -3,6 +3,8 @@
 
 #include <chrono>
 #include <map>
+#include <memory>
+#include <vector>
 
 #include "componentmanager.h"
 

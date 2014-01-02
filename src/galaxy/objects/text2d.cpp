@@ -1,5 +1,7 @@
 #include "text2d.h"
 
+#include <glog/logging.h>
+
 namespace galaxy {
 namespace object {
 
