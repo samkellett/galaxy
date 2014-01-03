@@ -11,7 +11,7 @@ include_directories(
 )
 
 set(UNIT_TESTS
-  src/main.cpp
+  src/main.cpp  
 )
 
 add_executable(${PROJECT_NAME}
