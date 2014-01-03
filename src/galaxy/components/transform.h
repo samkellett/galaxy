@@ -14,6 +14,9 @@ public:
   Transform();
   ~Transform();
 
+  void update(const std::chrono::nanoseconds &dt);
+  void render(const std::chrono::nanoseconds &dt);
+
 private:
   glm::vec3 position_;
   glm::vec3 rotation_;

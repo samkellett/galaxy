@@ -65,6 +65,8 @@ set(GALAXY_SOURCES
   src/galaxy/scenemanager.cpp
 
   src/galaxy/components/transform.cpp
+
+  src/galaxy/objects/camera.cpp
 )
 
 file(GLOB_RECURSE GALAXY_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/*.h)
