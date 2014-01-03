@@ -12,8 +12,6 @@ include_directories(
 
 set(UNIT_TESTS
   src/main.cpp
-
-  src/teststatemanager.cpp
 )
 
 add_executable(${PROJECT_NAME}

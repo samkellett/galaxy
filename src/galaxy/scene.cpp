@@ -3,7 +3,7 @@
 namespace galaxy {
 
 Scene::Scene() : 
-  objects_(std::shared_ptr<ObjectManager>(new ObjectManager))
+  objects_(new ObjectManager)
 {
 }
 

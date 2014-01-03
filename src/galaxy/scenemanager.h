@@ -1,5 +1,5 @@
-#ifndef GALAXY_STATEMANAGER_H
-#define GALAXY_STATEMANAGER_H
+#ifndef GALAXY_SCENEMANAGER_H
+#define GALAXY_SCENEMANAGER_H
 
 #include <cstdint>
 #include <memory>
@@ -9,16 +9,16 @@
 
 namespace galaxy {
 
-class StateManager
+class SceneManager
 {
 public:
-  StateManager();
-  ~StateManager();
+  SceneManager();
+  ~SceneManager();
 
-  template <typename State>
+  template <typename YourState>
   std::shared_ptr<Scene> push();
 
-  const std::shared_ptr<Scene> at(int32_t i);
+  const std::shared_ptr<Scene> at(const int32_t i);
   const int32_t size();
 
   const std::shared_ptr<Scene> pop_back();
@@ -27,10 +27,10 @@ public:
   const std::shared_ptr<Scene> back();
 
 private:
-  std::vector<std::shared_ptr<Scene>> states_;
+  std::vector<std::shared_ptr<Scene>> scenes_;
 };
 
 } // namespace galaxy
 
-#include "statemanager.tpp"
+#include "scenemanager.tpp"
 #endif

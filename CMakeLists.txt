@@ -62,7 +62,7 @@ set(GALAXY_SOURCES
   src/galaxy/logger.cpp
   src/galaxy/objectmanager.cpp
   src/galaxy/scene.cpp
-  src/galaxy/statemanager.cpp
+  src/galaxy/scenemanager.cpp
 )
 
 file(GLOB_RECURSE GALAXY_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/*.h)

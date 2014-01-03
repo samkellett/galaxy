@@ -5,9 +5,9 @@
 #include <cstdint>
 #include <memory>
 
-namespace galaxy {
+#include "scenemanager.h"
 
-class StateManager;
+namespace galaxy {
 
 class Game
 {
@@ -24,7 +24,7 @@ public:
   void render(const std::chrono::nanoseconds &dt);
 
 protected:
-  const std::shared_ptr<StateManager> states() const;
+  const std::shared_ptr<SceneManager> scenes() const;
 
   const char *const title_;
 
@@ -32,7 +32,7 @@ protected:
   const uint32_t height_;
 
 private:
-  std::shared_ptr<StateManager> states_;
+  std::shared_ptr<SceneManager> scenes_;
 };
 
 } // namespace galaxy
