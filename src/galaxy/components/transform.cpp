@@ -20,5 +20,20 @@ void Transform::render(const std::chrono::nanoseconds &)
 {
 }
 
+const glm::vec3 &Transform::position() const
+{
+  return position_;
+}
+
+const glm::vec3 &Transform::rotation() const
+{
+  return rotation_;
+}
+
+const glm::vec3 &Transform::scale() const
+{
+  return scale_;
+}
+
 } // namespace component
 } // namespace galaxy

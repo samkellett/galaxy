@@ -17,6 +17,10 @@ public:
   void update(const std::chrono::nanoseconds &dt);
   void render(const std::chrono::nanoseconds &dt);
 
+  const glm::vec3 &position() const;
+  const glm::vec3 &rotation() const;
+  const glm::vec3 &scale() const;
+
 private:
   glm::vec3 position_;
   glm::vec3 rotation_;
