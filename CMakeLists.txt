@@ -59,9 +59,9 @@ set(GALAXY_SOURCES
   src/galaxy/galaxy.cpp
   src/galaxy/game.cpp
   src/galaxy/gameobject.cpp
-  src/galaxy/gamestate.cpp
   src/galaxy/logger.cpp
   src/galaxy/objectmanager.cpp
+  src/galaxy/scene.cpp
   src/galaxy/statemanager.cpp
 )
 

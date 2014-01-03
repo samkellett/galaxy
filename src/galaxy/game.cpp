@@ -4,7 +4,6 @@
 #include <chrono>
 #include <glog/logging.h>
 
-#include "gamestate.h"
 #include "statemanager.h"
 
 namespace galaxy {

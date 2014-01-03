@@ -2,12 +2,12 @@
 #define GALAXY_STATEMANAGER_H
 
 #include <cstdint>
-#include <deque>
 #include <memory>
+#include <vector>
+
+#include "scene.h"
 
 namespace galaxy {
-
-class GameState;
 
 class StateManager
 {
@@ -16,20 +16,18 @@ public:
   ~StateManager();
 
   template <typename State>
-  std::shared_ptr<GameState> push();
+  std::shared_ptr<Scene> push();
 
-  const std::shared_ptr<GameState> at(int32_t i);
+  const std::shared_ptr<Scene> at(int32_t i);
   const int32_t size();
 
-  const std::shared_ptr<GameState> pop_front();
-  const std::shared_ptr<GameState> pop_back();
+  const std::shared_ptr<Scene> pop_back();
 
-  const std::shared_ptr<GameState> front();
-  const std::shared_ptr<GameState> back();
+  const std::shared_ptr<Scene> front();
+  const std::shared_ptr<Scene> back();
 
 private:
-  typedef std::shared_ptr<GameState> GameStatePtr;
-  std::deque<GameStatePtr> states_;
+  std::vector<std::shared_ptr<Scene>> states_;
 };
 
 } // namespace galaxy

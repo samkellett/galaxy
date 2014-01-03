@@ -2,7 +2,7 @@
 
 #include "galaxy/statemanager.h"
 
-#include "mocks/gamestate.h"
+#include "mocks/scenes.h"
 
 namespace unit {
 
@@ -25,9 +25,9 @@ protected:
     EXPECT_TRUE(states_ == nullptr);
 
     states_ = new galaxy::StateManager;
-    states_->push<mocks::GameStateOne>();
-    states_->push<mocks::GameStateTwo>();
-    states_->push<mocks::GameStateThree>();
+    states_->push<mocks::FirstScene>();
+    states_->push<mocks::SecondScene>();
+    states_->push<mocks::LastScene>();
   }
 
   void TearDown()
@@ -51,30 +51,17 @@ TEST_F(StateManagerTest, StatesAdded)
     states()->at(2);
   });
 
-  galaxy::GameState *first = states()->at(0).get();
-  galaxy::GameState *last = states()->at(2).get();
-  EXPECT_NE(dynamic_cast<mocks::GameStateThree *>(first), nullptr);
-  EXPECT_NE(dynamic_cast<mocks::GameStateOne *>(last), nullptr);
+  galaxy::Scene *first = states()->at(0).get();
+  galaxy::Scene *last = states()->at(2).get();
+  EXPECT_NE(dynamic_cast<mocks::FirstScene *>(last), nullptr);
+  EXPECT_NE(dynamic_cast<mocks::LastScene *>(first), nullptr);
 
   EXPECT_THROW(states()->at(4), std::out_of_range);
 }
 
-TEST_F(StateManagerTest, Front)
-{
-  std::shared_ptr<galaxy::GameState> front = states()->front();
-  EXPECT_EQ(front, states()->pop_front());
-  EXPECT_NE(front, states()->front());
-
-  ASSERT_EQ(states()->size(), 2);
-  
-  states()->pop_front();
-  states()->pop_front();
-  ASSERT_EQ(states()->size(), 0);
-}
-
 TEST_F(StateManagerTest, Back)
 {
-  std::shared_ptr<galaxy::GameState> back = states()->back();
+  std::shared_ptr<galaxy::Scene> back = states()->back();
   EXPECT_EQ(back, states()->pop_back());
   EXPECT_NE(back, states()->back());
 

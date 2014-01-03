@@ -1,5 +1,5 @@
-#ifndef GALAXY_GAMESTATE_H
-#define GALAXY_GAMESTATE_H
+#ifndef GALAXY_SCENE_H
+#define GALAXY_SCENE_H
 
 #include <chrono>
 #include <memory>
@@ -8,11 +8,11 @@
 
 namespace galaxy {
 
-class GameState
+class Scene
 {
 public:
-  GameState();
-  ~GameState();
+  Scene();
+  ~Scene();
 
   virtual void init() = 0;
   virtual void update(const std::chrono::nanoseconds &dt);

@@ -1,16 +1,14 @@
 #include <type_traits>
 
-#include "gamestate.h"
-
 namespace galaxy {
 
 template <typename State>
-std::shared_ptr<GameState> StateManager::push()
+std::shared_ptr<Scene> StateManager::push()
 {
-  static_assert(std::is_base_of<GameState, State>(), "Class must be a child of galaxy::GameState");
+  static_assert(std::is_base_of<Scene, State>(), "Class must be a child of galaxy::Scene");
 
-  const std::shared_ptr<GameState> state(new State);
-  states_.push_front(state);
+  const std::shared_ptr<Scene> state(new State);
+  states_.push_back(state);
 
   state->init();
   return state;
