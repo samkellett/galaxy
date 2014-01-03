@@ -19,6 +19,8 @@ find_package(GLog REQUIRED)
 set(Boost_USE_STATIC_LIBS ON)
 find_package(Boost 1.49 COMPONENTS REQUIRED)
 find_package(OpenGL REQUIRED)
+find_package(Lua51 REQUIRED)
+find_package(Luabind REQUIRED)
 
 find_package(PkgConfig REQUIRED)
 pkg_search_module(GLFW REQUIRED glfw3)
@@ -41,7 +43,7 @@ include_directories(
   ${GLOG_INCLUDE_DIR}
 
   ${Boost_INCLUDE_DIR}
-  ${PYTHON_INCLUDE_DIR}
+  ${LUA_INCLUDE_DIR}
 
   ${OPENGL_INCLUDE_PATH}
   ${GLFW_INCLUDE_DIRS}
@@ -76,7 +78,7 @@ target_link_libraries(${PROJECT_NAME}
   ${GLOG_LIBRARY}
 
   ${Boost_LIBRARIES}
-  ${PYTHON_LIBRARIES}
+  ${LUA_LIBRARIES}
 
   ${COCOA_LIBRARY}
   ${OPENGL_LIBRARIES}
