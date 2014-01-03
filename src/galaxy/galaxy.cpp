@@ -1,7 +1,5 @@
 #include "galaxy.h"
 
-#include <boost/algorithm/string.hpp>
-#include <boost/python.hpp>
 #include <chrono>
 #include <GLFW/glfw3.h>
 #include <glog/logging.h>
@@ -41,19 +39,6 @@ int Galaxy::exec()
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   glfwMakeContextCurrent(window);
-
-  LOG(INFO) << "Initialising Python interpreter";
-  Py_Initialize();
-
-  {
-    boost::python::object sys = boost::python::import("sys");
-    boost::python::object pyver = sys.attr("version");
-    std::string version_string = boost::python::extract<std::string>(pyver);
-
-    std::vector<std::string> version;
-    boost::split(version, version_string, boost::is_any_of(" "));
-    LOG(INFO) << "Python version running: " << version[0];
-  }
 
   LOG(INFO) << "Beginning game loop";
   std::chrono::nanoseconds dt(0);

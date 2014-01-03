@@ -16,17 +16,9 @@ endif()
 set(CMAKE_CXX_FLAGS_DEBUG "-DGALAXY_DEBUG")
 
 find_package(GLog REQUIRED)
-message("[CMake]: Found glog in: ${GLOG_INCLUDE_DIR}")
-
 set(Boost_USE_STATIC_LIBS ON)
-find_package(Boost 1.49 COMPONENTS python REQUIRED)
-message("[CMake]: Found Boost in: ${Boost_INCLUDE_DIR}")
-
+find_package(Boost 1.49 COMPONENTS REQUIRED)
 find_package(OpenGL REQUIRED)
-message("[CMake]: Found OpenGL in: ${OPENGL_INCLUDE_PATH}")
-
-find_package(PythonLibs REQUIRED)
-message("[CMake]: Found Python in: ${PYTHON_INCLUDE_DIR}")
 
 find_package(PkgConfig REQUIRED)
 pkg_search_module(GLFW REQUIRED glfw3)
@@ -36,16 +28,11 @@ elseif(UNIX)
   # Can't link statically on Linux...
   set(GLFW_LIB ${GLFW_LIBRARIES})
 endif()
-message("[CMake]: Found GLFW in: ${GLFW_INCLUDE_DIRS}")
 
 if(APPLE)
   find_library(COCOA_LIBRARY Cocoa)
   find_library(IOKIT_LIBRARY IOKit)
   find_library(COREVIDEO_LIBRARY CoreVideo)
-
-  message("[CMake]: Cocoa: ${COCOA_LIBRARY}")
-  message("[CMake]: IOKit: ${IOKIT_LIBRARY}")
-  message("[CMake]: CoreVideo: ${COREVIDEO_LIBRARY}")
 endif()
 
 include_directories(
