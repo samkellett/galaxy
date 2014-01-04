@@ -15,6 +15,8 @@ public:
   SceneManager();
   ~SceneManager();
 
+  const std::shared_ptr<Scene> current();
+
   template <typename YourState>
   std::shared_ptr<Scene> push();
 
@@ -27,6 +29,7 @@ public:
   const std::shared_ptr<Scene> back();
 
 private:
+  int32_t current_;
   std::vector<std::shared_ptr<Scene>> scenes_;
 };
 

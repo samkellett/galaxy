@@ -6,12 +6,22 @@
 
 namespace galaxy {
 
-SceneManager::SceneManager()
+SceneManager::SceneManager() :
+  current_(-1)
 {
 }
 
 SceneManager::~SceneManager()
 {
+}
+
+const std::shared_ptr<Scene> SceneManager::current()
+{
+  if (current_ >= 0 || current_ < scenes_.size()) {
+    return at(current_);
+  } else {
+    return nullptr;
+  }
 }
 
 const std::shared_ptr<Scene> SceneManager::at(const int32_t i)

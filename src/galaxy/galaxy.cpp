@@ -5,7 +5,9 @@
 #include <glog/logging.h>
 #include <string>
 
+#include "component.h"
 #include "game.h"
+#include "scene.h"
 
 namespace galaxy {
 
@@ -46,6 +48,11 @@ int Galaxy::exec()
     auto start = std::chrono::high_resolution_clock::now();
 
     // Components
+    std::shared_ptr<Scene> scene = game_.currentScene();
+    for (std::shared_ptr<Component> component : scene->components()) {
+      component->update(dt);
+      component->render(dt);
+    }
     
     glfwSwapBuffers(window);
     glfwPollEvents();

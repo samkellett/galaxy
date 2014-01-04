@@ -20,6 +20,8 @@ public:
   const uint32_t width() const;
   const uint32_t height() const;
 
+  const std::shared_ptr<Scene> currentScene() const;
+
 protected:
   const std::shared_ptr<SceneManager> scenes() const;
 

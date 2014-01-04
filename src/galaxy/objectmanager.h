@@ -11,11 +11,19 @@ namespace galaxy {
 class ObjectManager
 {
 public:
+  typedef std::shared_ptr<GameObject> *iterator;
+  typedef const std::shared_ptr<GameObject> *const_iterator;
+
   ObjectManager();
   ~ObjectManager();
 
   template <typename Obj>
   std::shared_ptr<GameObject> push();
+
+  iterator begin();
+  const_iterator begin() const;
+  iterator end();
+  const_iterator end() const;
 
 private:
   std::vector<std::shared_ptr<GameObject>> objects_;

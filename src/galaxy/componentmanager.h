@@ -11,14 +11,21 @@ namespace galaxy {
 class ComponentManager
 {
 public:
+  typedef std::shared_ptr<Component> *iterator;
+  typedef const std::shared_ptr<Component> *const_iterator;
+
   ComponentManager();
   ~ComponentManager();
 
   template <typename Comp>
   std::shared_ptr<Component> push();
 
-  std::vector<std::shared_ptr<Component>>::iterator begin();
-  std::vector<std::shared_ptr<Component>>::iterator end();
+  const size_t size() const;
+
+  iterator begin();
+  const_iterator begin() const;
+  iterator end();
+  const_iterator end() const;
 
 private:
   std::vector<std::shared_ptr<Component>> components_;

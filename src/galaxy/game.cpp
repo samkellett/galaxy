@@ -35,6 +35,11 @@ const uint32_t Game::height() const
   return height_;
 }
 
+const std::shared_ptr<Scene> Game::currentScene() const
+{
+  return scenes_->current();
+}
+
 const std::shared_ptr<SceneManager> Game::scenes() const
 {
   return scenes_;

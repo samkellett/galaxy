@@ -1,3 +1,4 @@
+#include <cassert>
 #include <type_traits>
 
 namespace galaxy {
@@ -10,7 +11,13 @@ std::shared_ptr<Scene> SceneManager::push()
   const std::shared_ptr<Scene> scene(new YourState);
   scenes_.push_back(scene);
 
-  scene->init();
+  if (current_ == -1) {
+    assert(scenes_.size() == 1);
+
+    current_ = 0;
+    scene->init();
+  }
+
   return scene;
 }
 

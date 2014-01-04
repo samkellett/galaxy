@@ -3,10 +3,13 @@
 
 #include <chrono>
 #include <memory>
+#include <vector>
 
 #include "objectmanager.h"
 
 namespace galaxy {
+
+class Component;
 
 class Scene
 {
@@ -16,6 +19,8 @@ public:
 
   virtual void init() = 0;
   virtual void destroy() = 0;
+
+  const std::vector<std::shared_ptr<Component>> components();
 
 protected:
   const std::shared_ptr<ObjectManager> objects();  
