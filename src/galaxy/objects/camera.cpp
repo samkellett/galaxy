@@ -7,8 +7,8 @@ namespace objects {
 
 Camera::Camera() : GameObject()
 {
-  components()->push<component::Transform>();
+  components()->push<components::Transform>();
 }
 
-} // namespace objects
+} // namespace object
 } // namespace galaxy

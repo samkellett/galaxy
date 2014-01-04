@@ -2,12 +2,11 @@
 #define GALAXY_COMPONENTS_H
 
 namespace galaxy {
-
+  
 enum class ComponentType
 {
   Transform,
-  Transform2D,
-  Text
+  LuaScript
 };
 
 } // namespace galaxy

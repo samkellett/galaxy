@@ -3,16 +3,25 @@
 
 #include <chrono>
 
+#include "components.h"
+
 namespace galaxy {
 
 class Component
 {
 public:
-  Component();
   ~Component();
 
   virtual void update(const std::chrono::nanoseconds &dt) = 0;
   virtual void render(const std::chrono::nanoseconds &dt) = 0;
+
+  const ComponentType type() const;
+
+protected:
+  Component(const ComponentType type);
+
+private:
+  const ComponentType type_;
 };
 
 } // namespace galaxy

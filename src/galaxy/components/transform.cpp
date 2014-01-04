@@ -1,9 +1,11 @@
 #include "transform.h"
 
-namespace galaxy {
-namespace component {
+#include "../components.h"
 
-Transform::Transform() : 
+namespace galaxy {
+namespace components {
+
+Transform::Transform() : Component(ComponentType::Transform),
   position_(0, 0, 0), rotation_(0, 0, 0), scale_(1, 1, 1)
 {
 }

@@ -6,7 +6,7 @@
 #include <glm/glm.hpp>
 
 namespace galaxy {
-namespace component {
+namespace components {
 
 class Transform : public Component
 {

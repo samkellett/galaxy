@@ -12,7 +12,7 @@ public:
   Camera();
 };
 
-} // namespace objects
+} // namespace object
 } // namespace galaxy
 
 #endif // GALAXY_OBJECTS_CAMERA_H
