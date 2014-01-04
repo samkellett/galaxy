@@ -13,7 +13,7 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 endif()
 
-set(CMAKE_CXX_FLAGS_DEBUG "-DGALAXY_DEBUG")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DGALAXY_DEBUG")
 
 find_package(GLog REQUIRED)
 set(Boost_USE_STATIC_LIBS ON)
@@ -108,7 +108,6 @@ endif()
 
 # Tests
 add_subdirectory(ext/gmock)
-# add_subdirectory(ext/gtest)
 add_subdirectory(tests)
 
-add_dependencies(unit gtest)
+add_dependencies(unit gmock)

@@ -1,5 +1,6 @@
 #include "scene.h"
 
+#include <cassert>
 #include <glog/logging.h>
 
 #include "component.h"
@@ -19,6 +20,9 @@ const std::vector<std::shared_ptr<Component>> Scene::components()
 {
   std::vector<std::shared_ptr<Component>> components;
   for (std::shared_ptr<GameObject> object : *objects()) {
+    assert(object);
+    assert(object->components());
+
     std::vector<std::shared_ptr<Component>> tmp;
     tmp.reserve(components.size() + object->components()->size());
 

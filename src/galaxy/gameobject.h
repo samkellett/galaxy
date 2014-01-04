@@ -13,8 +13,10 @@ namespace galaxy {
 class GameObject : public std::enable_shared_from_this<GameObject>
 {
 public:
-  GameObject(const std::shared_ptr<GameObject> &parent = nullptr);
+  GameObject(const char *const name, const std::shared_ptr<GameObject> &parent = nullptr);
   ~GameObject();
+
+  const char *const name() const;
 
   const std::shared_ptr<ComponentManager> components() const;
 
@@ -25,6 +27,8 @@ public:
   const std::vector<std::shared_ptr<GameObject>> children() const;
 
 private:
+  const char *const name_;
+
   std::shared_ptr<GameObject> parent_;
   std::vector<std::shared_ptr<GameObject>> children_;
 

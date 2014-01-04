@@ -13,7 +13,15 @@ namespace components {
 class LuaScript : public Component
 {
 public:
+  struct Data
+  {
+    Data(const char *script);
+
+    const char *script_;
+  };
+
   LuaScript();
+  LuaScript(const Data &data);
   ~LuaScript();
 
   void update(const std::chrono::nanoseconds &dt);
@@ -21,7 +29,7 @@ public:
 
 private:
   lua_State *state_;
-  FILE *script_;
+  const char *script_;
 };
 
 } // namespace component

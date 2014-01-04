@@ -18,14 +18,14 @@ public:
   ~ObjectManager();
 
   template <typename Obj>
-  std::shared_ptr<GameObject> push();
+  std::shared_ptr<GameObject> push(const char *const name);
 
   iterator begin();
   const_iterator begin() const;
   iterator end();
   const_iterator end() const;
 
-private:
+ private:
   std::vector<std::shared_ptr<GameObject>> objects_;
 };
 

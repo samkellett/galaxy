@@ -17,8 +17,11 @@ public:
   ComponentManager();
   ~ComponentManager();
 
-  template <typename Comp>
+  template <typename Comp> 
   std::shared_ptr<Component> push();
+
+  template <typename Comp>
+  std::shared_ptr<Component> push(const typename Comp::Data &data);
 
   const size_t size() const;
 

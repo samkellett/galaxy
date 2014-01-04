@@ -5,9 +5,11 @@
 namespace galaxy {
 namespace objects {
 
-Camera::Camera() : GameObject()
+Camera::Camera(const char *const name) : GameObject(name)
 {
-  components()->push<components::Transform>();
+  using components::Transform;
+
+  components()->push<Transform>();
 }
 
 } // namespace object

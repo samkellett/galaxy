@@ -4,8 +4,8 @@
 
 namespace galaxy {
 
-GameObject::GameObject(const std::shared_ptr<GameObject> &parent) :
-  components_(new ComponentManager), parent_(parent)
+GameObject::GameObject(const char *const name, const std::shared_ptr<GameObject> &parent) :
+  name_(name), parent_(parent), components_(new ComponentManager)
 {
   if (parent) {
     parent->addChild(shared_from_this());
@@ -14,6 +14,11 @@ GameObject::GameObject(const std::shared_ptr<GameObject> &parent) :
 
 GameObject::~GameObject()
 {
+}
+
+const char *const GameObject::name() const
+{
+  return name_;
 }
 
 const std::shared_ptr<ComponentManager> GameObject::components() const

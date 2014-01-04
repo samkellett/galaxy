@@ -9,7 +9,7 @@ namespace objects {
 class Camera : public GameObject
 {
 public:
-  Camera();
+  Camera(const char *const name);
 };
 
 } // namespace object
