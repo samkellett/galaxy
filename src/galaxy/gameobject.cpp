@@ -16,20 +16,6 @@ GameObject::~GameObject()
 {
 }
 
-void GameObject::update(std::chrono::nanoseconds &dt)
-{
-  for (auto iterator = components_->begin(); iterator != components_->end(); ++iterator) {
-    (*iterator)->update(dt);
-  }
-}
-
-void GameObject::render(std::chrono::nanoseconds &dt)
-{
-  for (auto iterator = components_->begin(); iterator != components_->end(); ++iterator) {
-    (*iterator)->render(dt);
-  }
-}
-
 const std::shared_ptr<ComponentManager> GameObject::components() const
 {
   return components_;

@@ -16,9 +16,6 @@ public:
   GameObject(const std::shared_ptr<GameObject> &parent = nullptr);
   ~GameObject();
 
-  void update(std::chrono::nanoseconds &dt);
-  void render(std::chrono::nanoseconds &dt);
-
   const std::shared_ptr<ComponentManager> components() const;
 
   void setParent(const std::shared_ptr<GameObject> &parent);

@@ -45,8 +45,7 @@ int Galaxy::exec()
   while(!glfwWindowShouldClose(window)) {
     auto start = std::chrono::high_resolution_clock::now();
 
-    game_.update(dt);
-    game_.render(dt);
+    // Components
     
     glfwSwapBuffers(window);
     glfwPollEvents();

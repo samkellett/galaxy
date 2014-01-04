@@ -8,6 +8,7 @@ namespace objects {
 
 class Camera : public GameObject
 {
+public:
   Camera();
 };
 

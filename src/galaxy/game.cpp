@@ -35,26 +35,6 @@ const uint32_t Game::height() const
   return height_;
 }
 
-void Game::update(const std::chrono::nanoseconds &dt)
-{
-  for (int32_t i = 0; i < scenes()->size(); ++i) {
-  	auto state = scenes()->at(i);
-  	assert(state);
-
-  	state->update(dt);
-  }
-}
-
-void Game::render(const std::chrono::nanoseconds &dt)
-{
-  for (int32_t i = 0; i < scenes()->size(); ++i) {
-  	auto state = scenes()->at(i);
-  	assert(state);
-
-  	state->render(dt);
-  }
-}
-
 const std::shared_ptr<SceneManager> Game::scenes() const
 {
   return scenes_;

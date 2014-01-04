@@ -20,9 +20,6 @@ public:
   const uint32_t width() const;
   const uint32_t height() const;
 
-  void update(const std::chrono::nanoseconds &dt);
-  void render(const std::chrono::nanoseconds &dt);
-
 protected:
   const std::shared_ptr<SceneManager> scenes() const;
 

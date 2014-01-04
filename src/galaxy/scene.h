@@ -15,8 +15,6 @@ public:
   ~Scene();
 
   virtual void init() = 0;
-  virtual void update(const std::chrono::nanoseconds &dt);
-  virtual void render(const std::chrono::nanoseconds &dt);
   virtual void destroy() = 0;
 
 protected:
