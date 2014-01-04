@@ -20,7 +20,7 @@ public:
     const char *script_;
   };
 
-  LuaScript();
+  LuaScript(const char *const file = "");
   LuaScript(const Data &data);
   ~LuaScript();
 

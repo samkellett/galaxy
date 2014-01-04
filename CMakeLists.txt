@@ -44,6 +44,7 @@ include_directories(
 
   ${Boost_INCLUDE_DIR}
   ${LUA_INCLUDE_DIR}
+  ${LUABIND_INCLUDE_DIR}
 
   ${OPENGL_INCLUDE_PATH}
   ${GLFW_INCLUDE_DIRS}
@@ -82,6 +83,7 @@ target_link_libraries(${PROJECT_NAME}
 
   ${Boost_LIBRARIES}
   ${LUA_LIBRARIES}
+  ${LUABIND_LIBRARY}
 
   ${COCOA_LIBRARY}
   ${OPENGL_LIBRARIES}
