@@ -13,14 +13,30 @@ namespace components {
 class LuaScript : public Component
 {
 public:
-  struct Data
+  enum LuaLib
   {
-    Data(const char *script);
+    NoLibs = 0x0,
+    BasicLib = 0x1,
+    IOLib = 0x2,
+    OSLib = 0x4,
+    StringLib = 0x8,
+    TableLib = 0x10,
+    MathLib = 0x20,
+    DebugLib = 0x40,
+    PackageLib = 0x80,
 
-    const char *script_;
+    CoreLibs = BasicLib | IOLib | OSLib | StringLib | TableLib | MathLib | DebugLib | PackageLib
   };
 
-  LuaScript(const char *const file = "");
+  struct Data
+  {
+    Data(const char *script, const LuaLib libraries = NoLibs);
+
+    const char *script_;
+    const LuaLib libraries_;
+  };
+
+  LuaScript(const char *const file = "", const LuaLib libraries = NoLibs);
   LuaScript(const Data &data);
   ~LuaScript();
 
@@ -28,8 +44,9 @@ public:
   void render(const std::chrono::nanoseconds &dt);
 
 private:
-  lua_State *state_;
+  lua_State *L;
   const char *script_;
+  const LuaLib libraries_;
 
   bool has_update_;
 };

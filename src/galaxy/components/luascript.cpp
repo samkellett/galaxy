@@ -7,6 +7,7 @@ extern "C" {
 }
 
 #include <cassert>
+#include <cstdint>
 #include <glog/logging.h>
 #include <luabind/luabind.hpp>
 #include <string>
@@ -16,42 +17,51 @@ extern "C" {
 namespace galaxy {
 namespace components {
 
-LuaScript::Data::Data(const char *script) :
-  script_(script)
+LuaScript::Data::Data(const char *script, const LuaLib libraries) :
+  script_(script), libraries_(libraries)
 {
 }
 
-LuaScript::LuaScript(const char *const file) : Component(ComponentType::LuaScript),
-  state_(luaL_newstate()), script_(file), has_update_(false)
+LuaScript::LuaScript(const char *const file, const LuaLib libraries) : Component(ComponentType::LuaScript),
+  L(luaL_newstate()), script_(file), libraries_(libraries), has_update_(false)
 {
-  assert(state_);
+  assert(L);
 
-  luaL_openlibs(state_);
+  {
+    // These two arrays must stay in the same order.
+    const LuaLib libraries[] = { BasicLib, IOLib, OSLib, StringLib, TableLib, MathLib, DebugLib, PackageLib };
+    const luaL_Reg lualibs[] = {
+      { "", luaopen_base },
+      { LUA_IOLIBNAME, luaopen_io },
+      { LUA_OSLIBNAME, luaopen_os },
+      { LUA_STRLIBNAME, luaopen_string },
+      { LUA_TABLIBNAME, luaopen_table },
+      { LUA_MATHLIBNAME, luaopen_math },
+      { LUA_DBLIBNAME, luaopen_debug },
+      { LUA_LOADLIBNAME, luaopen_package }
+    };
 
-  int ret = luaL_dofile(state_, script_);
+    const int n = sizeof(libraries) / sizeof(libraries[0]);
+    for (uint32_t i = 0; i < n; ++i) {
+      if (libraries[i] & libraries_) {
+        LOG(INFO) << "Loading Lua library: " << lualibs[i].name;
+        lua_pushcfunction(L, lualibs[i].func);
+        lua_pushstring(L, lualibs[i].name);
+        lua_call(L, 1, 0);
+      }
+    }
+  }
+
+  int ret = luaL_dofile(L, script_);
   assert(ret == 0);
 
-  luabind::set_pcall_callback([](lua_State *L) {
-    // log the error message
-    luabind::object msg(luabind::from_stack(L, -1));
-    std::ostringstream str;
-    str << "Lua run-time error: " << msg;
+  luabind::open(L);
 
-    // log the callstack
-    std::string traceback = luabind::call_function<std::string>(luabind::globals(L)["debug"]["traceback"]);
-    LOG(INFO) << str.str() << "\nLua " << traceback;
-
-    // return unmodified error object
-    return 1;
-  });
-
-  luabind::open(state_);
-
-  luabind::object update = luabind::globals(state_)["onUpdate"];
+  luabind::object update = luabind::globals(L)["onUpdate"];
   has_update_ = update && luabind::type(update) == LUA_TFUNCTION;
 }
 
-LuaScript::LuaScript(const LuaScript::Data &data) : LuaScript(data.script_)
+LuaScript::LuaScript(const LuaScript::Data &data) : LuaScript(data.script_, data.libraries_)
 {
 }
 
@@ -62,7 +72,7 @@ LuaScript::~LuaScript()
 void LuaScript::update(const std::chrono::nanoseconds &dt)
 {
   if (has_update_) {
-    luabind::call_function<void>(state_, "onUpdate", static_cast<long>(dt.count()));
+    luabind::call_function<void>(L, "onUpdate", static_cast<long>(dt.count()));
   }
 }
 
