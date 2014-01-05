@@ -22,7 +22,7 @@ LuaScript::Data::Data(const char *script) :
 }
 
 LuaScript::LuaScript(const char *const file) : Component(ComponentType::LuaScript),
-  state_(luaL_newstate()), script_(file)
+  state_(luaL_newstate()), script_(file), has_update_(false)
 {
   assert(state_);
 
@@ -35,20 +35,20 @@ LuaScript::LuaScript(const char *const file) : Component(ComponentType::LuaScrip
     // log the error message
     luabind::object msg(luabind::from_stack(L, -1));
     std::ostringstream str;
-    str << "lua> run-time error: " << msg;
-    LOG(INFO) << str.str();
+    str << "Lua run-time error: " << msg;
 
     // log the callstack
     std::string traceback = luabind::call_function<std::string>(luabind::globals(L)["debug"]["traceback"]);
-    traceback = std::string("lua> ") + traceback;
-    LOG(INFO) << traceback;
+    LOG(INFO) << str.str() << "\nLua " << traceback;
 
     // return unmodified error object
     return 1;
   });
 
   luabind::open(state_);
-  luabind::call_function<void>(state_, "helloWorld");
+
+  luabind::object update = luabind::globals(state_)["onUpdate"];
+  has_update_ = update && luabind::type(update) == LUA_TFUNCTION;
 }
 
 LuaScript::LuaScript(const LuaScript::Data &data) : LuaScript(data.script_)
@@ -61,6 +61,9 @@ LuaScript::~LuaScript()
 
 void LuaScript::update(const std::chrono::nanoseconds &dt)
 {
+  if (has_update_) {
+    luabind::call_function<void>(state_, "onUpdate", static_cast<long>(dt.count()));
+  }
 }
 
 void LuaScript::render(const std::chrono::nanoseconds &dt)

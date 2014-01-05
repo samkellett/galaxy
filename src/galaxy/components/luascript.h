@@ -30,6 +30,8 @@ public:
 private:
   lua_State *state_;
   const char *script_;
+
+  bool has_update_;
 };
 
 } // namespace component
