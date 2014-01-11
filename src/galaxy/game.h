@@ -7,6 +7,8 @@
 
 #include "scenemanager.h"
 
+#define myGame() galaxy::Game::instance()
+
 namespace galaxy {
 
 class Game
@@ -23,10 +25,9 @@ public:
   const uint32_t height() const;
 
   const std::shared_ptr<Scene> currentScene() const;
-
-protected:
   const std::shared_ptr<SceneManager> scenes() const;
 
+protected:
   const char *const title_;
   const char *const assets_;
 
