@@ -6,16 +6,16 @@
 
 namespace galaxy {
 
-Game::Game() : Game("Dark Matter", 640, 480)
+Game::Game() : Game("Dark Matter", ".", 640, 480)
 {
 }
 
-Game::Game(const char *const title) : Game(title, 640, 480)
+Game::Game(const char *const title, const char *const assets) : Game(title, assets, 640, 480)
 {
 }
 
-Game::Game(const char *const title, uint32_t width, uint32_t height) :
-  title_(title), width_(width), height_(height), scenes_(new SceneManager)
+Game::Game(const char *const title, const char *assets, uint32_t width, uint32_t height) :
+  title_(title), assets_(assets), width_(width), height_(height), scenes_(new SceneManager)
 {
   LOG(INFO) << "Creating new game: " << title_;
 }
