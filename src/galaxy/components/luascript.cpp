@@ -42,7 +42,7 @@ LuaScript::LuaScript(const char *const file, const LuaLib libraries) : Component
     const int n = sizeof(libraries) / sizeof(libraries[0]);
     for (uint32_t i = 0; i < n; ++i) {
       if (libraries[i] & libraries_) {
-        LOG(INFO) << "Loading Lua library: " << lualibs[i].name;
+        LOG(INFO) << "Loading Lua library: " << (strcmp(lualibs[i].name, "") == 0 ? "base" : lualibs[i].name);
         lua_pushcfunction(L, lualibs[i].func);
         lua_pushstring(L, lualibs[i].name);
         lua_call(L, 1, 0);
