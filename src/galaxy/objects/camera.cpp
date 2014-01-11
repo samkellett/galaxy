@@ -9,7 +9,7 @@ Camera::Camera(const char *const name) : GameObject(name)
 {
   using components::Transform;
 
-  components()->push<Transform>();
+  components().push<Transform>();
 }
 
 } // namespace object

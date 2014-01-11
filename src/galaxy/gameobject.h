@@ -2,7 +2,6 @@
 #define GALAXY_GAMEOBJECT_H
 
 #include <chrono>
-#include <map>
 #include <memory>
 #include <vector>
 
@@ -18,7 +17,7 @@ public:
 
   const char *const name() const;
 
-  const std::shared_ptr<ComponentManager> components() const;
+  ComponentManager &components();
 
   void setParent(const std::shared_ptr<GameObject> &parent);
   const std::shared_ptr<GameObject> parent() const;
@@ -32,7 +31,7 @@ private:
   std::shared_ptr<GameObject> parent_;
   std::vector<std::shared_ptr<GameObject>> children_;
 
-  std::shared_ptr<ComponentManager> components_;
+  ComponentManager components_;
 };
 
 } // namespace galaxy

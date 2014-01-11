@@ -17,7 +17,7 @@ Game::Game(const char *const title, const char *const assets) : Game(title, asse
 }
 
 Game::Game(const char *const title, const char *assets, uint32_t width, uint32_t height) :
-  title_(title), assets_(assets), width_(width), height_(height), scenes_(new SceneManager)
+  title_(title), assets_(assets), width_(width), height_(height)
 {
   assert(game == nullptr);
   game = this;
@@ -51,12 +51,12 @@ const uint32_t Game::height() const
   return height_;
 }
 
-const std::shared_ptr<Scene> Game::currentScene() const
+const std::shared_ptr<Scene> Game::currentScene()
 {
-  return scenes_->current();
+  return scenes_.current();
 }
 
-const std::shared_ptr<SceneManager> Game::scenes() const
+SceneManager &Game::scenes()
 {
   return scenes_;
 }

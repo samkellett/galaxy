@@ -2,10 +2,12 @@
 
 #include <cassert>
 
+#include "componentmanager.h"
+
 namespace galaxy {
 
 GameObject::GameObject(const char *const name, const std::shared_ptr<GameObject> &parent) :
-  name_(name), parent_(parent), components_(new ComponentManager)
+  name_(name), parent_(parent)
 {
   if (parent) {
     parent->addChild(shared_from_this());
@@ -21,7 +23,7 @@ const char *const GameObject::name() const
   return name_;
 }
 
-const std::shared_ptr<ComponentManager> GameObject::components() const
+ComponentManager &GameObject::components()
 {
   return components_;
 }

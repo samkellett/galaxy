@@ -26,8 +26,8 @@ public:
   const uint32_t width() const;
   const uint32_t height() const;
 
-  const std::shared_ptr<Scene> currentScene() const;
-  const std::shared_ptr<SceneManager> scenes() const;
+  const std::shared_ptr<Scene> currentScene();
+  SceneManager &scenes();
 
 protected:
   const char *const title_;
@@ -39,7 +39,7 @@ protected:
 private:
   static Game *game;
 
-  std::shared_ptr<SceneManager> scenes_;
+  SceneManager scenes_;
 };
 
 } // namespace galaxy

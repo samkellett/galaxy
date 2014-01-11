@@ -23,10 +23,10 @@ public:
   const std::vector<std::shared_ptr<Component>> components();
 
 protected:
-  const std::shared_ptr<ObjectManager> objects();  
+  ObjectManager &objects();  
 
 private:
-  std::shared_ptr<ObjectManager> objects_;
+  ObjectManager objects_;
 };
 
 } // namespace galaxy
