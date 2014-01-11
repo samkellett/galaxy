@@ -37,6 +37,9 @@ public:
   const_iterator end() const;
 
 private:
+  template <typename Comp>
+  std::shared_ptr<Component> push(Comp *comp);
+
   std::vector<std::shared_ptr<Component>> components_;
 };
 
