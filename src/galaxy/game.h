@@ -16,6 +16,8 @@ public:
   Game(const char *const title, const char *const assets);
   Game(const char *const title, const char *const assets, const uint32_t width, const uint32_t height);
 
+  static Game *instance();
+
   const char *const title() const;
   const uint32_t width() const;
   const uint32_t height() const;
@@ -32,6 +34,8 @@ protected:
   const uint32_t height_;
 
 private:
+  static Game *game;
+
   std::shared_ptr<SceneManager> scenes_;
 };
 

@@ -6,6 +6,8 @@
 
 namespace galaxy {
 
+Game *Game::game = nullptr;
+
 Game::Game() : Game("Dark Matter", ".", 640, 480)
 {
 }
@@ -17,7 +19,16 @@ Game::Game(const char *const title, const char *const assets) : Game(title, asse
 Game::Game(const char *const title, const char *assets, uint32_t width, uint32_t height) :
   title_(title), assets_(assets), width_(width), height_(height), scenes_(new SceneManager)
 {
+  assert(game == nullptr);
+  game = this;
+
   LOG(INFO) << "Creating new game: " << title_;
+}
+
+Game *Game::instance()
+{
+  assert(game != nullptr);
+  return game;
 }
 
 const char *const Game::title() const
