@@ -21,6 +21,8 @@ public:
   static Game *instance();
 
   const char *const title() const;
+  const char *const assets() const;
+
   const uint32_t width() const;
   const uint32_t height() const;
 

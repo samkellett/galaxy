@@ -2,6 +2,7 @@
 #define GALAXY_COMPONENT_LUASCRIPT_H
 
 #include <stdio.h>
+#include <string>
 
 #include "../component.h"
 
@@ -28,16 +29,7 @@ public:
     CoreLibs = BasicLib | IOLib | OSLib | StringLib | TableLib | MathLib | DebugLib | PackageLib
   };
 
-  struct Data
-  {
-    Data(const char *script, const LuaLib libraries = NoLibs);
-
-    const char *script_;
-    const LuaLib libraries_;
-  };
-
-  LuaScript(const char *const file = "", const LuaLib libraries = NoLibs);
-  LuaScript(const Data &data);
+  LuaScript(const char *const file, const LuaLib libraries = NoLibs);
   ~LuaScript();
 
   void update(const std::chrono::nanoseconds &dt);
@@ -45,7 +37,7 @@ public:
 
 private:
   lua_State *L;
-  const char *script_;
+  std::string script_;
   const LuaLib libraries_;
 
   bool has_update_;

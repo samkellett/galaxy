@@ -13,19 +13,17 @@ extern "C" {
 #include <string>
 
 #include "../components.h"
+#include "../game.h"
 
 namespace galaxy {
 namespace components {
 
-LuaScript::Data::Data(const char *script, const LuaLib libraries) :
-  script_(script), libraries_(libraries)
-{
-}
-
 LuaScript::LuaScript(const char *const file, const LuaLib libraries) : Component(ComponentType::LuaScript),
-  L(luaL_newstate()), script_(file), libraries_(libraries), has_update_(false)
+  L(luaL_newstate()), script_(myGame()->assets()), libraries_(libraries), has_update_(false)
 {
   assert(L);
+  script_.append(file);
+  LOG(INFO) << "New Lua Script: " << script_;
 
   {
     // These two arrays must stay in the same order.
@@ -52,17 +50,13 @@ LuaScript::LuaScript(const char *const file, const LuaLib libraries) : Component
     }
   }
 
-  int ret = luaL_dofile(L, script_);
+  int ret = luaL_dofile(L, script_.c_str());
   assert(ret == 0);
 
   luabind::open(L);
 
   luabind::object update = luabind::globals(L)["onUpdate"];
   has_update_ = update && luabind::type(update) == LUA_TFUNCTION;
-}
-
-LuaScript::LuaScript(const LuaScript::Data &data) : LuaScript(data.script_, data.libraries_)
-{
 }
 
 LuaScript::~LuaScript()

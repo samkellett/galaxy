@@ -20,8 +20,14 @@ public:
   template <typename Comp> 
   std::shared_ptr<Component> push();
 
-  template <typename Comp>
-  std::shared_ptr<Component> push(const typename Comp::Data &data);
+  template <typename Comp, typename P1>
+  std::shared_ptr<Component> push(const P1 &p1);
+
+  template <typename Comp, typename P1, typename P2>
+  std::shared_ptr<Component> push(const P1 &p1, const P2 &p2);
+
+  template <typename Comp, typename P1, typename P2, typename P3>
+  std::shared_ptr<Component> push(const P1 &p1, const P2 &p2, const P3 &p3);
 
   const size_t size() const;
 

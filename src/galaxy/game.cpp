@@ -36,6 +36,11 @@ const char *const Game::title() const
   return title_;
 }
 
+const char *const Game::assets() const
+{
+  return assets_;
+}
+
 const uint32_t Game::width() const
 {
   return width_;
