@@ -66,6 +66,7 @@ set(GALAXY_SOURCES
   src/galaxy/scenemanager.cpp
 
   src/galaxy/components/transform.cpp
+  src/galaxy/components/guiscript.cpp
   src/galaxy/components/luascript.cpp
 
   src/galaxy/objects/camera.cpp

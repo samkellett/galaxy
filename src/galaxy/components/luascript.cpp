@@ -18,8 +18,8 @@ extern "C" {
 namespace galaxy {
 namespace components {
 
-LuaScript::LuaScript(const char *const file, const LuaLib libraries) : Component(ComponentType::LuaScript),
-  L(luaL_newstate()), script_(myGame()->assets()), libraries_(libraries), has_update_(false)
+LuaScript::LuaScript(const char *const file, const LuaLib libraries, const char *const method) : Component(ComponentType::LuaScript),
+  L(luaL_newstate()), libraries_(libraries), script_(myGame()->assets()), method_(method), has_method_(false)
 {
   assert(L);
   script_.append(file);
@@ -55,8 +55,8 @@ LuaScript::LuaScript(const char *const file, const LuaLib libraries) : Component
 
   luabind::open(L);
 
-  luabind::object update = luabind::globals(L)["onUpdate"];
-  has_update_ = update && luabind::type(update) == LUA_TFUNCTION;
+  luabind::object func = luabind::globals(L)[method_];
+  has_method_ = func && luabind::type(func) == LUA_TFUNCTION;
 }
 
 LuaScript::~LuaScript()
@@ -65,8 +65,8 @@ LuaScript::~LuaScript()
 
 void LuaScript::update(const std::chrono::nanoseconds &dt)
 {
-  if (has_update_) {
-    luabind::call_function<void>(L, "onUpdate", static_cast<long>(dt.count()));
+  if (has_method_) {
+    luabind::call_function<void>(L, method_, static_cast<long>(dt.count()));
   }
 }
 

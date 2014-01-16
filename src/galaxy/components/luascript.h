@@ -29,7 +29,7 @@ public:
     CoreLibs = BasicLib | IOLib | OSLib | StringLib | TableLib | MathLib | DebugLib | PackageLib
   };
 
-  LuaScript(const char *const file, const LuaLib libraries = NoLibs);
+  LuaScript(const char *const file, const LuaLib libraries = NoLibs, const char *const method = "onUpdate");
   ~LuaScript();
 
   void update(const std::chrono::nanoseconds &dt);
@@ -37,10 +37,11 @@ public:
 
 private:
   lua_State *L;
-  std::string script_;
   const LuaLib libraries_;
+  std::string script_;
 
-  bool has_update_;
+  const char *const method_;
+  bool has_method_;
 };
 
 } // namespace component
