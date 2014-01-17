@@ -1,5 +1,6 @@
 #include "scene.h"
 
+#include <algorithm>
 #include <cassert>
 #include <glog/logging.h>
 
