@@ -17,11 +17,8 @@ public:
   ComponentManager();
   ~ComponentManager();
 
-  template <typename Comp> 
-  std::shared_ptr<Component> push();
-
   template <typename Comp, typename... Params>
-  std::shared_ptr<Component> push(const Params&... parameters);
+  std::shared_ptr<Component> push(Params&&... parameters);
 
   const size_t size() const;
 
@@ -31,9 +28,6 @@ public:
   const_iterator end() const;
 
 private:
-  template <typename Comp>
-  std::shared_ptr<Component> push(Comp *comp);
-
   std::vector<std::shared_ptr<Component>> components_;
 };
 

@@ -1,9 +1,11 @@
 #include "galaxy.h"
 
 #include <chrono>
-#include <GLFW/glfw3.h>
-#include <glog/logging.h>
 #include <string>
+
+#include <GLFW/glfw3.h>
+
+#include <glog/logging.h>
 
 #include "component.h"
 #include "game.h"

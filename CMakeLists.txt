@@ -23,11 +23,12 @@ find_package(Lua51 REQUIRED)
 find_package(Luabind REQUIRED)
 
 find_package(PkgConfig REQUIRED)
+pkg_search_module(FREETYPE REQUIRED freetype2)
 pkg_search_module(GLFW REQUIRED glfw3)
 if(APPLE)
   set(GLFW_LIB ${GLFW_STATIC_LIBRARIES})
 elseif(UNIX)
-  # Can't link statically on Linux...
+  # FIXME: Can't link statically on Linux...
   set(GLFW_LIB ${GLFW_LIBRARIES})
 endif()
 
@@ -47,6 +48,7 @@ include_directories(
   ${LUABIND_INCLUDE_DIR}
 
   ${OPENGL_INCLUDE_PATH}
+  ${FREETYPE_INCLUDE_DIRS}
   ${GLFW_INCLUDE_DIRS}
 )
 
@@ -88,6 +90,7 @@ target_link_libraries(${PROJECT_NAME}
 
   ${COCOA_LIBRARY}
   ${OPENGL_LIBRARIES}
+  ${FREETYPE_LIBRARY}
   ${IOKIT_LIBRARY}
   ${COREVIDEO_LIBRARY}
 
