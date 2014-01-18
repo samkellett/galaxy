@@ -37,7 +37,7 @@ int Galaxy::exec()
     glfwTerminate();
     return 1;
   }
-  
+
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
@@ -56,6 +56,7 @@ int Galaxy::exec()
       component->render(dt);
     }
     
+    glfwSwapInterval(0);
     glfwSwapBuffers(window);
     glfwPollEvents();
 
