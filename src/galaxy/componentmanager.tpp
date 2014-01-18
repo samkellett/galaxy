@@ -19,22 +19,10 @@ std::shared_ptr<Component> ComponentManager::push()
   return push(new Comp);
 }
 
-template <typename Comp, typename P1>
-std::shared_ptr<Component> ComponentManager::push(const P1 &p1)
+template <typename Comp, typename... Params>
+std::shared_ptr<Component> ComponentManager::push(const Params&... params)
 {
-  return push(new Comp(p1));
-}
-
-template <typename Comp, typename P1, typename P2>
-std::shared_ptr<Component> ComponentManager::push(const P1 &p1, const P2 &p2)
-{
-  return push(new Comp(p1, p2));
-}
-
-template <typename Comp, typename P1, typename P2, typename P3>
-std::shared_ptr<Component> ComponentManager::push(const P1 &p1, const P2 &p2, const P3 &p3)
-{
-  return push(new Comp(p1, p2, p3));
+  return push(new Comp(params...));
 }
 
 } // namespace galaxy
