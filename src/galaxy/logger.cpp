@@ -1,7 +1,5 @@
 #include "logger.h"
 
-#include <glog/logging.h>
-
 namespace galaxy {
 	
 void initLogger(const char * const argv)

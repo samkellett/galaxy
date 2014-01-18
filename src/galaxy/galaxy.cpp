@@ -49,6 +49,9 @@ int Galaxy::exec()
   while(!glfwWindowShouldClose(window)) {
     auto start = std::chrono::high_resolution_clock::now();
 
+    glClearColor(1, 1, 1, 1);
+    glClear(GL_COLOR_BUFFER_BIT);
+
     // Components
     std::shared_ptr<Scene> scene = game_.currentScene();
     for (std::shared_ptr<Component> component : scene->components()) {
