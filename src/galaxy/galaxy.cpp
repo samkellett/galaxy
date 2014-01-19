@@ -42,7 +42,9 @@ int Galaxy::exec()
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+  
   glfwMakeContextCurrent(window);
+  LOG(INFO) << "OpenGL version: " << glGetString(GL_VERSION);;
 
   // Bee yellow
   glClearColor(1.0f, 0.83f, 0.33f, 1.0f);
