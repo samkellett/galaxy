@@ -32,6 +32,11 @@ const std::vector<std::shared_ptr<Component>> Scene::components()
   return components;
 }
 
+FontManager &Scene::fonts()
+{
+  return fonts_;
+}
+
 ObjectManager &Scene::objects()
 {
   return objects_;

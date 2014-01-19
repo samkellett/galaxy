@@ -59,6 +59,7 @@ link_directories(
 set(GALAXY_SOURCES
   src/galaxy/component.cpp
   src/galaxy/componentmanager.cpp
+  src/galaxy/fontmanager.cpp
   src/galaxy/galaxy.cpp
   src/galaxy/game.cpp
   src/galaxy/gameobject.cpp

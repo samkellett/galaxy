@@ -5,6 +5,7 @@
 #include <memory>
 #include <vector>
 
+#include "fontmanager.h"
 #include "objectmanager.h"
 
 namespace galaxy {
@@ -18,14 +19,16 @@ public:
   ~Scene();
 
   virtual void init() = 0;
-  virtual void destroy() = 0;
 
   const std::vector<std::shared_ptr<Component>> components();
 
 protected:
-  ObjectManager &objects();  
+  FontManager &fonts();
+  ObjectManager &objects();
 
 private:
+  FontManager fonts_;
+  // ShaderManager shaders_;
   ObjectManager objects_;
 };
 
