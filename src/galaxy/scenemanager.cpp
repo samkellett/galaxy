@@ -24,7 +24,7 @@ const std::shared_ptr<Scene> SceneManager::current()
   }
 }
 
-const std::shared_ptr<Scene> SceneManager::at(const int32_t i)
+const std::shared_ptr<Scene> SceneManager::at(const uint32_t i)
 {
   return scenes_.at(i);
 }

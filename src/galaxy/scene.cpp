@@ -42,4 +42,9 @@ ObjectManager &Scene::objects()
   return objects_;
 }
 
+ShaderManager &Scene::shaders()
+{
+  return shaders_;
+}
+
 } // namespace galaxy

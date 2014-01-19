@@ -7,6 +7,7 @@
 
 #include "fontmanager.h"
 #include "objectmanager.h"
+#include "shadermanager.h"
 
 namespace galaxy {
 
@@ -25,10 +26,11 @@ public:
 protected:
   FontManager &fonts();
   ObjectManager &objects();
+  ShaderManager &shaders();
 
 private:
   FontManager fonts_;
-  // ShaderManager shaders_;
+  ShaderManager shaders_;
   ObjectManager objects_;
 };
 
