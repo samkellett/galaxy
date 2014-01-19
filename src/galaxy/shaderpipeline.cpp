@@ -48,7 +48,7 @@ const GLenum ShaderPipeline::type(const ShaderType &type)
   {
     case ShaderType::Vertex: return GL_VERTEX_SHADER;
     case ShaderType::Fragment: return GL_FRAGMENT_SHADER;
-    // case ShaderType::Geometry: return GL_GEOMETRY_SHADER;
+    case ShaderType::Geometry: return GL_GEOMETRY_SHADER;
 
     default: assert(false);
   }

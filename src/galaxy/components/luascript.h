@@ -1,7 +1,6 @@
 #ifndef GALAXY_COMPONENT_LUASCRIPT_H
 #define GALAXY_COMPONENT_LUASCRIPT_H
 
-#include <stdio.h>
 #include <string>
 
 #include "../component.h"
@@ -29,19 +28,16 @@ public:
     CoreLibs = BasicLib | IOLib | OSLib | StringLib | TableLib | MathLib | DebugLib | PackageLib
   };
 
-  LuaScript(const char *const file, const LuaLib libraries = NoLibs, const char *const method = "onUpdate");
+  LuaScript(const char *const file, const LuaLib libraries = NoLibs);
   ~LuaScript();
 
   void update(const std::chrono::nanoseconds &dt);
   void render(const std::chrono::nanoseconds &dt);
 
-private:
+protected:
   lua_State *L;
   const LuaLib libraries_;
   std::string script_;
-
-  const char *const method_;
-  bool has_method_;
 };
 
 } // namespace component

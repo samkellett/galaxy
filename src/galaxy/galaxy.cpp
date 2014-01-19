@@ -3,6 +3,7 @@
 #include <chrono>
 #include <string>
 
+#define GLFW_INCLUDE_GLCOREARB
 #include <GLFW/glfw3.h>
 
 #include <glog/logging.h>
@@ -30,6 +31,11 @@ int Galaxy::exec()
     return 1;
   }
   
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
   GLFWwindow *window = glfwCreateWindow(game_.width(), game_.height(), game_.title(), nullptr, nullptr);
   LOG(INFO) << "Window: " << window;
   if (!window) {
@@ -37,13 +43,9 @@ int Galaxy::exec()
     glfwTerminate();
     return 1;
   }
-
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
-  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   
   glfwMakeContextCurrent(window);
+  glfwSwapInterval(0);
   LOG(INFO) << "OpenGL version: " << glGetString(GL_VERSION);;
 
   // Bee yellow
@@ -66,7 +68,6 @@ int Galaxy::exec()
       component->render(dt);
     }
     
-    glfwSwapInterval(0);
     glfwSwapBuffers(window);
     glfwPollEvents();
 

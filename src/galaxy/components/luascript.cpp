@@ -1,16 +1,17 @@
 #include "luascript.h"
 
+#include <cassert>
+#include <cstdint>
+
 extern "C" {
 #include "lua.h"
 #include "lualib.h"
 #include "lauxlib.h"
 }
 
-#include <cassert>
-#include <cstdint>
-#include <glog/logging.h>
 #include <luabind/luabind.hpp>
-#include <string>
+
+#include <glog/logging.h>
 
 #include "../components.h"
 #include "../game.h"
@@ -18,12 +19,11 @@ extern "C" {
 namespace galaxy {
 namespace components {
 
-LuaScript::LuaScript(const char *const file, const LuaLib libraries, const char *const method) : Component(ComponentType::LuaScript),
-  L(luaL_newstate()), libraries_(libraries), script_(myGame()->assets()), method_(method), has_method_(false)
+LuaScript::LuaScript(const char *const file, const LuaLib libraries) : Component(ComponentType::LuaScript),
+  L(luaL_newstate()), libraries_(libraries), script_(std::string(myGame()->assets()) + file)
 {
   assert(L);
-  script_.append(file);
-  LOG(INFO) << "New Lua Script: " << script_;
+  LOG(INFO) << "New Lua Script: " << file;
 
   {
     // These two arrays must stay in the same order.
@@ -54,9 +54,6 @@ LuaScript::LuaScript(const char *const file, const LuaLib libraries, const char 
   assert(ret == 0);
 
   luabind::open(L);
-
-  luabind::object func = luabind::globals(L)[method_];
-  has_method_ = func && luabind::type(func) == LUA_TFUNCTION;
 }
 
 LuaScript::~LuaScript()
@@ -65,9 +62,7 @@ LuaScript::~LuaScript()
 
 void LuaScript::update(const std::chrono::nanoseconds &dt)
 {
-  if (has_method_) {
-    luabind::call_function<void>(L, method_, static_cast<long>(dt.count()));
-  }
+  luabind::call_function<void>(L, "onUpdate", static_cast<long>(dt.count()));
 }
 
 void LuaScript::render(const std::chrono::nanoseconds &dt)
