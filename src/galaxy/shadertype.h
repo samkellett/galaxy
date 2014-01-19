@@ -13,6 +13,13 @@ enum class ShaderType
   All = Vertex | Geometry | Fragment
 };
 
-}
+const bool operator &(const ShaderType &lhs, const ShaderType &rhs);
+
+ShaderType operator ++(ShaderType& type);
+ShaderType operator *(ShaderType type);
+ShaderType begin(const ShaderType &);
+ShaderType end(const ShaderType &);
+
+} // namespace galaxy
 
 #endif // GALAXY_SHADERTYPE_H

@@ -43,7 +43,13 @@ int Galaxy::exec()
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   glfwMakeContextCurrent(window);
+
+  // Bee yellow
   glClearColor(1.0f, 0.83f, 0.33f, 1.0f);
+
+  // Load the first scene
+  auto scene = myGame()->scenes().next();
+  scene->init();
   
   LOG(INFO) << "Beginning game loop";
   std::chrono::nanoseconds dt(0);
@@ -53,7 +59,6 @@ int Galaxy::exec()
     glClear(GL_COLOR_BUFFER_BIT);
 
     // Components
-    std::shared_ptr<Scene> scene = game_.currentScene();
     for (std::shared_ptr<Component> component : scene->components()) {
       component->update(dt);
       component->render(dt);

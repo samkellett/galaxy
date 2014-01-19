@@ -18,41 +18,22 @@ SceneManager::~SceneManager()
 const std::shared_ptr<Scene> SceneManager::current()
 {
   if (current_ >= 0 || current_ < scenes_.size()) {
-    return at(current_);
+    return scenes_.at(current_);
   } else {
     return nullptr;
   }
 }
 
-const std::shared_ptr<Scene> SceneManager::at(const uint32_t i)
+const std::shared_ptr<Scene> SceneManager::next()
 {
-  return scenes_.at(i);
-}
+  ++current_;
+  assert(current_ >= 0);
 
-const int32_t SceneManager::size()
-{
-  return scenes_.size();
-}
-
-const std::shared_ptr<Scene> SceneManager::pop_back()
-{
-  assert(!scenes_.empty());
-  const auto back = scenes_.back();
-  scenes_.pop_back();
-
-  return back;
-}
-
-const std::shared_ptr<Scene> SceneManager::front()
-{
-  assert(!scenes_.empty());
-  return scenes_.front();
-}
-
-const std::shared_ptr<Scene> SceneManager::back()
-{
-  assert(!scenes_.empty());
-  return scenes_.back();
+  if (current_ < scenes_.size()) {
+    return scenes_.at(current_);
+  } else {
+    return nullptr;
+  }
 }
 
 } // namespace galaxy
