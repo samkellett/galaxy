@@ -3,13 +3,11 @@
 #include <chrono>
 #include <string>
 
-#define GLFW_INCLUDE_GLCOREARB
-#include <GLFW/glfw3.h>
-
 #include <glog/logging.h>
 
 #include "component.h"
 #include "game.h"
+#include "gl.h"
 #include "scene.h"
 
 namespace glxy {
@@ -49,8 +47,7 @@ int Galaxy::exec()
   LOG(INFO) << "OpenGL version: " << glGetString(GL_VERSION);
 
   // Bee yellow
-  glClearColor(1.0f, 0.83f, 0.33f, 1.0f);
-  // LOG(INFO) << gluErrorString(glGetError());
+  gl::clearColor(1.0f, 0.83f, 0.33f, 1.0f);
 
   // Load the first scene
   auto scene = myGame()->scenes().next();
@@ -60,8 +57,7 @@ int Galaxy::exec()
   std::chrono::nanoseconds dt(0);
   while(!glfwWindowShouldClose(window)) {
     auto start = std::chrono::high_resolution_clock::now();
-
-    glClear(GL_COLOR_BUFFER_BIT);
+    gl::clear(GL_COLOR_BUFFER_BIT);
 
     // Components
     for (std::shared_ptr<Component> component : scene->components()) {

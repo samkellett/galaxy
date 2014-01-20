@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include <OpenGL/gl3.h>
+#include "gl.h"
 
 namespace glxy {
 
