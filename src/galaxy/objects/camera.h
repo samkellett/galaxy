@@ -3,7 +3,7 @@
 
 #include "../gameobject.h"
 
-namespace galaxy {
+namespace glxy {
 namespace objects {
 
 class Camera : public GameObject
@@ -13,6 +13,6 @@ public:
 };
 
 } // namespace object
-} // namespace galaxy
+} // namespace glxy
 
 #endif // GALAXY_OBJECTS_CAMERA_H

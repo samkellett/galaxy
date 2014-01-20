@@ -12,7 +12,7 @@
 #include "game.h"
 #include "scene.h"
 
-namespace galaxy {
+namespace glxy {
 
 Galaxy::Galaxy(Game &game) :
   game_(game)
@@ -81,4 +81,4 @@ int Galaxy::exec()
   return 0;
 }
   
-} // namespace galaxy
+} // namespace glxy

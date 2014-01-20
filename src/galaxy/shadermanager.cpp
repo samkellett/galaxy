@@ -2,7 +2,7 @@
 
 #include "logger.h"
 
-namespace galaxy {
+namespace glxy {
 
 ShaderManager::ShaderManager()
 {

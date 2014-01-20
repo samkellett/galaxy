@@ -1,6 +1,6 @@
 #include "logger.h"
 
-namespace galaxy {
+namespace glxy {
 	
 void initLogger(const char * const argv)
 {
@@ -9,4 +9,4 @@ void initLogger(const char * const argv)
   google::InitGoogleLogging(argv);
 }
 
-} // namespace galaxy
+} // namespace glxy

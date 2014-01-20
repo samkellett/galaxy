@@ -2,7 +2,7 @@
 
 #include "components/transform.h"
 
-namespace galaxy {
+namespace glxy {
 namespace objects {
 
 Camera::Camera(const char *const name) : GameObject(name)
@@ -13,4 +13,4 @@ Camera::Camera(const char *const name) : GameObject(name)
 }
 
 } // namespace object
-} // namespace galaxy
+} // namespace glxy

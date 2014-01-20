@@ -5,7 +5,7 @@
 
 #include "components.h"
 
-namespace galaxy {
+namespace glxy {
 
 class Component
 {
@@ -24,6 +24,6 @@ private:
   const ComponentType type_;
 };
 
-} // namespace galaxy
+} // namespace glxy
 
 #endif // GALAXY_COMPONENT_H

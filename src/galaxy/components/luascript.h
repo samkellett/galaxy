@@ -7,7 +7,7 @@
 
 class lua_State;
 
-namespace galaxy {
+namespace glxy {
 namespace components {
 
 class LuaScript : public Component
@@ -41,6 +41,6 @@ protected:
 };
 
 } // namespace component
-} // namespace galaxy
+} // namespace glxy
 
 #endif // GALAXY_COMPONENT_LUASCRIPT_H

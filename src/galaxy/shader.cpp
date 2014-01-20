@@ -6,7 +6,7 @@
 
 #include "logger.h"
 
-namespace galaxy {
+namespace glxy {
 
 Shader::Shader(const std::string &file, const GLenum type) : 
   shader_(glCreateShader(type))
@@ -66,4 +66,4 @@ const GLuint Shader::id() const
   return shader_;
 }
 
-} // namespace galaxy
+} // namespace glxy

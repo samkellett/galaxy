@@ -5,7 +5,7 @@
 
 #include <OpenGL/gl3.h>
 
-namespace galaxy {
+namespace glxy {
 
 enum class ShaderType;
 
@@ -21,6 +21,6 @@ private:
   const GLuint shader_;
 };
 
-} // namespace galaxy
+} // namespace glxy
 
 #endif // GALAXY_SHADER_H

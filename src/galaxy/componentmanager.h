@@ -6,7 +6,7 @@
 
 #include "component.h"
 
-namespace galaxy {
+namespace glxy {
 
 class ComponentManager
 {
@@ -31,7 +31,7 @@ private:
   std::vector<std::shared_ptr<Component>> components_;
 };
 
-} // namespace galaxy
+} // namespace glxy
 
 #include "componentmanager.tpp"
 #endif // GALAXY_COMPONENTMANAGER_H

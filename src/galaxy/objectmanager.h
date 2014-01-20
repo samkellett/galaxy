@@ -6,7 +6,7 @@
 
 #include "gameobject.h"
 
-namespace galaxy {
+namespace glxy {
 
 class ObjectManager
 {
@@ -29,7 +29,7 @@ public:
   std::vector<std::shared_ptr<GameObject>> objects_;
 };
 
-} // namespace galaxy
+} // namespace glxy
 
 #include "objectmanager.tpp"
 #endif // GALAXY_OBJECTMANAGER_H

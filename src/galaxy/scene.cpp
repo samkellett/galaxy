@@ -6,7 +6,7 @@
 
 #include "component.h"
 
-namespace galaxy {
+namespace glxy {
 
 Scene::Scene()
 {
@@ -47,4 +47,4 @@ ShaderManager &Scene::shaders()
   return shaders_;
 }
 
-} // namespace galaxy
+} // namespace glxy

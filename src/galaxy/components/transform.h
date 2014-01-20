@@ -5,7 +5,7 @@
 
 #include <glm/glm.hpp>
 
-namespace galaxy {
+namespace glxy {
 namespace components {
 
 class Transform : public Component
@@ -28,6 +28,6 @@ private:
 };
 
 } // namespace component
-} // namespace galaxy
+} // namespace glxy
 
 #endif // GALAXY_COMPONENTS_TRANSFORM_H

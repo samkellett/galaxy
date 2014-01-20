@@ -7,7 +7,7 @@
 
 #include "shaderpipeline.h"
 
-namespace galaxy {
+namespace glxy {
 
 enum class ShaderType;
 
@@ -24,6 +24,6 @@ private:
   std::map<std::string, std::shared_ptr<ShaderPipeline>> shaders_;
 };
 
-} // namespace galaxy
+} // namespace glxy
 
 #endif // GALAXY_SHADERMANAGER_H

@@ -1,7 +1,7 @@
 #ifndef GALAXY_GALAXY_H
 #define GALAXY_GALAXY_H
 
-namespace galaxy {
+namespace glxy {
 
 class Game;
 
@@ -17,6 +17,6 @@ private:
   Game &game_;
 };
 
-} // namespace galaxy
+} // namespace glxy
 
 #endif // GALAXY_GALAXY_H

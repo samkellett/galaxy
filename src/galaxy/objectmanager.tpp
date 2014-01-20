@@ -1,6 +1,6 @@
 #include <type_traits>
 
-namespace galaxy {
+namespace glxy {
 
 template <typename Obj>
 std::shared_ptr<GameObject> ObjectManager::push(const char *const name)
@@ -13,4 +13,4 @@ std::shared_ptr<GameObject> ObjectManager::push(const char *const name)
   return object;
 }
 
-} // namespace galaxy
+} // namespace glxy

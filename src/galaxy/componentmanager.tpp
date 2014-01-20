@@ -1,7 +1,7 @@
 #include <type_traits>
 #include <utility>
 
-namespace galaxy {
+namespace glxy {
 
 template <typename Comp, typename... Params>
 std::shared_ptr<Component> ComponentManager::push(Params&&... params)
@@ -14,4 +14,4 @@ std::shared_ptr<Component> ComponentManager::push(Params&&... params)
   return component;
 }
 
-} // namespace galaxy
+} // namespace glxy

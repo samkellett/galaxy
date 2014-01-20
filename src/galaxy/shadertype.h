@@ -1,7 +1,7 @@
 #ifndef GALAXY_SHADERTYPE_H
 #define GALAXY_SHADERTYPE_H
 
-namespace galaxy {
+namespace glxy {
 
 enum class ShaderType
 {
@@ -20,6 +20,6 @@ ShaderType operator *(ShaderType type);
 ShaderType begin(const ShaderType &);
 ShaderType end(const ShaderType &);
 
-} // namespace galaxy
+} // namespace glxy
 
 #endif // GALAXY_SHADERTYPE_H

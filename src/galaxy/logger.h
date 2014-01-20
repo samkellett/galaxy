@@ -3,10 +3,10 @@
 
 #include <glog/logging.h>
 
-namespace galaxy {
+namespace glxy {
 	
 void initLogger(const char *const argv);
 
-} // namespace galaxy
+} // namespace glxy
 
 #endif

@@ -1,6 +1,6 @@
 #include "objectmanager.h"
 
-namespace galaxy {
+namespace glxy {
 
 ObjectManager::ObjectManager()
 {
@@ -30,4 +30,4 @@ ObjectManager::const_iterator ObjectManager::end() const
   return &objects_[objects_.size()];
 }
 
-} // namespace galaxy
+} // namespace glxy
