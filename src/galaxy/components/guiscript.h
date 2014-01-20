@@ -3,7 +3,7 @@
 
 #include "luascript.h"
 
-#include "../gui.h"
+#include "../shaderpipeline.h"
 
 namespace galaxy {
 namespace components {
@@ -16,8 +16,8 @@ public:
   void update(const std::chrono::nanoseconds &dt);
   void render(const std::chrono::nanoseconds &dt);
 
-private:
-  Gui gui_;
+  // Drawing API:
+  void drawLabel(const uint32_t x, const uint32_t y, const char *const text);
 };
 
 } // namespace components

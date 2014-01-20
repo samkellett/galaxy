@@ -10,6 +10,7 @@
 #include "scenemanager.h"
 
 #define myGame() galaxy::Game::instance()
+#define myScene() myGame()->scenes().current()
 
 namespace galaxy {
 

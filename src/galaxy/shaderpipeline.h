@@ -15,6 +15,11 @@ public:
   ShaderPipeline(const char *const name, const char *const folder, const ShaderType &type);
   ~ShaderPipeline();
 
+  const GLuint id() const;
+
+  const GLint attribute(const char *const name);
+  const GLint uniform(const char *const name);
+
 private:
   const char *const extension(const ShaderType &type);
   const GLenum type(const ShaderType &type);

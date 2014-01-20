@@ -16,11 +16,12 @@ public:
   FontManager();
   ~FontManager();
 
-  void push(const char *const name, const std::string &file);
+  void push(const std::string &name, const std::string &file);
+  std::shared_ptr<FT_Face> at(const std::string &key) const;
 
 private:
   FT_Library freetype_;
-  std::map<const char *const, std::shared_ptr<FT_Face>> fonts_;
+  std::map<std::string, std::shared_ptr<FT_Face>> fonts_;
 };
 
 } // namespace galaxy

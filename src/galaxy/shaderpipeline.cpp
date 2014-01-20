@@ -24,10 +24,45 @@ ShaderPipeline::ShaderPipeline(const char *const name, const char *const folder,
       glAttachShader(program_, shader.id());
     }
   }
+
+  glLinkProgram(program_);
+  {
+    GLint ret = GL_FALSE;
+    glGetProgramiv(program_, GL_LINK_STATUS, &ret);
+    if (ret == GL_FALSE) {
+      GLint log_length = 0;
+      glGetProgramiv(program_, GL_INFO_LOG_LENGTH, &log_length);
+      char* log = (char*)malloc(log_length);
+      glGetProgramInfoLog(program_, log_length, NULL, log);
+      LOG(ERROR) << log;
+      free(log);
+    }
+  }
 }
 
 ShaderPipeline::~ShaderPipeline()
 {
+}
+
+const GLuint ShaderPipeline::id() const
+{
+  return program_;
+}
+
+const GLint ShaderPipeline::attribute(const char *const name)
+{
+  const GLint location = glGetAttribLocation(program_, name);
+  assert(location != -1);
+
+  return location;
+}
+
+const GLint ShaderPipeline::uniform(const char *const name)
+{
+  const GLint location = glGetUniformLocation(program_, name);
+  assert(location != -1);
+
+  return location;
 }
 
 const char *const ShaderPipeline::extension(const ShaderType &type)

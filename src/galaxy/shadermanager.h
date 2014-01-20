@@ -3,6 +3,7 @@
 
 #include <map>
 #include <memory>
+#include <string>
 
 #include "shaderpipeline.h"
 
@@ -16,10 +17,11 @@ public:
   ShaderManager();
   ~ShaderManager();
 
-  void push(const char *const name, const char *const path, const ShaderType &type);
+  void push(const std::string &name, const char *const path, const ShaderType &type);
+  const std::shared_ptr<ShaderPipeline> at(const std::string &key);
 
 private:
-  std::map<const char *const, std::shared_ptr<ShaderPipeline>> shaders_;
+  std::map<std::string, std::shared_ptr<ShaderPipeline>> shaders_;
 };
 
 } // namespace galaxy

@@ -23,7 +23,6 @@ public:
 
   const std::vector<std::shared_ptr<Component>> components();
 
-protected:
   FontManager &fonts();
   ObjectManager &objects();
   ShaderManager &shaders();

@@ -1,5 +1,7 @@
 #include "guiscript.h"
 
+#include <utility>
+
 extern "C" {
 #include "lua.h"
 #include "lualib.h"
@@ -8,24 +10,33 @@ extern "C" {
 
 #include <luabind/luabind.hpp>
 
-#include <boost/ref.hpp>
-
 namespace galaxy {
 namespace components {
 
-GuiScript::GuiScript(const char *const file, const LuaLib libraries) : LuaScript(file, libraries),
-  gui_(L)
+GuiScript::GuiScript(const char *const file, const LuaLib libraries) : LuaScript(file, libraries)
 {
+  using luabind::module;
+  using luabind::class_;
+
+  module(L)
+  [
+    class_<GuiScript>("GuiScript")
+      .def("drawLabel", &GuiScript::drawLabel)
+  ];
 }
 
 void GuiScript::update(const std::chrono::nanoseconds &dt)
 {
-  luabind::call_function<void>(L, "onGui", static_cast<long>(dt.count()), boost::ref(gui_));
+  luabind::call_function<void>(L, "onGui", static_cast<long>(dt.count()), std::ref(*this));
 }
 
 void GuiScript::render(const std::chrono::nanoseconds &)
 {
-  gui_.render();
+}
+
+// Drawing API:
+void GuiScript::drawLabel(const uint32_t x, const uint32_t y, const char *const text)
+{
 }
 
 } // namespace components

@@ -46,10 +46,11 @@ int Galaxy::exec()
   
   glfwMakeContextCurrent(window);
   glfwSwapInterval(0);
-  LOG(INFO) << "OpenGL version: " << glGetString(GL_VERSION);;
+  LOG(INFO) << "OpenGL version: " << glGetString(GL_VERSION);
 
   // Bee yellow
   glClearColor(1.0f, 0.83f, 0.33f, 1.0f);
+  // LOG(INFO) << gluErrorString(glGetError());
 
   // Load the first scene
   auto scene = myGame()->scenes().next();

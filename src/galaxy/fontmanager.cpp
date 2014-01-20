@@ -17,7 +17,7 @@ FontManager::~FontManager()
 {
 }
 
-void FontManager::push(const char *const name, const std::string &file)
+void FontManager::push(const std::string &name, const std::string &file)
 {
   size_t path = file.find_last_of("/\\");
   size_t ext = file.find_last_of(".");
@@ -32,6 +32,11 @@ void FontManager::push(const char *const name, const std::string &file)
   assert(ret == 0);
 
   fonts_.insert({font.c_str(), face});
+}
+
+std::shared_ptr<FT_Face> FontManager::at(const std::string &key) const
+{
+  return fonts_.at(key);
 }
 
 } // namespace galaxy
