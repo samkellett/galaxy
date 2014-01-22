@@ -7,7 +7,7 @@
 
 #include "scene.h"
 
-namespace glxy {
+namespace gxy {
 
 class SceneManager
 {
@@ -27,7 +27,7 @@ private:
   std::vector<std::shared_ptr<Scene>> scenes_;
 };
 
-} // namespace glxy
+} // namespace gxy
 
 #include "scenemanager.tpp"
 #endif

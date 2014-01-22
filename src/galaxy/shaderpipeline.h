@@ -5,7 +5,7 @@
 
 #include "gl.h"
 
-namespace glxy {
+namespace gxy {
 
 enum class ShaderType;
 
@@ -28,6 +28,6 @@ private:
   const GLuint program_;
 };
 
-} // namespace glxy
+} // namespace gxy
 
 #endif // GALAXY_SHADERPIPELINE_H

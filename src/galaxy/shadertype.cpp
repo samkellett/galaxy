@@ -1,6 +1,6 @@
 #include "shadertype.h"
 
-namespace glxy {
+namespace gxy {
 
 const bool operator &(const ShaderType &lhs, const ShaderType &rhs)
 {
@@ -27,4 +27,4 @@ ShaderType end(const ShaderType &)
   return ShaderType(int(ShaderType::Fragment) << 1);
 }
 
-} // namespace glxy
+} // namespace gxy

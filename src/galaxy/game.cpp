@@ -5,7 +5,7 @@
 
 #include <glog/logging.h>
 
-namespace glxy {
+namespace gxy {
 
 Game *Game::game = nullptr;
 
@@ -57,4 +57,4 @@ SceneManager &Game::scenes()
   return scenes_;
 }
 
-} // namespace glxy
+} // namespace gxy

@@ -1,7 +1,7 @@
 #ifndef GALAXY_COMPONENTS_H
 #define GALAXY_COMPONENTS_H
 
-namespace glxy {
+namespace gxy {
   
 enum class ComponentType
 {
@@ -9,6 +9,6 @@ enum class ComponentType
   LuaScript
 };
 
-} // namespace glxy
+} // namespace gxy
 
 #endif // GALAXY_COMPONENTS_H

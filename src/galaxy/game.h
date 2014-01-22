@@ -9,10 +9,10 @@
 
 #include "scenemanager.h"
 
-#define myGame() glxy::Game::instance()
+#define myGame() gxy::Game::instance()
 #define myScene() myGame()->scenes().current()
 
-namespace glxy {
+namespace gxy {
 
 class Game
 {
@@ -44,6 +44,6 @@ private:
   SceneManager scenes_;
 };
 
-} // namespace glxy
+} // namespace gxy
 
 #endif // GALAXY_GAME_H

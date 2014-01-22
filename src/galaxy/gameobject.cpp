@@ -4,7 +4,7 @@
 
 #include "componentmanager.h"
 
-namespace glxy {
+namespace gxy {
 
 GameObject::GameObject(const char *const name, const std::shared_ptr<GameObject> &parent) :
   name_(name), parent_(parent)
@@ -57,4 +57,4 @@ const std::vector<std::shared_ptr<GameObject>> GameObject::children() const
   return children_;
 }
 
-} // namespace glxy
+} // namespace gxy

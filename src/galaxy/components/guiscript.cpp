@@ -10,7 +10,7 @@ extern "C" {
 
 #include <luabind/luabind.hpp>
 
-namespace glxy {
+namespace gxy {
 namespace components {
 
 GuiScript::GuiScript(const char *const file, const LuaLib libraries) : LuaScript(file, libraries)
@@ -40,4 +40,4 @@ void GuiScript::drawLabel(const uint32_t x, const uint32_t y, const char *const 
 }
 
 } // namespace components
-} // namespace glxy
+} // namespace gxy

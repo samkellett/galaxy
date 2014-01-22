@@ -16,7 +16,7 @@ extern "C" {
 #include "../components.h"
 #include "../game.h"
 
-namespace glxy {
+namespace gxy {
 namespace components {
 
 LuaScript::LuaScript(const char *const file, const LuaLib libraries) : Component(ComponentType::LuaScript),
@@ -71,4 +71,4 @@ void LuaScript::render(const std::chrono::nanoseconds &dt)
 
 
 } // namespace component
-} // namespace glxy
+} // namespace gxy

@@ -10,7 +10,7 @@
 #include "gl.h"
 #include "scene.h"
 
-namespace glxy {
+namespace gxy {
 
 Galaxy::Galaxy(Game &game) :
   game_(game)
@@ -33,8 +33,8 @@ int Galaxy::exec()
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
   GLFWwindow *window = glfwCreateWindow(game_.width(), game_.height(), game_.title(), nullptr, nullptr);
+  
   LOG(INFO) << "Window: " << window;
   if (!window) {
     LOG(ERROR) << "Could not create a GLFW window.";
@@ -47,7 +47,7 @@ int Galaxy::exec()
   LOG(INFO) << "OpenGL version: " << glGetString(GL_VERSION);
 
   // Bee yellow
-  gl::clearColor(1.0f, 0.83f, 0.33f, 1.0f);
+  gfx::clearColor(1.0f, 0.83f, 0.33f, 1.0f);
 
   // Load the first scene
   auto scene = myGame()->scenes().next();
@@ -57,7 +57,7 @@ int Galaxy::exec()
   std::chrono::nanoseconds dt(0);
   while(!glfwWindowShouldClose(window)) {
     auto start = std::chrono::high_resolution_clock::now();
-    gl::clear(GL_COLOR_BUFFER_BIT);
+    gfx::clear(GL_COLOR_BUFFER_BIT);
 
     // Components
     for (std::shared_ptr<Component> component : scene->components()) {
@@ -77,4 +77,4 @@ int Galaxy::exec()
   return 0;
 }
   
-} // namespace glxy
+} // namespace gxy

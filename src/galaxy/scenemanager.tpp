@@ -1,7 +1,7 @@
 #include <cassert>
 #include <type_traits>
 
-namespace glxy {
+namespace gxy {
 
 template <typename YourState>
 std::shared_ptr<Scene> SceneManager::push()
@@ -14,4 +14,4 @@ std::shared_ptr<Scene> SceneManager::push()
   return scene;
 }
 
-} // namespace glxy
+} // namespace gxy

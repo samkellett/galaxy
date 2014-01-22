@@ -5,7 +5,7 @@
 #include "shader.h"
 #include "shadertype.h"
 
-namespace glxy {
+namespace gxy {
 
 ShaderPipeline::ShaderPipeline(const char *const name, const char *const folder, const ShaderType &types) :
   name_(name), program_(glCreateProgram())
@@ -89,4 +89,4 @@ const GLenum ShaderPipeline::type(const ShaderType &type)
   }
 }
 
-} // namespace glxy
+} // namespace gxy

@@ -2,7 +2,7 @@
 
 #include "../components.h"
 
-namespace glxy {
+namespace gxy {
 namespace components {
 
 Transform::Transform(const glm::vec3 &position, const glm::vec3 &rotation, const glm::vec3 &scale) : Component(ComponentType::Transform),
@@ -38,4 +38,4 @@ const glm::vec3 &Transform::scale() const
 }
 
 } // namespace component
-} // namespace glxy
+} // namespace gxy

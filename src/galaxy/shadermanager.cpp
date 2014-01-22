@@ -2,7 +2,7 @@
 
 #include "logger.h"
 
-namespace glxy {
+namespace gxy {
 
 ShaderManager::ShaderManager()
 {

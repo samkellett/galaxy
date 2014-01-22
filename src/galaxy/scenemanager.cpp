@@ -4,7 +4,7 @@
 
 #include "scene.h"
 
-namespace glxy {
+namespace gxy {
 
 SceneManager::SceneManager() :
   current_(-1)
@@ -36,4 +36,4 @@ const std::shared_ptr<Scene> SceneManager::next()
   }
 }
 
-} // namespace glxy
+} // namespace gxy

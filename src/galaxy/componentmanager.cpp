@@ -1,6 +1,6 @@
 #include "componentmanager.h"
 
-namespace glxy {
+namespace gxy {
 
 ComponentManager::ComponentManager()
 {
@@ -35,4 +35,4 @@ ComponentManager::const_iterator ComponentManager::end() const
   return &components_[components_.size()];
 }
 
-} // namespace glxy
+} // namespace gxy

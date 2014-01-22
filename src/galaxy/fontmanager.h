@@ -8,7 +8,7 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
-namespace glxy {
+namespace gxy {
 
 class FontManager
 {
@@ -24,6 +24,6 @@ private:
   std::map<std::string, std::shared_ptr<FT_Face>> fonts_;
 };
 
-} // namespace glxy
+} // namespace gxy
 
 #endif // GALAXY_FONT_MANAGER_H

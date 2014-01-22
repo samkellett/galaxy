@@ -6,10 +6,10 @@
 
 #include "logger.h"
 
-namespace glxy {
+namespace gxy {
 
 Shader::Shader(const std::string &file, const GLenum type) : 
-  shader_(gl::createShader(type))
+  shader_(gfx::createShader(type))
 {
   std::ifstream in(file);
   assert(in.is_open());
@@ -22,8 +22,8 @@ Shader::Shader(const std::string &file, const GLenum type) :
   {
     const GLint length = source.size();
     const GLchar *const data = source.c_str();
-    gl::shaderSource(shader_, 1, &data, &length);
-    gl::compileShader(shader_);
+    gfx::shaderSource(shader_, 1, &data, &length);
+    gfx::compileShader(shader_);
   }
 }
 
@@ -36,4 +36,4 @@ const GLuint Shader::id() const
   return shader_;
 }
 
-} // namespace glxy
+} // namespace gxy

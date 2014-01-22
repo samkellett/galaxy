@@ -3,10 +3,10 @@
 
 #include <glog/logging.h>
 
-namespace glxy {
+namespace gxy {
 	
 void initLogger(const char *const argv);
 
-} // namespace glxy
+} // namespace gxy
 
 #endif

@@ -9,7 +9,7 @@
 #include "objectmanager.h"
 #include "shadermanager.h"
 
-namespace glxy {
+namespace gxy {
 
 class Component;
 
@@ -33,6 +33,6 @@ private:
   ObjectManager objects_;
 };
 
-} // namespace glxy
+} // namespace gxy
 
 #endif

@@ -5,7 +5,7 @@
 #include "game.h"
 #include "logger.h"
 
-namespace glxy {
+namespace gxy {
 
 FontManager::FontManager()
 {
@@ -39,4 +39,4 @@ std::shared_ptr<FT_Face> FontManager::at(const std::string &key) const
   return fonts_.at(key);
 }
 
-} // namespace glxy
+} // namespace gxy

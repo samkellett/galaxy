@@ -5,7 +5,7 @@
 
 #include "../shaderpipeline.h"
 
-namespace glxy {
+namespace gxy {
 namespace components {
 
 class GuiScript : public LuaScript
@@ -21,6 +21,6 @@ public:
 };
 
 } // namespace components
-} // namespace glxy
+} // namespace gxy
 
 #endif // GALAXY_COMPONENTS_GUISCRIPT_H
