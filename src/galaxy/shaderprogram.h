@@ -1,5 +1,5 @@
-#ifndef GALAXY_SHADERPIPELINE_H
-#define GALAXY_SHADERPIPELINE_H
+#ifndef GALAXY_SHADERPROGRAM_H
+#define GALAXY_SHADERPROGRAM_H
 
 #include <vector>
 
@@ -9,11 +9,11 @@ namespace gxy {
 
 enum class ShaderType;
 
-class ShaderPipeline
+class ShaderProgram
 {
 public:
-  ShaderPipeline(const char *const name, const char *const folder, const ShaderType &type);
-  ~ShaderPipeline();
+  ShaderProgram(const char *const name, const char *const folder, const ShaderType &type);
+  ~ShaderProgram();
 
   const GLuint id() const;
 
@@ -30,4 +30,4 @@ private:
 
 } // namespace gxy
 
-#endif // GALAXY_SHADERPIPELINE_H
+#endif // GALAXY_SHADERPROGRAM_H

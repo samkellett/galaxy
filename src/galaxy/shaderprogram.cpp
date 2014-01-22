@@ -1,4 +1,4 @@
-#include "shaderpipeline.h"
+#include "ShaderProgram.h"
 
 #include "game.h"
 #include "logger.h"
@@ -7,7 +7,7 @@
 
 namespace gxy {
 
-ShaderPipeline::ShaderPipeline(const char *const name, const char *const folder, const ShaderType &types) :
+ShaderProgram::ShaderProgram(const char *const name, const char *const folder, const ShaderType &types) :
   name_(name), program_(glCreateProgram())
 {
   std::string path(myGame()->assets());
@@ -40,16 +40,16 @@ ShaderPipeline::ShaderPipeline(const char *const name, const char *const folder,
   }
 }
 
-ShaderPipeline::~ShaderPipeline()
+ShaderProgram::~ShaderProgram()
 {
 }
 
-const GLuint ShaderPipeline::id() const
+const GLuint ShaderProgram::id() const
 {
   return program_;
 }
 
-const GLint ShaderPipeline::attribute(const char *const name)
+const GLint ShaderProgram::attribute(const char *const name)
 {
   const GLint location = glGetAttribLocation(program_, name);
   assert(location != -1);
@@ -57,7 +57,7 @@ const GLint ShaderPipeline::attribute(const char *const name)
   return location;
 }
 
-const GLint ShaderPipeline::uniform(const char *const name)
+const GLint ShaderProgram::uniform(const char *const name)
 {
   const GLint location = glGetUniformLocation(program_, name);
   assert(location != -1);
@@ -65,7 +65,7 @@ const GLint ShaderPipeline::uniform(const char *const name)
   return location;
 }
 
-const char *const ShaderPipeline::extension(const ShaderType &type)
+const char *const ShaderProgram::extension(const ShaderType &type)
 {
   switch(type)
   {
@@ -77,7 +77,7 @@ const char *const ShaderPipeline::extension(const ShaderType &type)
   }
 }
 
-const GLenum ShaderPipeline::type(const ShaderType &type)
+const GLenum ShaderProgram::type(const ShaderType &type)
 {
   switch(type)
   {

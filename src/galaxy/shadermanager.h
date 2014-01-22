@@ -5,7 +5,7 @@
 #include <memory>
 #include <string>
 
-#include "shaderpipeline.h"
+#include "shaderprogram.h"
 
 namespace gxy {
 
@@ -18,10 +18,10 @@ public:
   ~ShaderManager();
 
   void push(const std::string &name, const char *const path, const ShaderType &type);
-  const std::shared_ptr<ShaderPipeline> at(const std::string &key);
+  const std::shared_ptr<ShaderProgram> at(const std::string &key);
 
 private:
-  std::map<std::string, std::shared_ptr<ShaderPipeline>> shaders_;
+  std::map<std::string, std::shared_ptr<ShaderProgram>> shaders_;
 };
 
 } // namespace gxy

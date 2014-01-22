@@ -69,7 +69,7 @@ set(GALAXY_SOURCES
   src/galaxy/scenemanager.cpp
   src/galaxy/shader.cpp
   src/galaxy/shadermanager.cpp
-  src/galaxy/shaderpipeline.cpp
+  src/galaxy/shaderprogram.cpp
   src/galaxy/shadertype.cpp
 
   src/galaxy/components/transform.cpp
