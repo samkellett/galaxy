@@ -17,7 +17,7 @@ namespace gxy {
 class Game
 {
 public:
-  Game();
+  Game() = default;
   Game(const char *const title, const char *const assets);
   Game(const char *const title, const char *const assets, const uint32_t width, const uint32_t height);
 
@@ -32,11 +32,11 @@ public:
   SceneManager &scenes();
 
 protected:
-  const char *const title_;
-  const char *const assets_;
+  const char *const title_ = "Dark Matter";
+  const char *const assets_ = ".";
 
-  const uint32_t width_;
-  const uint32_t height_;
+  const uint32_t width_ = 640;
+  const uint32_t height_ = 480;
 
 private:
   static Game *game;

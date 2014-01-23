@@ -9,10 +9,6 @@ namespace gxy {
 
 Game *Game::game = nullptr;
 
-Game::Game() : Game("Dark Matter", ".", 640, 480)
-{
-}
-
 Game::Game(const char *const title, const char *const assets) : Game(title, assets, 640, 480)
 {
 }
