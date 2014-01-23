@@ -20,9 +20,8 @@ Shader::Shader(const std::string &file, const GLenum type) :
   }
 
   {
-    const GLint length = source.size();
     const GLchar *const data = source.c_str();
-    gfx::shaderSource(shader_, 1, &data, &length);
+    gfx::shaderSource(shader_, 1, &data, 0);
     gfx::compileShader(shader_);
   }
 }

@@ -20,7 +20,21 @@ inline void clearColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha)
 inline void compileShader(GLuint shader)
 {
   glCompileShader(shader);
-  assert(glGetError() == GL_NO_ERROR);
+
+  GLint status = GL_TRUE;
+  glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
+  if(status == GL_FALSE) {
+    GLint length = 0;
+    glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &length);
+
+    std::vector<GLchar> info(length);
+    glGetShaderInfoLog(shader, length, &length, &info[0]);
+    glDeleteShader(shader);
+
+    LOG(ERROR) << "ERROR:";
+    LOG(ERROR) << std::string(info.begin(), info.end());
+    assert(status != GL_FALSE);
+  }  
 }
 
 inline GLuint createShader(GLenum type)
@@ -33,19 +47,7 @@ inline GLuint createShader(GLenum type)
 inline void shaderSource(GLuint shader, GLsizei count, const GLchar *const *string, const GLint *length)
 {
   glShaderSource(shader, count, string, length);
-
-  GLint status;
-  glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
-  if(status == GL_FALSE) {
-    char message[1024];
-
-    int size;
-    glGetShaderInfoLog(shader, 1024, &size, message);
-
-    LOG(ERROR) << "Could not compile shader, error:";
-    LOG(ERROR) << message;
-    assert(status != GL_FALSE);
-  }  
+  assert(glGetError() == GL_NO_ERROR);
 }
 
 } // namespace gfx

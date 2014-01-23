@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "gl.h"
+#include "gfx.h"
 
 namespace gxy {
 

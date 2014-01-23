@@ -7,7 +7,7 @@
 
 #include "component.h"
 #include "game.h"
-#include "gl.h"
+#include "gfx.h"
 #include "scene.h"
 
 namespace gxy {
