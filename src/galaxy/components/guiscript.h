@@ -3,7 +3,7 @@
 
 #include "luascript.h"
 
-#include "../ShaderProgram.h"
+#include "../shaderprogram.h"
 
 namespace gxy {
 namespace components {
