@@ -40,31 +40,6 @@ ShaderProgram::ShaderProgram(const char *const name, const char *const folder, c
   }
 }
 
-ShaderProgram::~ShaderProgram()
-{
-}
-
-const GLuint ShaderProgram::id() const
-{
-  return program_;
-}
-
-const GLint ShaderProgram::attribute(const char *const name)
-{
-  const GLint location = glGetAttribLocation(program_, name);
-  assert(location != -1);
-
-  return location;
-}
-
-const GLint ShaderProgram::uniform(const char *const name)
-{
-  const GLint location = glGetUniformLocation(program_, name);
-  assert(location != -1);
-
-  return location;
-}
-
 const char *const ShaderProgram::extension(const ShaderType &type)
 {
   switch(type)

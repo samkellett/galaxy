@@ -29,7 +29,6 @@ public:
   };
 
   LuaScript(const char *const file, const LuaLib libraries = NoLibs);
-  ~LuaScript();
 
   void update(const std::chrono::nanoseconds &dt);
   void render(const std::chrono::nanoseconds &dt);

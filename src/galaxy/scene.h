@@ -16,8 +16,7 @@ class Component;
 class Scene
 {
 public:
-  Scene();
-  ~Scene();
+  Scene() = default;
 
   virtual void init() = 0;
 

@@ -7,10 +7,6 @@ Component::Component(const ComponentType type) :
 {
 }
 
-Component::~Component()
-{
-}
-
 const ComponentType Component::type() const
 {
   return type_;

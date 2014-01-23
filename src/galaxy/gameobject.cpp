@@ -14,10 +14,6 @@ GameObject::GameObject(const char *const name, const std::shared_ptr<GameObject>
   }
 }
 
-GameObject::~GameObject()
-{
-}
-
 const char *const GameObject::name() const
 {
   return name_;

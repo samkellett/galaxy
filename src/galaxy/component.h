@@ -10,8 +10,6 @@ namespace gxy {
 class Component
 {
 public:
-  ~Component();
-
   virtual void update(const std::chrono::nanoseconds &dt) = 0;
   virtual void render(const std::chrono::nanoseconds &dt) = 0;
 

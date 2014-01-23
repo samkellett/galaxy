@@ -12,7 +12,6 @@ class Transform : public Component
 {
 public:
   Transform(const glm::vec3 &position = glm::vec3(0, 0, 0), const glm::vec3 &rotation = glm::vec3(0, 0, 0), const glm::vec3 &scale = glm::vec3(1, 1, 1));
-  ~Transform();
 
   void update(const std::chrono::nanoseconds &dt);
   void render(const std::chrono::nanoseconds &dt);

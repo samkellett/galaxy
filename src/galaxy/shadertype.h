@@ -9,6 +9,7 @@ enum class ShaderType
   Geometry = 0x2,
   Fragment = 0x4,
 
+  None = 0,
   Basic = Vertex | Fragment,
   All = Vertex | Geometry | Fragment
 };

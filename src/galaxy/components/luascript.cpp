@@ -56,10 +56,6 @@ LuaScript::LuaScript(const char *const file, const LuaLib libraries) : Component
   luabind::open(L);
 }
 
-LuaScript::~LuaScript()
-{
-}
-
 void LuaScript::update(const std::chrono::nanoseconds &dt)
 {
   luabind::call_function<void>(L, "onUpdate", static_cast<long>(dt.count()));

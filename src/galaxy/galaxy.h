@@ -9,8 +9,7 @@ class Galaxy
 {
 public:
   Galaxy(Game &game);
-  ~Galaxy();
-  
+
   int exec();
   
 private:

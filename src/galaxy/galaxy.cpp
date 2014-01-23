@@ -18,10 +18,6 @@ Galaxy::Galaxy(Game &game) :
   LOG(INFO) << "Initialising Galaxy";
 }
 
-Galaxy::~Galaxy()
-{
-}
-
 int Galaxy::exec()
 {
   if (!glfwInit()) {

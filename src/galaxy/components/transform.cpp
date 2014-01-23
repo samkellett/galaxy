@@ -10,10 +10,6 @@ Transform::Transform(const glm::vec3 &position, const glm::vec3 &rotation, const
 {
 }
 
-Transform::~Transform()
-{
-}
-
 void Transform::update(const std::chrono::nanoseconds &)
 {
 }

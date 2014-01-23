@@ -8,14 +8,6 @@
 
 namespace gxy {
 
-Scene::Scene()
-{
-}
-
-Scene::~Scene()
-{ 
-}
-
 const std::vector<std::shared_ptr<Component>> Scene::components()
 {
   std::vector<std::shared_ptr<Component>> components;

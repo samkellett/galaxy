@@ -13,7 +13,6 @@ class GameObject : public std::enable_shared_from_this<GameObject>
 {
 public:
   GameObject(const char *const name, const std::shared_ptr<GameObject> &parent = nullptr);
-  ~GameObject();
 
   const char *const name() const;
 
