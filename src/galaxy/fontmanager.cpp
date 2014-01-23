@@ -13,10 +13,6 @@ FontManager::FontManager()
   assert(ret == 0);
 }
 
-FontManager::~FontManager()
-{
-}
-
 void FontManager::push(const std::string &name, const std::string &file)
 {
   size_t path = file.find_last_of("/\\");
@@ -31,12 +27,7 @@ void FontManager::push(const std::string &name, const std::string &file)
   auto ret = FT_New_Face(freetype_, fullpath.c_str(), 0, face.get());
   assert(ret == 0);
 
-  fonts_.insert({font.c_str(), face});
-}
-
-std::shared_ptr<FT_Face> FontManager::at(const std::string &key) const
-{
-  return fonts_.at(key);
+  insert({font.c_str(), face});
 }
 
 } // namespace gxy

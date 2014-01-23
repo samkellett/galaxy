@@ -10,18 +10,17 @@
 
 namespace gxy {
 
-class FontManager
+typedef std::map<std::string, std::shared_ptr<FT_Face>> FontMap;
+class FontManager : private FontMap
 {
 public:
   FontManager();
-  ~FontManager();
 
+  using FontMap::at;
   void push(const std::string &name, const std::string &file);
-  std::shared_ptr<FT_Face> at(const std::string &key) const;
 
 private:
   FT_Library freetype_;
-  std::map<std::string, std::shared_ptr<FT_Face>> fonts_;
 };
 
 } // namespace gxy
