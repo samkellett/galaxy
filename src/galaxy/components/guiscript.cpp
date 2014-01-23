@@ -3,11 +3,12 @@
 #include <utility>
 
 extern "C" {
-#include "lua.h"
-#include "lualib.h"
-#include "lauxlib.h"
+  #include "lua.h"
+  #include "lualib.h"
+  #include "lauxlib.h"
 }
 
+#include <boost/ref.hpp>
 #include <luabind/luabind.hpp>
 
 namespace gxy {
@@ -27,7 +28,7 @@ GuiScript::GuiScript(const char *const file, const LuaLib libraries) : LuaScript
 
 void GuiScript::update(const std::chrono::nanoseconds &dt)
 {
-  luabind::call_function<void>(L, "onGui", static_cast<long>(dt.count()), std::ref(*this));
+  luabind::call_function<void>(L, "onGui", static_cast<long>(dt.count()), boost::ref(*this));
 }
 
 void GuiScript::render(const std::chrono::nanoseconds &)
