@@ -11,17 +11,15 @@ namespace gxy {
 
 enum class ShaderType;
 
-class ShaderManager
+typedef std::map<std::string, std::shared_ptr<ShaderProgram>> ShaderMap;
+class ShaderManager : private ShaderMap
 {
 public:
-  ShaderManager();
-  ~ShaderManager();
+  ShaderManager() = default;
+
+  using ShaderMap::at;
 
   void push(const std::string &name, const char *const path, const ShaderType &type);
-  const std::shared_ptr<ShaderProgram> at(const std::string &key);
-
-private:
-  std::map<std::string, std::shared_ptr<ShaderProgram>> shaders_;
 };
 
 } // namespace gxy

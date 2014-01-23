@@ -8,27 +8,18 @@
 
 namespace gxy {
 
-class ComponentManager
+typedef std::vector<std::shared_ptr<Component>> ComponentList;
+class ComponentManager : private ComponentList
 {
 public:
-  typedef std::shared_ptr<Component> *iterator;
-  typedef const std::shared_ptr<Component> *const_iterator;
+  ComponentManager() = default;
 
-  ComponentManager();
-  ~ComponentManager();
+  using ComponentList::size;
+  using ComponentList::begin;
+  using ComponentList::end;
 
   template <typename Comp, typename... Params>
   std::shared_ptr<Component> push(Params&&... parameters);
-
-  const size_t size() const;
-
-  iterator begin();
-  const_iterator begin() const;
-  iterator end();
-  const_iterator end() const;
-
-private:
-  std::vector<std::shared_ptr<Component>> components_;
 };
 
 } // namespace gxy

@@ -8,25 +8,17 @@
 
 namespace gxy {
 
-class ObjectManager
+typedef std::vector<std::shared_ptr<GameObject>> ObjectList;
+class ObjectManager : private ObjectList
 {
 public:
-  typedef std::shared_ptr<GameObject> *iterator;
-  typedef const std::shared_ptr<GameObject> *const_iterator;
+  ObjectManager() = default;
 
-  ObjectManager();
-  ~ObjectManager();
+  using ObjectList::begin;
+  using ObjectList::end;
 
   template <typename Obj>
   std::shared_ptr<GameObject> push(const char *const name);
-
-  iterator begin();
-  const_iterator begin() const;
-  iterator end();
-  const_iterator end() const;
-
- private:
-  std::vector<std::shared_ptr<GameObject>> objects_;
 };
 
 } // namespace gxy

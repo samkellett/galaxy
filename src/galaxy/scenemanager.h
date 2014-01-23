@@ -9,11 +9,11 @@
 
 namespace gxy {
 
-class SceneManager
+typedef std::vector<std::shared_ptr<Scene>> SceneList;
+class SceneManager : public SceneList
 {
 public:
-  SceneManager();
-  ~SceneManager();
+  SceneManager() = default;
 
   const std::shared_ptr<Scene> current();
 
@@ -23,8 +23,7 @@ public:
   const std::shared_ptr<Scene> next();
 
 private:
-  int32_t current_;
-  std::vector<std::shared_ptr<Scene>> scenes_;
+  int32_t current_ = -1;
 };
 
 } // namespace gxy
