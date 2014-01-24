@@ -20,6 +20,8 @@ public:
   Game() = default;
   Game(const char *const title, const char *const assets);
   Game(const char *const title, const char *const assets, const uint32_t width, const uint32_t height);
+  Game(const Game &) = delete;
+  Game &operator =(Game) = delete;
 
   static Game *instance();
 
@@ -35,8 +37,8 @@ protected:
   const char *const title_ = "Dark Matter";
   const char *const assets_ = ".";
 
-  const uint32_t width_ = 640;
-  const uint32_t height_ = 480;
+  const uint32_t width_ = 768;
+  const uint32_t height_ = 432;
 
 private:
   static Game *game;

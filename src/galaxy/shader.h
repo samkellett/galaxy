@@ -13,6 +13,8 @@ class Shader
 {
 public:
   Shader(const std::string &file, const GLenum type);
+  Shader(const Shader &) = delete;
+  Shader &operator =(Shader) = delete;
 
   const GLuint id() const;
 

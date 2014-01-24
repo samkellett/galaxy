@@ -13,6 +13,8 @@ class ComponentManager : private ComponentList
 {
 public:
   ComponentManager() = default;
+  ComponentManager(const ComponentManager &) = delete;
+  ComponentManager &operator =(ComponentManager) = delete;
 
   using ComponentList::size;
   using ComponentList::begin;

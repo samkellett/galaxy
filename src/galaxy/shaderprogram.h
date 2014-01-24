@@ -13,6 +13,8 @@ class ShaderProgram
 {
 public:
   ShaderProgram(const char *const name, const char *const folder, const ShaderType &type);
+  ShaderProgram(const ShaderProgram &) = delete;
+  ShaderProgram &operator =(ShaderProgram) = delete;
 
 private:
   const char *const extension(const ShaderType &type);

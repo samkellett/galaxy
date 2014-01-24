@@ -9,6 +9,8 @@ class Galaxy
 {
 public:
   Galaxy(Game &game);
+  Galaxy(const Galaxy &) = delete;
+  Galaxy &operator =(Galaxy) = delete;
 
   int exec();
   

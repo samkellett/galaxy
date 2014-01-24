@@ -14,6 +14,8 @@ class SceneManager : public SceneList
 {
 public:
   SceneManager() = default;
+  SceneManager(const SceneManager &) = delete;
+  SceneManager &operator =(SceneManager) = delete;
 
   const std::shared_ptr<Scene> current();
 

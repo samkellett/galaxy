@@ -13,6 +13,8 @@ class ObjectManager : private ObjectList
 {
 public:
   ObjectManager() = default;
+  ObjectManager(const ObjectManager &) = delete;
+  ObjectManager &operator =(ObjectManager) = delete;
 
   using ObjectList::begin;
   using ObjectList::end;

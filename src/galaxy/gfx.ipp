@@ -24,14 +24,23 @@ inline void compileShader(GLuint shader)
   GLint status = GL_TRUE;
   glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
   if(status == GL_FALSE) {
+    GLint type = 0;
     GLint length = 0;
     glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &length);
+    glGetShaderiv(shader, GL_SHADER_TYPE, &type);
 
     std::vector<GLchar> info(length);
     glGetShaderInfoLog(shader, length, &length, &info[0]);
     glDeleteShader(shader);
 
-    LOG(ERROR) << "ERROR:";
+    if (type == GL_VERTEX_SHADER) {
+      LOG(ERROR) << "In vertex shader:";
+    } else if (type == GL_FRAGMENT_SHADER) {
+      LOG(ERROR) << "In fragment shader:";
+    } else if (type == GL_GEOMETRY_SHADER) {
+      LOG(ERROR) << "In geometry shader:";
+    }
+
     LOG(ERROR) << std::string(info.begin(), info.end());
     assert(status != GL_FALSE);
   }  

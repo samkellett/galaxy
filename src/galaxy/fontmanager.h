@@ -15,6 +15,8 @@ class FontManager : private FontMap
 {
 public:
   FontManager();
+  FontManager(const FontManager &) = delete;
+  FontManager &operator =(FontManager) = delete;
 
   using FontMap::at;
   void push(const std::string &name, const std::string &file);

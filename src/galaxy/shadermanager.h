@@ -16,6 +16,8 @@ class ShaderManager : private ShaderMap
 {
 public:
   ShaderManager() = default;
+  ShaderManager(const ShaderManager &) = delete;
+  ShaderManager &operator =(ShaderManager) = delete;
 
   using ShaderMap::at;
 

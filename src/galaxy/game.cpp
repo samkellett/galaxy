@@ -9,7 +9,7 @@ namespace gxy {
 
 Game *Game::game = nullptr;
 
-Game::Game(const char *const title, const char *const assets) : Game(title, assets, 640, 480)
+Game::Game(const char *const title, const char *const assets) : Game(title, assets, 768, 432)
 {
 }
 
