@@ -9,7 +9,7 @@
 namespace gxy {
 
 typedef std::vector<std::shared_ptr<GameObject>> ObjectList;
-class ObjectManager : private ObjectList
+class ObjectManager final : private ObjectList
 {
 public:
   ObjectManager() = default;

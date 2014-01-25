@@ -11,7 +11,7 @@
 namespace gxy {
 
 typedef std::map<std::string, std::shared_ptr<FT_Face>> FontMap;
-class FontManager : private FontMap
+class FontManager final : private FontMap
 {
 public:
   FontManager();

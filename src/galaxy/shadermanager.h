@@ -12,7 +12,7 @@ namespace gxy {
 enum class ShaderType;
 
 typedef std::map<std::string, std::shared_ptr<ShaderProgram>> ShaderMap;
-class ShaderManager : private ShaderMap
+class ShaderManager final : private ShaderMap
 {
 public:
   ShaderManager() = default;

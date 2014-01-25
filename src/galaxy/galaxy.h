@@ -5,7 +5,7 @@ namespace gxy {
 
 class Game;
 
-class Galaxy
+class Galaxy final
 {
 public:
   Galaxy(Game &game);

@@ -9,7 +9,7 @@ namespace gxy {
 
 enum class ShaderType;
 
-class Shader
+class Shader final
 {
 public:
   Shader(const std::string &file, const GLenum type);

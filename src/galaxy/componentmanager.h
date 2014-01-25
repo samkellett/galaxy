@@ -9,7 +9,7 @@
 namespace gxy {
 
 typedef std::vector<std::shared_ptr<Component>> ComponentList;
-class ComponentManager : private ComponentList
+class ComponentManager final : private ComponentList
 {
 public:
   ComponentManager() = default;

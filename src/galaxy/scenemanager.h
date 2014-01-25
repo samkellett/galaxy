@@ -10,7 +10,7 @@
 namespace gxy {
 
 typedef std::vector<std::shared_ptr<Scene>> SceneList;
-class SceneManager : private SceneList
+class SceneManager final : private SceneList
 {
 public:
   SceneManager() = default;

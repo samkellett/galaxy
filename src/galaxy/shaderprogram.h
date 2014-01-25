@@ -9,7 +9,7 @@ namespace gxy {
 
 enum class ShaderType;
 
-class ShaderProgram
+class ShaderProgram final
 {
 public:
   ShaderProgram(const char *const name, const char *const folder, const ShaderType &type);
