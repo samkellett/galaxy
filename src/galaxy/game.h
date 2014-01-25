@@ -21,6 +21,7 @@ public:
   Game(const char *const title, const char *const assets);
   Game(const char *const title, const char *const assets, const uint32_t width, const uint32_t height);
   Game(const Game &) = delete;
+  virtual ~Game() = default;
   Game &operator =(Game) = delete;
 
   static Game *instance();
