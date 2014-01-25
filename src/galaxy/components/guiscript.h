@@ -4,7 +4,7 @@
 #include "luascript.h"
 
 #include "../shaderprogram.h"
-#include "../widgets/widget.h"
+#include "../gui/widget.h"
 
 namespace gxy {
 namespace components {
@@ -21,7 +21,7 @@ public:
   void drawLabel(const uint32_t x, const uint32_t y, const char *const text);
 
 private:
-  std::vector<std::shared_ptr<widget::Widget>> widgets_;
+  std::vector<std::shared_ptr<gui::Widget>> widgets_;
 };
 
 } // namespace components

@@ -2,14 +2,14 @@
 #define GALAXY_WIDGET_H
 
 namespace gxy {
-namespace widget {
+namespace gui {
 
 class Widget
 {
   virtual void render() = 0;
 };
 
-} // namespace widget
+} // namespace gui
 } // namespace gxy
 
 #endif // GALAXY_WIDGET_H
