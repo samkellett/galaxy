@@ -1,18 +1,21 @@
 #ifndef GALAXY_COMPONENTS_GUISCRIPT_H
 #define GALAXY_COMPONENTS_GUISCRIPT_H
 
-#include "luascript.h"
+#include <vector>
 
-#include "../shaderprogram.h"
+#include "../component.h"
+#include "../luastate.h"
+
 #include "../gui/widget.h"
 
 namespace gxy {
 namespace components {
 
-class GuiScript : public LuaScript
+class GuiScript final : public Component
 {
 public:
-  GuiScript(const char *const file, const LuaLib libraries = NoLibs);
+  GuiScript(const char *const file);
+  GuiScript(const char *const file, const LuaState::Libraries libraries);
 
   void update(const std::chrono::nanoseconds &dt);
   void render(const std::chrono::nanoseconds &dt);
@@ -21,6 +24,7 @@ public:
   void drawLabel(const uint32_t x, const uint32_t y, const char *const text);
 
 private:
+  LuaState state_;
   std::vector<std::shared_ptr<gui::Widget>> widgets_;
 };
 

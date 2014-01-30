@@ -1,25 +1,25 @@
 #include "guiscript.h"
 
-#include <utility>
-
-extern "C" {
-  #include "lua.h"
-  #include "lualib.h"
-  #include "lauxlib.h"
-}
-
 #include <boost/ref.hpp>
 #include <luabind/luabind.hpp>
+
+#include "../components.h"
+#include "../game.h"
 
 namespace gxy {
 namespace components {
 
-GuiScript::GuiScript(const char *const file, const LuaLib libraries) : LuaScript(file, libraries)
+GuiScript::GuiScript(const char *const file) : GuiScript(file, LuaState::Libraries::NoLibs)
+{
+}
+
+GuiScript::GuiScript(const char *const file, const LuaState::Libraries libraries) : Component(ComponentType::GuiScript),
+  state_(std::string(myGame()->assets()) + file, libraries)
 {
   using luabind::module;
   using luabind::class_;
 
-  module(L)
+  module(state_)
   [
     class_<GuiScript>("GuiScript")
       .def("drawLabel", &GuiScript::drawLabel)
@@ -28,7 +28,7 @@ GuiScript::GuiScript(const char *const file, const LuaLib libraries) : LuaScript
 
 void GuiScript::update(const std::chrono::nanoseconds &dt)
 {
-  luabind::call_function<void>(L, "onGui", static_cast<long>(dt.count()), boost::ref(*this));
+  luabind::call_function<void>(state_, "onGui", static_cast<long>(dt.count()), boost::ref(*this));
 }
 
 void GuiScript::render(const std::chrono::nanoseconds &)

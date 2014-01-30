@@ -63,6 +63,7 @@ set(GALAXY_SOURCES
   src/galaxy/game.cpp
   src/galaxy/gameobject.cpp
   src/galaxy/logger.cpp
+  src/galaxy/luastate.cpp
   src/galaxy/scene.cpp
   src/galaxy/scenemanager.cpp
   src/galaxy/shader.cpp

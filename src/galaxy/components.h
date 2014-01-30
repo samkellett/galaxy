@@ -6,7 +6,8 @@ namespace gxy {
 enum class ComponentType
 {
   Transform,
-  LuaScript
+  LuaScript,
+  GuiScript
 };
 
 } // namespace gxy
