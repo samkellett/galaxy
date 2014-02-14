@@ -1,0 +1,53 @@
+#!/bin/bash
+
+readonly SOURCE="$1"
+readonly CLASS="$2"
+
+readonly GUARD="$(echo $CLASS | sed 's/::/_/g' | awk '{ print toupper($0) }')_H"
+readonly OBJECT="$(echo $CLASS | awk '{ print $NF }' FS=":")"
+readonly NAMESPACES="$(echo $CLASS | sed 's/::'"$OBJECT"'$//g' | sed 's/::/ /g')"
+
+readonly FILE="$(echo $CLASS | awk '{ print tolower($NF) }' FS=":")"
+readonly HEADER="$SOURCE$FILE.h"
+readonly CPP="$SOURCE$FILE.cpp"
+
+if [[ -f $HEADER ]] || [[ -f $CPP ]]; then
+	echo "Error: at least one of these files already exist!"
+	echo " Header: $HEADER"
+	echo " Source: $CPP"
+	exit 1
+fi
+
+touch $HEADER
+echo "#ifndef $GUARD" >> $HEADER
+echo "#define $GUARD" >> $HEADER
+echo >> $HEADER
+for namespace in $NAMESPACES; do
+	echo "namespace $namespace {" >> $HEADER
+done
+echo >> $HEADER
+echo "class $OBJECT" >> $HEADER
+echo "{" >> $HEADER
+echo "  " >> $HEADER
+echo "};" >> $HEADER
+echo >> $HEADER
+for namespace in $(echo $NAMESPACES | tr ' ' '\n' | awk '{print NR,$0}' | sort -nr | sed 's/^[0-9]* //'); do
+	echo "} // $namespace" >> $HEADER
+done
+echo >> $HEADER
+echo "#endif // $GUARD" >> $HEADER
+echo >> $HEADER
+
+touch $CPP
+echo "#include \"$FILE.h\"" >> $CPP
+echo  >> $CPP
+for namespace in $NAMESPACES; do
+	echo "namespace $namespace {" >> $CPP
+done
+echo >> $CPP
+echo >> $CPP
+echo >> $CPP
+for namespace in $(echo $NAMESPACES | tr ' ' '\n' | awk '{print NR,$0}' | sort -nr | sed 's/^[0-9]* //'); do
+	echo "} // $namespace" >> $CPP
+done
+echo >> $CPP

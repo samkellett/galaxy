@@ -116,6 +116,10 @@ if(DOXYGEN_FOUND)
   )
 endif()
 
+execute_process(
+  COMMAND ln -fs ${PROJECT_SOURCE_DIR}/scripts/gxy ${CMAKE_SOURCE_DIR}/gxy
+)
+
 # Tests
 add_subdirectory(ext/gmock)
 add_subdirectory(tests)

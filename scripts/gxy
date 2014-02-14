@@ -1,0 +1,12 @@
+#!/bin/bash
+DIR="$(dirname "$([[ -L "$0" ]] && readlink "$0" || dirname "$0")")"
+
+COMMAND="$DIR/$1.gxy"
+
+if [[ -f $COMMAND ]]; then
+	shift
+	$COMMAND "$@"
+else
+	echo "Unknown command: $1"
+	exit 1
+fi
