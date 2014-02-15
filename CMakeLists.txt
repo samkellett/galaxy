@@ -6,6 +6,7 @@ set(GALAXY_BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR})
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${GALAXY_SOURCE_DIR}/cmake)
 
+# Compiler Flags:
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
@@ -15,28 +16,25 @@ endif()
 
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DGALAXY_DEBUG")
 
-find_package(GLog REQUIRED)
+# Package options:
 set(Boost_USE_STATIC_LIBS ON)
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "Build the GLFW example programs")
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "Build the GLFW test programs")
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation")
+set(GLFW_INSTALL OFF CACHE BOOL "Generate installation target")
+
+# CMake packages:
 find_package(Boost 1.49 COMPONENTS REQUIRED)
-find_package(OpenGL REQUIRED)
+find_package(Doxygen)
+find_package(FreeType REQUIRED)
+find_package(GLog REQUIRED)
 find_package(Lua51 REQUIRED)
 find_package(Luabind REQUIRED)
+find_package(OpenGL REQUIRED)
 
-find_package(PkgConfig REQUIRED)
-pkg_search_module(FREETYPE REQUIRED freetype2)
-pkg_search_module(GLFW REQUIRED glfw3)
-if(APPLE)
-  set(GLFW_LIB ${GLFW_STATIC_LIBRARIES})
-elseif(UNIX)
-  # FIXME: Can't link statically on Linux...
-  set(GLFW_LIB ${GLFW_LIBRARIES})
-endif()
-
-if(APPLE)
-  find_library(COCOA_LIBRARY Cocoa)
-  find_library(IOKIT_LIBRARY IOKit)
-  find_library(COREVIDEO_LIBRARY CoreVideo)
-endif()
+# Submodule packages:
+add_subdirectory(ext/glfw)
+add_subdirectory(ext/gmock)
 
 include_directories(
   src/galaxy
@@ -44,12 +42,11 @@ include_directories(
   ${GLOG_INCLUDE_DIR}
 
   ${Boost_INCLUDE_DIR}
+  ${FREETYPE_INCLUDE_DIRS}
   ${LUA_INCLUDE_DIR}
   ${LUABIND_INCLUDE_DIR}
 
-  ${OPENGL_INCLUDE_PATH}
-  ${FREETYPE_INCLUDE_DIRS}
-  ${GLFW_INCLUDE_DIRS}
+  ext/glfw/include
 )
 
 link_directories(
@@ -89,20 +86,14 @@ target_link_libraries(${PROJECT_NAME}
   ${GLOG_LIBRARY}
 
   ${Boost_LIBRARIES}
+  ${FREETYPE_LIBRARY}
   ${LUA_LIBRARIES}
   ${LUABIND_LIBRARY}
 
-  ${COCOA_LIBRARY}
-  ${OPENGL_LIBRARIES}
-  ${FREETYPE_LIBRARY}
-  ${IOKIT_LIBRARY}
-  ${COREVIDEO_LIBRARY}
-
-  ${GLFW_LIB}
+  glfw
+  ${GLFW_LIBRARIES}
 )
 
-# add a target to generate API documentation with Doxygen
-find_package(Doxygen)
 if(DOXYGEN_FOUND)
   configure_file(
     ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile
@@ -121,7 +112,6 @@ execute_process(
 )
 
 # Tests
-add_subdirectory(ext/gmock)
 add_subdirectory(tests)
 
 add_dependencies(unit gmock)

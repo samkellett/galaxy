@@ -4,3 +4,6 @@
 [submodule "ext/gmock"]
 	path = ext/gmock
 	url = https://chromium.googlesource.com/external/googlemock
+[submodule "ext/glfw"]
+	path = ext/glfw
+	url = git@github.com:glfw/glfw.git
