@@ -17,7 +17,6 @@ namespace gxy {
 class Game
 {
 public:
-  Game() = default;
   Game(const char *const title, const char *const assets);
   Game(const char *const title, const char *const assets, const uint32_t width, const uint32_t height);
   Game(const Game &) = delete;
