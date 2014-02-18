@@ -4,9 +4,7 @@ message("[CMake]: Processing ${PROJECT_NAME} project")
 include_directories(
   ${GALAXY_SOURCE_DIR}/src
 
-  ${gtest_SOURCE_DIR}
   ${gtest_SOURCE_DIR}/include
-  ${gmock_SOURCE_DIR}
   ${gmock_SOURCE_DIR}/include
 )
 
@@ -20,7 +18,6 @@ add_executable(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}  
   gmock
-  gmock_main
 
   galaxy
 )
