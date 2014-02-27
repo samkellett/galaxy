@@ -5,8 +5,11 @@
 #include <memory>
 #include <string>
 
-#include <ft2build.h>
-#include FT_FREETYPE_H
+struct FT_FaceRec_;
+struct FT_LibraryRec_;
+
+typedef struct FT_FaceRec_ *FT_Face;
+typedef struct FT_LibraryRec_ *FT_Library;
 
 namespace gxy {
 
@@ -22,7 +25,7 @@ public:
   void push(const std::string &name, const std::string &file);
 
 private:
-  FT_Library freetype_;
+  std::unique_ptr<FT_Library> freetype_;
 };
 
 } // namespace gxy

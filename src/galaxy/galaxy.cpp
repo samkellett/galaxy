@@ -22,7 +22,16 @@ Galaxy::Galaxy(Game &game) :
 
 int Galaxy::exec()
 {
-  if (glfwInit() != 0) {
+  glfwSetErrorCallback([] (int code, const char *msg) {
+    glfwTerminate();
+
+    std::ostringstream stream;
+    stream << "GLFW Error " << code << ": " << msg;
+
+    throw std::runtime_error(stream.str());
+  });
+
+  if (glfwInit() != GL_TRUE) {
     throw std::runtime_error("Failed to initialise GLFW.");
   }
   
@@ -35,15 +44,6 @@ int Galaxy::exec()
 //  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 //  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-  glfwSetErrorCallback([] (int code, const char *msg) {
-    glfwTerminate();
-
-    std::ostringstream stream;
-    stream << "GLFW Error " << code << ": " << msg;
-
-    throw std::runtime_error(stream.str());
-  });
-
   LOG(INFO) << "Creating GLFW window...";
   GLFWwindow *window = glfwCreateWindow(game_.width(), game_.height(), game_.title(), nullptr, nullptr);
 
@@ -54,7 +54,7 @@ int Galaxy::exec()
   LOG(INFO) << "OpenGL Vendor: " << gfx::getString(GL_VENDOR);
   LOG(INFO) << "OpenGL Renderer: " << gfx::getString(GL_RENDERER); 
   LOG(INFO) << "GLSL Version: " << gfx::getString(GL_SHADING_LANGUAGE_VERSION);
-
+  LOG(INFO) << "GLFW Version: " << glfwGetVersionString();
   // Bee yellow
   gfx::clearColor(1.0f, 0.83f, 0.33f, 1.0f);
 
@@ -80,9 +80,10 @@ int Galaxy::exec()
     auto end = std::chrono::high_resolution_clock::now();
     dt = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
   }
-  LOG(INFO) << "Exited game loop";
 
+  LOG(INFO) << "Exited game loop";
   glfwTerminate();
+
   return 0;
 }
   
