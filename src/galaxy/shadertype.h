@@ -1,6 +1,10 @@
 #ifndef GALAXY_SHADERTYPE_H
 #define GALAXY_SHADERTYPE_H
 
+#include <ostream>
+#include <stdexcept>
+#include <type_traits>
+
 namespace gxy {
 
 enum class ShaderType
@@ -18,9 +22,26 @@ const bool operator &(const ShaderType &lhs, const ShaderType &rhs);
 
 ShaderType operator ++(ShaderType& type);
 ShaderType operator *(ShaderType type);
-ShaderType begin(const ShaderType &);
-ShaderType end(const ShaderType &);
+constexpr ShaderType begin(const ShaderType &);
+constexpr ShaderType end(const ShaderType &);
+
+template <typename T>
+constexpr typename std::enable_if<std::is_integral<T>::value, ShaderType>::type operator <<(const ShaderType &type, const T i);
+
+template <typename T>
+constexpr typename std::enable_if<std::is_integral<T>::value, ShaderType>::type operator >>(const ShaderType &type, const T i);
+
+std::ostream &operator <<(std::ostream &out, const ShaderType &type);
+
+// Exceptions:
+
+struct unknown_shader : public std::runtime_error
+{
+  unknown_shader(const ShaderType &type);
+};
 
 } // namespace gxy
 
+#include "shadertype.tpp"
+#include "shadertype.ipp"
 #endif // GALAXY_SHADERTYPE_H

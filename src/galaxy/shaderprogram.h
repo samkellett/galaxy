@@ -3,8 +3,6 @@
 
 #include <vector>
 
-#include "gfx.h"
-
 namespace gxy {
 
 enum class ShaderType;
@@ -17,11 +15,8 @@ public:
   ShaderProgram &operator =(ShaderProgram) = delete;
 
 private:
-  const char *const extension(const ShaderType &type);
-  const GLenum type(const ShaderType &type);
-
   const char *const name_;
-  const GLuint program_;
+  const unsigned int program_;
 };
 
 } // namespace gxy

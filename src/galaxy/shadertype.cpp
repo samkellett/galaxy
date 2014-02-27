@@ -1,5 +1,24 @@
 #include "shadertype.h"
 
+#include <array>
+#include <cassert>
+
+#include <boost/lexical_cast.hpp>
+
+#include "casts.h"
+
+namespace {
+
+std::array<const char *, 3> types {{
+  "vertex",
+  "geometry",
+  "fragment"
+}};
+
+static_assert(gxy::begin(gxy::ShaderType()) << types.size() == gxy::end(gxy::ShaderType()), "");
+
+} // unnamed namespace
+
 namespace gxy {
 
 const bool operator &(const ShaderType &lhs, const ShaderType &rhs)
@@ -9,7 +28,7 @@ const bool operator &(const ShaderType &lhs, const ShaderType &rhs)
 
 ShaderType operator ++(ShaderType& type)
 {
-  return type = static_cast<ShaderType>(static_cast<int>(type) << 1);
+  return type = static_cast<ShaderType>(type << 1);
 }
 
 ShaderType operator *(ShaderType type)
@@ -17,14 +36,18 @@ ShaderType operator *(ShaderType type)
   return type;
 }
 
-ShaderType begin(const ShaderType &)
+std::ostream &operator <<(std::ostream &out, const ShaderType &type)
 {
-  return ShaderType::Vertex;
+  auto index = base_cast<2, 10>(static_cast<int>(type));
+  assert(index < sizeof(types) / sizeof(types[0]));
+
+  out << types[index];
+  return out;
 }
 
-ShaderType end(const ShaderType &)
+unknown_shader::unknown_shader(const ShaderType &type) :
+  std::runtime_error(std::string("Unknown ShaderType: " + boost::lexical_cast<std::string>(type)))
 {
-  return ShaderType(static_cast<int>(ShaderType::Fragment) << 1);
 }
 
 } // namespace gxy

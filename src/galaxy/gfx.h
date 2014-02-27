@@ -1,5 +1,5 @@
-#ifndef GALAXY_GL_H
-#define GALAXY_GL_H
+#ifndef GALAXY_GFX_H
+#define GALAXY_GFX_H
 
 #include <GLXW/glxw.h>
 
@@ -10,11 +10,13 @@ namespace gxy {
 namespace gfx {
 
 // A:
+inline void attachShader(GLuint program, GLuint shader);
 // B:
 // C:
 inline void clear(GLbitfield mask);
 inline void clearColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
 inline void compileShader(GLuint shader);
+inline GLuint createProgram();
 inline GLuint createShader(GLenum type);
 // D:
 // E:
@@ -26,6 +28,7 @@ inline const GLubyte *getString(GLenum name);
 // J:
 // K:
 // L:
+inline void linkProgram(GLuint program);
 // M:
 // N:
 // O:
@@ -46,4 +49,4 @@ inline void shaderSource(GLuint shader, GLsizei count, const GLchar *const *stri
 } // namespace gxy
 
 #include "gfx.ipp"
-#endif // GALAXY_GL_H
+#endif // GALAXY_GFX_H

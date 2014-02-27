@@ -5,19 +5,27 @@
 namespace gxy {
 namespace gfx {
 
-inline void clear(GLbitfield mask)
+// A:
+void attachShader(GLuint program, GLuint shader)
+{
+  glAttachShader(program, shader);
+  assert(glGetError() == GL_NO_ERROR);
+}
+// B:
+// C:
+void clear(GLbitfield mask)
 {
   glClear(mask);
   assert(glGetError() == GL_NO_ERROR);
 }
 
-inline void clearColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha)
+void clearColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha)
 {
   glClearColor(red, green, blue, alpha);
   assert(glGetError() == GL_NO_ERROR);
 }
 
-inline void compileShader(GLuint shader)
+void compileShader(GLuint shader)
 {
   glCompileShader(shader);
 
@@ -43,10 +51,18 @@ inline void compileShader(GLuint shader)
 
     LOG(ERROR) << std::string(info.begin(), info.end());
     assert(status != GL_FALSE);
-  }  
+  }
 }
 
-inline GLuint createShader(GLenum type)
+GLuint createProgram()
+{
+  auto ret = glCreateProgram();
+  assert(glGetError() == GL_NO_ERROR);
+
+  return ret;
+}
+
+GLuint createShader(GLenum type)
 {
   auto ret = glCreateShader(type);
   assert(glGetError() == GL_NO_ERROR);
@@ -54,7 +70,11 @@ inline GLuint createShader(GLenum type)
   return ret;
 }
 
-inline const GLubyte *getString(GLenum name)
+// D:
+// E:
+// F:
+// G:
+const GLubyte *getString(GLenum name)
 {
   auto ret = glGetString(name);
   assert(glGetError() == GL_NO_ERROR);
@@ -62,11 +82,48 @@ inline const GLubyte *getString(GLenum name)
   return ret;
 }
 
-inline void shaderSource(GLuint shader, GLsizei count, const GLchar *const *string, const GLint *length)
+// H:
+// I:
+// J:
+// K:
+// L:
+void linkProgram(GLuint program)
+{
+  glLinkProgram(program);
+
+  GLint ret = GL_FALSE;
+  glGetProgramiv(program, GL_LINK_STATUS, &ret);
+  if (ret == GL_FALSE) {
+    GLint log_length = 0;
+    glGetProgramiv(program, GL_INFO_LOG_LENGTH, &log_length);
+    GLchar *log = static_cast<GLchar *>(malloc(log_length));
+    glGetProgramInfoLog(program, log_length, nullptr, log);
+
+    LOG(ERROR) << log;
+    free(log);
+  }
+}
+
+// M:
+// N:
+// O:
+// P:
+// Q:
+// R:
+// S:
+void shaderSource(GLuint shader, GLsizei count, const GLchar *const *string, const GLint *length)
 {
   glShaderSource(shader, count, string, length);
   assert(glGetError() == GL_NO_ERROR);
 }
+
+// T:
+// U:
+// V:
+// W:
+// X:
+// Y:
+// Z:
 
 } // namespace gfx
 } // namespace gxy

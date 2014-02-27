@@ -1,14 +1,45 @@
 #include "shaderprogram.h"
 
 #include "game.h"
+#include "gfx.h"
 #include "logger.h"
 #include "shader.h"
 #include "shadertype.h"
 
+namespace {
+
+const char *const to_file_ext(const gxy::ShaderType &type)
+{
+  using gxy::ShaderType;
+
+  switch(type) {
+    case ShaderType::Vertex: return ".vert";
+    case ShaderType::Fragment: return ".frag";
+    case ShaderType::Geometry: return ".geom";
+
+    default: throw gxy::unknown_shader(type); 
+  }
+}
+
+const GLenum to_glenum(const gxy::ShaderType &type)
+{
+  using gxy::ShaderType;
+
+  switch(type) {
+    case ShaderType::Vertex: return GL_VERTEX_SHADER;
+    case ShaderType::Fragment: return GL_FRAGMENT_SHADER;
+    case ShaderType::Geometry: return GL_GEOMETRY_SHADER;
+
+    default: throw gxy::unknown_shader(type); 
+  }
+}
+
+} // unnamed namespace
+
 namespace gxy {
 
 ShaderProgram::ShaderProgram(const char *const name, const char *const folder, const ShaderType &types) :
-  name_(name), program_(glCreateProgram())
+  name_(name), program_(gfx::createProgram())
 {
   std::string path(myGame()->assets());
   path += folder;
@@ -18,50 +49,14 @@ ShaderProgram::ShaderProgram(const char *const name, const char *const folder, c
 
   for (const auto& shader_type : ShaderType()) {
     if (types & shader_type) {
-      std::string file = path + extension(shader_type);
+      std::string file = path + to_file_ext(shader_type);
 
-      Shader shader(file, type(shader_type));
-      glAttachShader(program_, shader.id());
+      Shader shader(file, to_glenum(shader_type));
+      gfx::attachShader(program_, shader.id());
     }
   }
 
-  glLinkProgram(program_);
-  {
-    GLint ret = GL_FALSE;
-    glGetProgramiv(program_, GL_LINK_STATUS, &ret);
-    if (ret == GL_FALSE) {
-      GLint log_length = 0;
-      glGetProgramiv(program_, GL_INFO_LOG_LENGTH, &log_length);
-      char* log = (char*)malloc(log_length);
-      glGetProgramInfoLog(program_, log_length, NULL, log);
-      LOG(ERROR) << log;
-      free(log);
-    }
-  }
-}
-
-const char *const ShaderProgram::extension(const ShaderType &type)
-{
-  switch(type)
-  {
-    case ShaderType::Vertex: return ".vert";
-    case ShaderType::Fragment: return ".frag";
-    case ShaderType::Geometry: return ".geom";
-
-    default: assert(false);
-  }
-}
-
-const GLenum ShaderProgram::type(const ShaderType &type)
-{
-  switch(type)
-  {
-    case ShaderType::Vertex: return GL_VERTEX_SHADER;
-    case ShaderType::Fragment: return GL_FRAGMENT_SHADER;
-    case ShaderType::Geometry: return GL_GEOMETRY_SHADER;
-
-    default: assert(false);
-  }
+  gfx::linkProgram(program_);
 }
 
 } // namespace gxy
