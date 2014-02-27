@@ -3,8 +3,8 @@
 
 #include <string>
 
-#include "../component.h"
-#include "../luastate.h"
+#include "component.h"
+#include "luastate.h"
 
 namespace gxy {
 namespace components {

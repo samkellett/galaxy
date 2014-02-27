@@ -1,7 +1,7 @@
 #ifndef GALAXY_COMPONENTS_TRANSFORM_H
 #define GALAXY_COMPONENTS_TRANSFORM_H
 
-#include "../component.h"
+#include "component.h"
 
 #include <glm/glm.hpp>
 

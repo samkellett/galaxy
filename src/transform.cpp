@@ -1,6 +1,6 @@
 #include "transform.h"
 
-#include "../components.h"
+#include "components.h"
 
 namespace gxy {
 namespace components {

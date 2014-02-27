@@ -39,7 +39,11 @@ add_subdirectory(ext/glxw)
 add_subdirectory(ext/gmock)
 
 include_directories(
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/galaxy
+  ${CMAKE_CURRENT_SOURCE_DIR}/src
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/galaxy
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/galaxy/components
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/galaxy/gui
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/galaxy/objects
 
   ${CMAKE_CURRENT_SOURCE_DIR}/ext/glm
   ${CMAKE_CURRENT_SOURCE_DIR}/ext/glfw/include
@@ -53,31 +57,37 @@ include_directories(
 )
 
 set(GALAXY_SOURCES
-  src/galaxy/component.cpp
-  src/galaxy/fontmanager.cpp
-  src/galaxy/galaxy.cpp
-  src/galaxy/game.cpp
-  src/galaxy/gameobject.cpp
-  src/galaxy/logger.cpp
-  src/galaxy/luastate.cpp
-  src/galaxy/scene.cpp
-  src/galaxy/scenemanager.cpp
-  src/galaxy/shader.cpp
-  src/galaxy/shadermanager.cpp
-  src/galaxy/shaderprogram.cpp
-  src/galaxy/shadertype.cpp
+  # Core
+  src/component.cpp
+  src/fontmanager.cpp
+  src/galaxy.cpp
+  src/game.cpp
+  src/gameobject.cpp
+  src/logger.cpp
+  src/luastate.cpp
+  src/scene.cpp
+  src/scenemanager.cpp
+  src/shader.cpp
+  src/shadermanager.cpp
+  src/shaderprogram.cpp
+  src/shadertype.cpp
 
-  src/galaxy/components/transform.cpp
-  src/galaxy/components/guiscript.cpp
-  src/galaxy/components/luascript.cpp
+  # Components
+  src/transform.cpp
+  src/guiscript.cpp
+  src/luascript.cpp
 
-  src/galaxy/objects/camera.cpp
+  # Objects
+  src/camera.cpp
 )
 
 file(GLOB_RECURSE GALAXY_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/*.h)
+file(GLOB_RECURSE GALAXY_INCLUDE_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} include/*.h)
 
 add_library(${PROJECT_NAME} SHARED
   ${GALAXY_HEADERS}
+  ${GALAXY_INCLUDE_HEADERS}
+
   ${GALAXY_SOURCES}
 )
 

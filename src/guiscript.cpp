@@ -3,8 +3,8 @@
 #include <boost/ref.hpp>
 #include <luabind/luabind.hpp>
 
-#include "../components.h"
-#include "../game.h"
+#include "components.h"
+#include "game.h"
 
 namespace gxy {
 namespace components {
