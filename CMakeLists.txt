@@ -26,7 +26,7 @@ set(GLFW_INSTALL OFF CACHE BOOL "Generate installation target")
 # CMake packages:
 find_package(Boost 1.49 COMPONENTS REQUIRED)
 find_package(Doxygen)
-find_package(FreeType REQUIRED)
+find_package(Freetype REQUIRED)
 find_package(GLog REQUIRED)
 find_package(Lua51 REQUIRED)
 find_package(Luabind REQUIRED)
