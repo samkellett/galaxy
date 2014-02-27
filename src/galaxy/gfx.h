@@ -48,5 +48,5 @@ inline void shaderSource(GLuint shader, GLsizei count, const GLchar *const *stri
 } // namespace gfx
 } // namespace gxy
 
-#include "gfx.ipp"
+#include "gfx.hpp"
 #endif // GALAXY_GFX_H

@@ -10,5 +10,5 @@ typename std::enable_if<std::is_integral<T>::value, bool>::type is_base(T i);
 
 } // namespace gxy
 
-#include "traits.tpp"
+#include "traits.hpp"
 #endif // GXY_TRAITS_H

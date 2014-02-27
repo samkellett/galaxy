@@ -30,5 +30,5 @@ private:
 
 } // namespace gxy
 
-#include "scenemanager.tpp"
+#include "scenemanager.hpp"
 #endif

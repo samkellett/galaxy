@@ -10,5 +10,5 @@ typename std::enable_if<std::is_integral<T>::value, T>::type base_cast(T t);
 
 } // namespace gxy
 
-#include "casts.tpp"
+#include "casts.hpp"
 #endif // GXY_CASTS_H

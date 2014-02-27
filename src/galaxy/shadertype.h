@@ -42,6 +42,5 @@ struct unknown_shader : public std::runtime_error
 
 } // namespace gxy
 
-#include "shadertype.tpp"
-#include "shadertype.ipp"
+#include "shadertype.hpp"
 #endif // GALAXY_SHADERTYPE_H

@@ -25,5 +25,5 @@ public:
 
 } // namespace gxy
 
-#include "objectmanager.tpp"
+#include "objectmanager.hpp"
 #endif // GALAXY_OBJECTMANAGER_H

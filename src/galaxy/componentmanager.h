@@ -26,5 +26,5 @@ public:
 
 } // namespace gxy
 
-#include "componentmanager.tpp"
+#include "componentmanager.hpp"
 #endif // GALAXY_COMPONENTMANAGER_H

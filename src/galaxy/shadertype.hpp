@@ -15,3 +15,17 @@ constexpr typename std::enable_if<std::is_integral<T>::value, ShaderType>::type 
 
 } // namespace gxy
 
+
+namespace gxy {
+
+constexpr ShaderType begin(const ShaderType &)
+{
+  return ShaderType::Vertex;
+}
+
+constexpr ShaderType end(const ShaderType &)
+{
+  return static_cast<ShaderType>(ShaderType::Fragment << 1);
+}
+
+} // namespace gxy
