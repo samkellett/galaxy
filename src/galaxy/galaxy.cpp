@@ -1,6 +1,8 @@
 #include "galaxy.h"
 
 #include <chrono>
+#include <sstream>
+#include <stdexcept>
 #include <string>
 
 #include <glog/logging.h>
@@ -20,27 +22,38 @@ Galaxy::Galaxy(Game &game) :
 
 int Galaxy::exec()
 {
-  if (!glfwInit()) {
-    LOG(ERROR) << "Failed to initialise GLFW.";
-    return 1;
+  if (glfwInit() != 0) {
+    throw std::runtime_error("Failed to initialise GLFW.");
   }
   
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
-  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-  GLFWwindow *window = glfwCreateWindow(game_.width(), game_.height(), game_.title(), nullptr, nullptr);
-  
-  LOG(INFO) << "Window: " << window;
-  if (!window) {
-    LOG(ERROR) << "Could not create a GLFW window.";
+  if (glxwInit() != 0) {
+    throw std::runtime_error("Cannot initialise GLXW.");
+  }
+
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+//  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+//  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+  glfwSetErrorCallback([] (int code, const char *msg) {
     glfwTerminate();
-    return 1;
-  }
-  
+
+    std::ostringstream stream;
+    stream << "GLFW Error " << code << ": " << msg;
+
+    throw std::runtime_error(stream.str());
+  });
+
+  LOG(INFO) << "Creating GLFW window...";
+  GLFWwindow *window = glfwCreateWindow(game_.width(), game_.height(), game_.title(), nullptr, nullptr);
+
   glfwMakeContextCurrent(window);
   glfwSwapInterval(0);
-  LOG(INFO) << "OpenGL version: " << glGetString(GL_VERSION);
+
+  LOG(INFO) << "OpenGL Version: " << gfx::getString(GL_VERSION);
+  LOG(INFO) << "OpenGL Vendor: " << gfx::getString(GL_VENDOR);
+  LOG(INFO) << "OpenGL Renderer: " << gfx::getString(GL_RENDERER); 
+  LOG(INFO) << "GLSL Version: " << gfx::getString(GL_SHADING_LANGUAGE_VERSION);
 
   // Bee yellow
   gfx::clearColor(1.0f, 0.83f, 0.33f, 1.0f);

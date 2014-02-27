@@ -1,6 +1,7 @@
 #ifndef GALAXY_COMPONENTS_GUISCRIPT_H
 #define GALAXY_COMPONENTS_GUISCRIPT_H
 
+#include <memory>
 #include <vector>
 
 #include "../component.h"

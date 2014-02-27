@@ -48,8 +48,17 @@ inline void compileShader(GLuint shader)
 
 inline GLuint createShader(GLenum type)
 {
-  GLuint ret = glCreateShader(type);
+  auto ret = glCreateShader(type);
   assert(glGetError() == GL_NO_ERROR);
+
+  return ret;
+}
+
+inline const GLubyte *getString(GLenum name)
+{
+  auto ret = glGetString(name);
+  assert(glGetError() == GL_NO_ERROR);
+
   return ret;
 }
 

@@ -14,6 +14,7 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 endif()
 
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DGALAXY_DEBUG")
 
 # Package options:
@@ -34,23 +35,21 @@ find_package(OpenGL REQUIRED)
 
 # Submodule packages:
 add_subdirectory(ext/glfw)
+add_subdirectory(ext/glxw)
 add_subdirectory(ext/gmock)
 
 include_directories(
-  src/galaxy
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/galaxy
+
+  ${CMAKE_CURRENT_SOURCE_DIR}/ext/glm
+  ${CMAKE_CURRENT_SOURCE_DIR}/ext/glfw/include
+  ${CMAKE_CURRENT_BINARY_DIR}/ext/glxw/include
 
   ${GLOG_INCLUDE_DIR}
-
   ${Boost_INCLUDE_DIR}
   ${FREETYPE_INCLUDE_DIRS}
   ${LUA_INCLUDE_DIR}
   ${LUABIND_INCLUDE_DIR}
-
-  ext/glfw/include
-)
-
-link_directories(
-  /usr/local/lib
 )
 
 set(GALAXY_SOURCES
@@ -90,6 +89,7 @@ target_link_libraries(${PROJECT_NAME}
   ${LUA_LIBRARIES}
   ${LUABIND_LIBRARY}
 
+  glxw
   glfw
   ${GLFW_LIBRARIES}
 )
