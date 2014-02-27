@@ -5,9 +5,9 @@
 #include <memory>
 #include <vector>
 
-#include "scene.h"
-
 namespace gxy {
+
+class Scene;
 
 typedef std::vector<std::shared_ptr<Scene>> SceneList;
 class SceneManager final : private SceneList

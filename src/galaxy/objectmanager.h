@@ -4,9 +4,9 @@
 #include <memory>
 #include <vector>
 
-#include "gameobject.h"
-
 namespace gxy {
+
+class GameObject;
 
 typedef std::vector<std::shared_ptr<GameObject>> ObjectList;
 class ObjectManager final : private ObjectList

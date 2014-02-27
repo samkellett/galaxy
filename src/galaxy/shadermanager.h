@@ -5,10 +5,9 @@
 #include <memory>
 #include <string>
 
-#include "shaderprogram.h"
-
 namespace gxy {
 
+class ShaderProgram;
 enum class ShaderType;
 
 typedef std::map<std::string, std::shared_ptr<ShaderProgram>> ShaderMap;

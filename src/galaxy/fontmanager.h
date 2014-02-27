@@ -6,9 +6,8 @@
 #include <string>
 
 struct FT_FaceRec_;
-struct FT_LibraryRec_;
-
 typedef struct FT_FaceRec_ *FT_Face;
+struct FT_LibraryRec_;
 typedef struct FT_LibraryRec_ *FT_Library;
 
 namespace gxy {

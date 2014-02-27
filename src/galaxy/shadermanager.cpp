@@ -1,6 +1,7 @@
 #include "shadermanager.h"
 
 #include "logger.h"
+#include "shaderprogram.h"
 
 namespace gxy {
 

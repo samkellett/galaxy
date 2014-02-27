@@ -5,6 +5,7 @@
 #include <glog/logging.h>
 
 #include "component.h"
+#include "gameobject.h"
 
 namespace gxy {
 

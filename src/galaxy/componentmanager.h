@@ -4,9 +4,9 @@
 #include <memory>
 #include <vector>
 
-#include "component.h"
-
 namespace gxy {
+
+class Component;
 
 typedef std::vector<std::shared_ptr<Component>> ComponentList;
 class ComponentManager final : private ComponentList
