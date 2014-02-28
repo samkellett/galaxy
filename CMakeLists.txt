@@ -37,6 +37,7 @@ find_package(OpenGL REQUIRED)
 add_subdirectory(ext/glfw)
 add_subdirectory(ext/glxw)
 add_subdirectory(ext/gmock)
+add_subdirectory(ext/yaml-cpp)
 
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/src
