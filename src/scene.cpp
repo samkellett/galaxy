@@ -2,12 +2,33 @@
 
 #include <algorithm>
 #include <cassert>
+
 #include <glog/logging.h>
 
 #include "component.h"
 #include "gameobject.h"
 
 namespace gxy {
+
+Scene::Scene(const std::string &name, const YAML::Node &data) :
+  name_(name), data_(data)
+{
+}
+
+void Scene::init()
+{
+  LOG(INFO) << "Scene: " << name_; 
+  assert(data_["objects"] && data_["objects"].IsSequence());
+
+  if (data_["fonts"]) {
+    assert(data_["fonts"].IsSequence());
+ 
+    LOG(INFO) << "Loading fonts...";
+    for(const auto &font : data_["fonts"]) {
+      LOG(INFO) << "Font: " << font["name"] << ", at: " << font["path"];
+    }
+  }
+}
 
 const std::vector<std::shared_ptr<Component>> Scene::components()
 {

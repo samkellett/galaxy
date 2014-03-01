@@ -14,7 +14,7 @@ Game::Game(const std::string &config_file)
   assert(game == nullptr);
   game = this;
 
-  YAML::Node config = YAML::LoadFile(config_file);
+  auto config = YAML::LoadFile(config_file);
 
   title_ = config["title"].as<std::string>();
   assets_ = boost::filesystem::path(config["assets"].as<std::string>());
@@ -28,6 +28,12 @@ Game::Game(const std::string &config_file)
 
   LOG(INFO) << "Creating new game: " << title_;
   LOG(INFO) << "Assets directory: " << assets_.string();
+
+  LOG(INFO) << "Processing scenes...";
+  scenes() << config["scenes"];
+
+  assert(!scenes().empty()); 
+  LOG(INFO) << "First scene: " << scenes().front();
 }
 
 Game *Game::instance()

@@ -83,9 +83,6 @@ set(GALAXY_SOURCES
   src/transform.cpp
   src/guiscript.cpp
   src/luascript.cpp
-
-  # Objects
-  src/camera.cpp
 )
 
 file(GLOB_RECURSE GALAXY_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/*.h)

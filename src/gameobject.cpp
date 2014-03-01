@@ -1,5 +1,6 @@
 #include "gameobject.h"
 
+#include <algorithm>
 #include <cassert>
 
 #include "componentmanager.h"
