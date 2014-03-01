@@ -1,5 +1,7 @@
 #include "shaderprogram.h"
 
+#include <boost/filesystem.hpp>
+
 #include "game.h"
 #include "gfx.h"
 #include "logger.h"
@@ -8,7 +10,7 @@
 
 namespace {
 
-const char *const to_file_ext(const gxy::ShaderType &type)
+std::string to_file_ext(const gxy::ShaderType &type)
 {
   using gxy::ShaderType;
 
@@ -38,20 +40,17 @@ const GLenum to_glenum(const gxy::ShaderType &type)
 
 namespace gxy {
 
-ShaderProgram::ShaderProgram(const char *const name, const char *const folder, const ShaderType &types) :
+ShaderProgram::ShaderProgram(const std::string &name, const boost::filesystem::path &folder, const ShaderType &types) :
   name_(name), program_(gfx::createProgram())
 {
-  std::string path(myGame()->assets().string());
-  path += folder;
-
-  assert(path.back() == '/' || path.back() == '\\');
-  path += name;
+  auto path = myGame()->assets() / folder / name;  
 
   for (const auto& shader_type : ShaderType()) {
     if (types & shader_type) {
-      std::string file = path + to_file_ext(shader_type);
+      boost::filesystem::path ext(to_file_ext(shader_type));
+      path.replace_extension(ext);
 
-      Shader shader(file, to_glenum(shader_type));
+      Shader shader(path.string(), to_glenum(shader_type));
       gfx::attachShader(program_, shader.id());
     }
   }

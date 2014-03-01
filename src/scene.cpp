@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cassert>
 
+#include <boost/filesystem.hpp>
 #include <glog/logging.h>
 
 #include "component.h"
@@ -17,6 +18,10 @@ Scene::Scene(const std::string &name, const YAML::Node &data) :
 
 void Scene::init()
 {
+  assert(fonts_.empty());
+  assert(shaders_.empty());
+  assert(objects_.empty());
+
   LOG(INFO) << "Scene: " << name_; 
   assert(data_["objects"] && data_["objects"].IsSequence());
 
@@ -25,7 +30,11 @@ void Scene::init()
  
     LOG(INFO) << "Loading fonts...";
     for(const auto &font : data_["fonts"]) {
-      LOG(INFO) << "Font: " << font["name"] << ", at: " << font["path"];
+      auto name = font["name"].as<std::string>();
+      boost::filesystem::path path(font["path"].as<std::string>());
+
+      LOG(INFO) << "Loading font: " << name << ", at: " << path;
+      fonts_.push(name, path);
     }
   }
 }

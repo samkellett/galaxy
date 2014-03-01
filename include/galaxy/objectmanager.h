@@ -2,6 +2,7 @@
 #define GALAXY_OBJECTMANAGER_H
 
 #include <memory>
+#include <string>
 #include <vector>
 
 namespace gxy {
@@ -18,9 +19,10 @@ public:
 
   using ObjectList::begin;
   using ObjectList::end;
+  using ObjectList::empty;
 
   template <typename Obj>
-  std::shared_ptr<GameObject> push(const char *const name);
+  std::shared_ptr<GameObject> push(const std::string &name);
 };
 
 } // namespace gxy

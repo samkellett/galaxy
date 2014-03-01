@@ -5,10 +5,12 @@
 #include <memory>
 #include <string>
 
-struct FT_FaceRec_;
 typedef struct FT_FaceRec_ *FT_Face;
-struct FT_LibraryRec_;
 typedef struct FT_LibraryRec_ *FT_Library;
+
+struct FT_FaceRec_;
+struct FT_LibraryRec_;
+namespace boost { namespace filesystem { class path; }}
 
 namespace gxy {
 
@@ -21,7 +23,9 @@ public:
   FontManager &operator =(FontManager) = delete;
 
   using FontMap::at;
-  void push(const std::string &name, const std::string &file);
+  using FontMap::empty;
+
+  void push(const std::string &name, const boost::filesystem::path &file);
 
 private:
   std::unique_ptr<FT_Library> freetype_;

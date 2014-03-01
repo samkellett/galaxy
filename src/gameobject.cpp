@@ -7,7 +7,7 @@
 
 namespace gxy {
 
-GameObject::GameObject(const char *const name, const std::shared_ptr<GameObject> &parent) :
+GameObject::GameObject(const std::string &name, std::shared_ptr<GameObject> parent) :
   name_(name), parent_(parent)
 {
   if (parent) {
@@ -15,7 +15,7 @@ GameObject::GameObject(const char *const name, const std::shared_ptr<GameObject>
   }
 }
 
-const char *const GameObject::name() const
+const std::string &GameObject::name() const
 {
   return name_;
 }
@@ -31,7 +31,6 @@ void GameObject::setParent(const std::shared_ptr<GameObject> &parent)
 
 #ifdef GALAXY_DEBUG
   auto children = parent_->children();
-
   assert(std::find(children.begin(), children.end(), shared_from_this()) != children.end());
 #endif
 }

@@ -3,6 +3,7 @@
 
 #include <chrono>
 #include <memory>
+#include <string>
 #include <vector>
 
 #include "componentmanager.h"
@@ -12,10 +13,10 @@ namespace gxy {
 class GameObject : public std::enable_shared_from_this<GameObject>
 {
 public:
-  GameObject(const char *const name, const std::shared_ptr<GameObject> &parent = nullptr);
+  GameObject(const std::string &name, std::shared_ptr<GameObject> parent = nullptr);
   virtual ~GameObject() = default;
 
-  const char *const name() const;
+  const std::string &name() const;
 
   ComponentManager &components();
 
@@ -26,7 +27,7 @@ public:
   const std::vector<std::shared_ptr<GameObject>> children() const;
 
 private:
-  const char *const name_;
+  const std::string name_;
 
   std::shared_ptr<GameObject> parent_;
   std::vector<std::shared_ptr<GameObject>> children_;

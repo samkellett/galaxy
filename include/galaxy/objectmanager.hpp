@@ -3,7 +3,7 @@
 namespace gxy {
 
 template <typename Obj>
-std::shared_ptr<GameObject> ObjectManager::push(const char *const name)
+std::shared_ptr<GameObject> ObjectManager::push(const std::string &name)
 {
   static_assert(std::is_base_of<GameObject, Obj>(), "Class must be a child of galaxy::GameObject");
 

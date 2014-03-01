@@ -5,6 +5,8 @@
 #include <memory>
 #include <string>
 
+namespace boost { namespace filesystem { class path; }}
+
 namespace gxy {
 
 class ShaderProgram;
@@ -19,8 +21,9 @@ public:
   ShaderManager &operator =(ShaderManager) = delete;
 
   using ShaderMap::at;
+  using ShaderMap::empty;
 
-  void push(const std::string &name, const char *const path, const ShaderType &type);
+  void push(const std::string &name, const boost::filesystem::path &path, const ShaderType &type);
 };
 
 } // namespace gxy
