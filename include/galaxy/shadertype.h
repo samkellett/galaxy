@@ -5,6 +5,8 @@
 #include <stdexcept>
 #include <type_traits>
 
+#include <yaml-cpp/yaml.h>
+
 namespace gxy {
 
 enum class ShaderType
@@ -41,6 +43,17 @@ struct unknown_shader : public std::runtime_error
 };
 
 } // namespace gxy
+
+namespace YAML {
+
+template<>
+struct convert<gxy::ShaderType>
+{
+  static Node encode(const gxy::ShaderType &type);
+  static bool decode(const Node &node, gxy::ShaderType &type);
+};
+
+} // namespace YAML
 
 #include "shadertype.hpp"
 #endif // GALAXY_SHADERTYPE_H

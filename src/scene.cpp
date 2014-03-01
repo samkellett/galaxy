@@ -8,6 +8,7 @@
 
 #include "component.h"
 #include "gameobject.h"
+#include "shadertype.h"
 
 namespace gxy {
 
@@ -33,9 +34,23 @@ void Scene::init()
       auto name = font["name"].as<std::string>();
       boost::filesystem::path path(font["path"].as<std::string>());
 
-      LOG(INFO) << "Loading font: " << name << ", at: " << path;
+      LOG(INFO) << " - Font: " << name << ", at: " << path;
       fonts_.push(name, path);
     }
+  }
+
+  if (data_["shaders"]) {
+    assert(data_["shaders"].IsSequence());
+
+    LOG(INFO) << "Loading shaders...";
+    for (const auto &shader : data_["shaders"]) {
+      auto name = shader["name"].as<std::string>();
+      boost::filesystem::path path(shader["path"].as<std::string>());
+      auto type = shader["type"].as<ShaderType>();
+
+      LOG(INFO) << " - Shader: " << name << " (" << shader["type"].as<std::string>() << "), at: " << path;
+      shaders_.push(name, path, type);
+    } 
   }
 }
 

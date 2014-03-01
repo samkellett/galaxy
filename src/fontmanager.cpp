@@ -23,7 +23,6 @@ void FontManager::push(const std::string &name, const boost::filesystem::path &f
 {
   auto face = std::make_shared<FT_Face>();
   auto fullpath = myGame()->assets() / file;
-  LOG(INFO) << fullpath;
 
   auto ret = FT_New_Face(*freetype_.get(), fullpath.c_str(), 0, face.get());
   assert(ret == 0);
