@@ -41,7 +41,7 @@ namespace gxy {
 ShaderProgram::ShaderProgram(const char *const name, const char *const folder, const ShaderType &types) :
   name_(name), program_(gfx::createProgram())
 {
-  std::string path(myGame()->assets());
+  std::string path(myGame()->assets().string());
   path += folder;
 
   assert(path.back() == '/' || path.back() == '\\');

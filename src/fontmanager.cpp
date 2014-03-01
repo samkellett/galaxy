@@ -24,7 +24,7 @@ void FontManager::push(const std::string &name, const std::string &file)
   std::string font = file.substr(path + 1, ext - path - 1);
 
   auto face = std::make_shared<FT_Face>();
-  std::string fullpath = std::string(myGame()->assets() + file);
+  std::string fullpath = std::string(myGame()->assets().string() + file);
 
   LOG(INFO) << fullpath;
 

@@ -15,8 +15,8 @@ namespace components {
 class GuiScript final : public Component
 {
 public:
-  GuiScript(const char *const file);
-  GuiScript(const char *const file, const LuaState::Libraries libraries);
+  GuiScript(const std::string &file);
+  GuiScript(const std::string &file, const LuaState::Libraries libraries);
 
   void update(const std::chrono::nanoseconds &dt);
   void render(const std::chrono::nanoseconds &dt);

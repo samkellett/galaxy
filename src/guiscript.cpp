@@ -9,12 +9,12 @@
 namespace gxy {
 namespace components {
 
-GuiScript::GuiScript(const char *const file) : GuiScript(file, LuaState::Libraries::NoLibs)
+GuiScript::GuiScript(const std::string &file) : GuiScript(file, LuaState::Libraries::NoLibs)
 {
 }
 
-GuiScript::GuiScript(const char *const file, const LuaState::Libraries libraries) : Component(ComponentType::GuiScript),
-  state_(std::string(myGame()->assets()) + file, libraries)
+GuiScript::GuiScript(const std::string &file, const LuaState::Libraries libraries) : Component(ComponentType::GuiScript),
+  state_(myGame()->assets() / file, libraries)
 {
   using luabind::module;
   using luabind::class_;

@@ -1,25 +1,33 @@
 #include "game.h"
 
 #include <cassert>
-#include <chrono>
 
 #include <glog/logging.h>
+#include <yaml-cpp/yaml.h>
 
 namespace gxy {
 
 Game *Game::game = nullptr;
 
-Game::Game(const char *const title, const char *const assets) : Game(title, assets, 768, 432)
-{
-}
-
-Game::Game(const char *const title, const char *assets, uint32_t width, uint32_t height) :
-  title_(title), assets_(assets), width_(width), height_(height)
+Game::Game(const std::string &config_file)
 {
   assert(game == nullptr);
   game = this;
 
+  YAML::Node config = YAML::LoadFile(config_file);
+
+  title_ = config["title"].as<std::string>();
+  assets_ = boost::filesystem::path(config["assets"].as<std::string>());
+  if (assets_.is_relative()) {
+    boost::filesystem::path path(config_file);
+    assets_ = path.parent_path() / assets_;
+  }
+
+  width_ = config["width"].as<unsigned int>();
+  height_ = config["height"].as<unsigned int>();
+
   LOG(INFO) << "Creating new game: " << title_;
+  LOG(INFO) << "Assets directory: " << assets_.string();
 }
 
 Game *Game::instance()
@@ -28,22 +36,22 @@ Game *Game::instance()
   return game;
 }
 
-const char *const Game::title() const
+const std::string &Game::title() const
 {
   return title_;
 }
 
-const char *const Game::assets() const
+const boost::filesystem::path &Game::assets() const
 {
   return assets_;
 }
 
-const uint32_t Game::width() const
+const unsigned int Game::width() const
 {
   return width_;
 }
 
-const uint32_t Game::height() const
+const unsigned int Game::height() const
 {
   return height_;
 }

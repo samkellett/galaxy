@@ -15,17 +15,21 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 endif()
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DGALAXY_DEBUG")
 
 # Package options:
-set(Boost_USE_STATIC_LIBS ON)
+set(Boost_USE_STATIC_LIBS OFF) # Turn this on eventually, but static needs fPIC
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "Build the GLFW example programs")
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "Build the GLFW test programs")
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation")
 set(GLFW_INSTALL OFF CACHE BOOL "Generate installation target")
 
 # CMake packages:
-find_package(Boost 1.49 COMPONENTS REQUIRED)
+find_package(Boost 1.49 REQUIRED COMPONENTS 
+  system
+  filesystem
+)
 find_package(Doxygen)
 find_package(Freetype REQUIRED)
 find_package(GLog REQUIRED)
@@ -48,6 +52,8 @@ include_directories(
 
   ${CMAKE_CURRENT_SOURCE_DIR}/ext/glm
   ${CMAKE_CURRENT_SOURCE_DIR}/ext/glfw/include
+  ${CMAKE_CURRENT_SOURCE_DIR}/ext/yaml-cpp/include
+
   ${CMAKE_CURRENT_BINARY_DIR}/ext/glxw/include
 
   ${GLOG_INCLUDE_DIR}
@@ -83,11 +89,11 @@ set(GALAXY_SOURCES
 )
 
 file(GLOB_RECURSE GALAXY_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/*.h)
-file(GLOB_RECURSE GALAXY_INCLUDE_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} include/*.h)
+file(GLOB_RECURSE GALAXY_INC_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} include/*.h)
 
 add_library(${PROJECT_NAME} SHARED
   ${GALAXY_HEADERS}
-  ${GALAXY_INCLUDE_HEADERS}
+  ${GALAXY_INC_HEADERS}
 
   ${GALAXY_SOURCES}
 )
@@ -103,6 +109,7 @@ target_link_libraries(${PROJECT_NAME}
   glxw
   glfw
   ${GLFW_LIBRARIES}
+  yaml-cpp
 )
 
 if(DOXYGEN_FOUND)

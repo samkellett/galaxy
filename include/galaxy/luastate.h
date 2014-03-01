@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include <boost/filesystem.hpp>
+
 class lua_State;
 
 namespace gxy {
@@ -13,6 +15,7 @@ public:
   enum Libraries
   {
     NoLibs = 0x0,
+
     BasicLib = 0x1,
     IOLib = 0x2,
     OSLib = 0x4,
@@ -25,13 +28,13 @@ public:
     CoreLibs = BasicLib | IOLib | OSLib | StringLib | TableLib | MathLib | DebugLib | PackageLib
   };
 
-  LuaState(const std::string &file, const Libraries libraries);
+  LuaState(const boost::filesystem::path &file, const Libraries libraries);
   operator lua_State *() const;
 
 private:
   lua_State *L;
   const Libraries libraries_;
-  std::string script_;
+  boost::filesystem::path file_;
 };
 
 } // namespace gxy

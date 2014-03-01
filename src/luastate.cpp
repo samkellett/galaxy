@@ -15,8 +15,8 @@ extern "C" {
 
 namespace gxy {
 
-LuaState::LuaState(const std::string &file, const Libraries libraries) :
-  L(luaL_newstate()), libraries_(libraries), script_(file)
+LuaState::LuaState(const boost::filesystem::path &file, const Libraries libraries) :
+  L(luaL_newstate()), libraries_(libraries), file_(file)
 {
   assert(L);
   LOG(INFO) << "New Lua Script: " << file;
@@ -46,7 +46,7 @@ LuaState::LuaState(const std::string &file, const Libraries libraries) :
     }
   }
 
-  int ret = luaL_dofile(L, script_.c_str());
+  int ret = luaL_dofile(L, file_.c_str());
   assert(ret == 0);
 
   luabind::open(L);

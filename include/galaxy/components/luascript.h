@@ -12,8 +12,8 @@ namespace components {
 class LuaScript : public Component
 {
 public:
-  LuaScript(const char *const file);
-  LuaScript(const char *const file, const LuaState::Libraries libraries);
+  LuaScript(const std::string &file);
+  LuaScript(const std::string &file, const LuaState::Libraries libraries);
 
   void update(const std::chrono::nanoseconds &dt);
   void render(const std::chrono::nanoseconds &dt);

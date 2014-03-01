@@ -45,7 +45,7 @@ int Galaxy::exec()
 //  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
   LOG(INFO) << "Creating GLFW window...";
-  GLFWwindow *window = glfwCreateWindow(game_.width(), game_.height(), game_.title(), nullptr, nullptr);
+  GLFWwindow *window = glfwCreateWindow(game_.width(), game_.height(), game_.title().c_str(), nullptr, nullptr);
 
   glfwMakeContextCurrent(window);
   glfwSwapInterval(0);
@@ -55,6 +55,7 @@ int Galaxy::exec()
   LOG(INFO) << "OpenGL Renderer: " << gfx::getString(GL_RENDERER); 
   LOG(INFO) << "GLSL Version: " << gfx::getString(GL_SHADING_LANGUAGE_VERSION);
   LOG(INFO) << "GLFW Version: " << glfwGetVersionString();
+
   // Bee yellow
   gfx::clearColor(1.0f, 0.83f, 0.33f, 1.0f);
 

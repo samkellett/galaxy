@@ -8,12 +8,12 @@
 namespace gxy {
 namespace components {
 
-LuaScript::LuaScript(const char *const file) : LuaScript(file, LuaState::Libraries::NoLibs)
+LuaScript::LuaScript(const std::string &file) : LuaScript(file, LuaState::Libraries::NoLibs)
 {
 }
 
-LuaScript::LuaScript(const char *const file, const LuaState::Libraries libraries) : Component(ComponentType::LuaScript),
-  state_(std::string(myGame()->assets()) + file, libraries)
+LuaScript::LuaScript(const std::string &file, const LuaState::Libraries libraries) : Component(ComponentType::LuaScript),
+  state_(myGame()->assets() / file, libraries)
 {
 }
 

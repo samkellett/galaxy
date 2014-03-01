@@ -1,11 +1,9 @@
 #ifndef GALAXY_GAME_H
 #define GALAXY_GAME_H
 
-#include <chrono>
-#include <cstdint>
-#include <map>
-#include <memory>
 #include <string>
+
+#include <boost/filesystem.hpp>
 
 #include "scenemanager.h"
 
@@ -17,28 +15,27 @@ namespace gxy {
 class Game
 {
 public:
-  Game(const char *const title, const char *const assets);
-  Game(const char *const title, const char *const assets, const uint32_t width, const uint32_t height);
+  Game(const std::string &config);
   Game(const Game &) = delete;
   virtual ~Game() = default;
   Game &operator =(Game) = delete;
 
   static Game *instance();
 
-  const char *const title() const;
-  const char *const assets() const;
+  const std::string &title() const;
+  const boost::filesystem::path &assets() const;
 
-  const uint32_t width() const;
-  const uint32_t height() const;
+  const unsigned int width() const;
+  const unsigned int height() const;
 
   SceneManager &scenes();
 
 protected:
-  const char *const title_ = "Dark Matter";
-  const char *const assets_ = ".";
+  std::string title_;
+  boost::filesystem::path assets_;
 
-  const uint32_t width_ = 768;
-  const uint32_t height_ = 432;
+  unsigned int width_;
+  unsigned int height_;
 
 private:
   static Game *game;
