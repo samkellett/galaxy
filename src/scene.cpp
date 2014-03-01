@@ -24,8 +24,6 @@ void Scene::init()
   assert(objects_.empty());
 
   LOG(INFO) << "Scene: " << name_; 
-  assert(data_["objects"] && data_["objects"].IsSequence());
-
   if (data_["fonts"]) {
     assert(data_["fonts"].IsSequence());
  
@@ -51,6 +49,12 @@ void Scene::init()
       LOG(INFO) << " - Shader: " << name << " (" << shader["type"].as<std::string>() << "), at: " << path;
       shaders_.push(name, path, type);
     } 
+  }
+
+  assert(data_["objects"] && data_["objects"].IsSequence());
+  LOG(INFO) << "Loading objects...";
+  for (const auto &object : data_["objects"]) {
+    
   }
 }
 

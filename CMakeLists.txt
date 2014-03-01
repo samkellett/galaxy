@@ -46,9 +46,7 @@ add_subdirectory(ext/yaml-cpp)
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/src
   ${CMAKE_CURRENT_SOURCE_DIR}/include/galaxy
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/galaxy/components
   ${CMAKE_CURRENT_SOURCE_DIR}/include/galaxy/gui
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/galaxy/objects
 
   ${CMAKE_CURRENT_SOURCE_DIR}/ext/glm
   ${CMAKE_CURRENT_SOURCE_DIR}/ext/glfw/include
@@ -78,11 +76,6 @@ set(GALAXY_SOURCES
   src/shadermanager.cpp
   src/shaderprogram.cpp
   src/shadertype.cpp
-
-  # Components
-  src/transform.cpp
-  src/guiscript.cpp
-  src/luascript.cpp
 )
 
 file(GLOB_RECURSE GALAXY_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/*.h)
