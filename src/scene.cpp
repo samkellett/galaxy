@@ -54,7 +54,13 @@ void Scene::init()
   assert(data_["objects"] && data_["objects"].IsSequence());
   LOG(INFO) << "Loading objects...";
   for (const auto &object : data_["objects"]) {
+    assert(object.IsMap());
+
+    auto data = object.begin();
+    auto name = data->first.as<std::string>();
     
+    LOG(INFO) << " - Object: " << name;
+    objects_.push(name, data->second);
   }
 }
 

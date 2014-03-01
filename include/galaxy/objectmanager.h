@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 
+namespace YAML { class Node; }
+
 namespace gxy {
 
 class GameObject;
@@ -21,11 +23,9 @@ public:
   using ObjectList::end;
   using ObjectList::empty;
 
-  template <typename Obj>
-  std::shared_ptr<GameObject> push(const std::string &name);
+  void push(const std::string &name, const YAML::Node &components);
 };
 
 } // namespace gxy
 
-#include "objectmanager.hpp"
 #endif // GALAXY_OBJECTMANAGER_H

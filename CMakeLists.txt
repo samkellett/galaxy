@@ -70,6 +70,7 @@ set(GALAXY_SOURCES
   src/gameobject.cpp
   src/logger.cpp
   src/luastate.cpp
+  src/objectmanager.cpp
   src/scene.cpp
   src/scenemanager.cpp
   src/shader.cpp

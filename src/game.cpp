@@ -5,6 +5,8 @@
 #include <glog/logging.h>
 #include <yaml-cpp/yaml.h>
 
+#include "component.h"
+
 namespace gxy {
 
 Game *Game::game = nullptr;
@@ -62,9 +64,30 @@ const unsigned int Game::height() const
   return height_;
 }
 
+void Game::registerComponent(const std::string &id, const ComponentLoader &loader)
+{
+  if (loaders_.find(id) == loaders_.end()) {
+    throw component_id_exists(id);
+  }
+
+  loaders_.insert({id, loader});
+}
+
+std::shared_ptr<Component> Game::loadComponent(const std::string &id, const YAML::Node &data)
+{
+  assert(loaders_.find(id) != loaders_.end());
+ 
+  return loaders_.at(id)(data);
+}
+
 SceneManager &Game::scenes()
 {
   return scenes_;
+}
+
+component_id_exists::component_id_exists(const std::string &id) : 
+  std::runtime_error(std::string("The component id: ") + id + " has already been registered for a different component.")
+{
 }
 
 } // namespace gxy

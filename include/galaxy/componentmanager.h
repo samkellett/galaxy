@@ -9,6 +9,7 @@ namespace gxy {
 class Component;
 
 typedef std::vector<std::shared_ptr<Component>> ComponentList;
+
 class ComponentManager final : private ComponentList
 {
 public:
@@ -19,12 +20,9 @@ public:
   using ComponentList::size;
   using ComponentList::begin;
   using ComponentList::end;
-
-  template <typename Comp, typename... Params>
-  std::shared_ptr<Component> push(Params&&... parameters);
+  using ComponentList::push_back;
 };
 
 } // namespace gxy
 
-#include "componentmanager.hpp"
 #endif // GALAXY_COMPONENTMANAGER_H
