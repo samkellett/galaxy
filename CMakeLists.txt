@@ -14,8 +14,9 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 endif()
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+set(GXY_FLAGS "-Wall -Wextra -Wfatal-errors -Werror -fPIC")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${GXY_FLAGS}")  
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GXY_FLAGS}")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DGALAXY_DEBUG")
 
 # Package options:
@@ -37,11 +38,19 @@ find_package(Lua51 REQUIRED)
 find_package(Luabind REQUIRED)
 find_package(OpenGL REQUIRED)
 
+# Disable warnings for submodules:
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -w")
+
 # Submodule packages:
 add_subdirectory(ext/glfw)
 add_subdirectory(ext/glxw)
 add_subdirectory(ext/gmock)
 add_subdirectory(ext/yaml-cpp)
+
+# Renable warnings again:
+string(REPLACE "-w" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+string(REPLACE "-w" "" CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
 
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/src

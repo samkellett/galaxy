@@ -66,3 +66,4 @@ struct component_id_exists : public std::runtime_error
 } // namespace gxy
 
 #endif // GALAXY_GAME_H
+
