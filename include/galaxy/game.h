@@ -34,8 +34,8 @@ public:
   const std::string &title() const;
   const boost::filesystem::path &assets() const;
 
-  const unsigned int width() const;
-  const unsigned int height() const;
+  unsigned int width() const;
+  unsigned int height() const;
 
   void registerComponent(const std::string &id, const ComponentLoader &loader);
   std::shared_ptr<Component> loadComponent(const std::string &id, const YAML::Node &d);

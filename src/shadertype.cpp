@@ -21,7 +21,7 @@ static_assert(gxy::begin(gxy::ShaderType()) << types.size() == gxy::end(gxy::Sha
 
 namespace gxy {
 
-const bool operator &(const ShaderType &lhs, const ShaderType &rhs)
+bool operator &(const ShaderType &lhs, const ShaderType &rhs)
 {
   return static_cast<int>(lhs) & static_cast<int>(rhs);
 }
@@ -38,8 +38,8 @@ ShaderType operator *(ShaderType type)
 
 std::ostream &operator <<(std::ostream &out, const ShaderType &type)
 {
-  auto index = base_cast<2, 10>(static_cast<int>(type));
-  assert(index < sizeof(types) / sizeof(types[0]));
+  unsigned int index = base_cast<2, 10>(static_cast<int>(type));
+  assert(index < types.size());
 
   out << types[index];
   return out;

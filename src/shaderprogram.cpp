@@ -23,7 +23,7 @@ std::string to_file_ext(const gxy::ShaderType &type)
   }
 }
 
-const GLenum to_glenum(const gxy::ShaderType &type)
+GLenum to_glenum(const gxy::ShaderType &type)
 {
   using gxy::ShaderType;
 

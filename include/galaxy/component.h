@@ -17,7 +17,7 @@ public:
   virtual void update(const std::chrono::nanoseconds &dt) = 0;
   virtual void render(const std::chrono::nanoseconds &dt) = 0;
 
-  const ComponentType type() const;
+  ComponentType type() const;
 
 protected:
   Component(const ComponentType type);

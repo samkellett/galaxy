@@ -16,7 +16,7 @@ public:
   Shader(const Shader &) = delete;
   Shader &operator =(Shader) = delete;
 
-  const GLuint id() const;
+  GLuint id() const;
 
 private:
   const GLuint shader_;

@@ -54,12 +54,12 @@ const boost::filesystem::path &Game::assets() const
   return assets_;
 }
 
-const unsigned int Game::width() const
+unsigned int Game::width() const
 {
   return width_;
 }
 
-const unsigned int Game::height() const
+unsigned int Game::height() const
 {
   return height_;
 }

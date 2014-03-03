@@ -20,7 +20,7 @@ enum class ShaderType
   All = Vertex | Geometry | Fragment
 };
 
-const bool operator &(const ShaderType &lhs, const ShaderType &rhs);
+bool operator &(const ShaderType &lhs, const ShaderType &rhs);
 
 ShaderType operator ++(ShaderType& type);
 ShaderType operator *(ShaderType type);

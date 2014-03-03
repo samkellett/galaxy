@@ -26,7 +26,7 @@ Shader::Shader(const std::string &file, const GLenum type) :
   }
 }
 
-const GLuint Shader::id() const
+  GLuint Shader::id() const
 {
   return shader_;
 }
