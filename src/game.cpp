@@ -9,16 +9,20 @@
 
 namespace gxy {
 
-Game::Game(const std::string &config_file) :
-  scenes_(shared_from_this())
+Game::Game(const boost::filesystem::path &config) :
+  config_(config)
 {
-  auto config = YAML::LoadFile(config_file);
+}
+
+void Game::init()
+{
+  scenes().setGame(shared_from_this());
+  auto config = YAML::LoadFile(config_.string());
 
   title_ = config["title"].as<std::string>();
   assets_ = boost::filesystem::path(config["assets"].as<std::string>());
   if (assets_.is_relative()) {
-    boost::filesystem::path path(config_file);
-    assets_ = path.parent_path() / assets_;
+    assets_ = config_.parent_path() / assets_;
   }
 
   width_ = config["width"].as<unsigned int>();

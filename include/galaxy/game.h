@@ -19,10 +19,12 @@ class Component;
 class Game : public std::enable_shared_from_this<Game>
 {
 public:
-  Game(const std::string &config);
+  Game(const boost::filesystem::path &config);
   Game(const Game &) = delete;
   virtual ~Game() = default;
   Game &operator =(Game) = delete;
+
+  void init();
 
   const std::string &title() const;
   const boost::filesystem::path &assets() const;
@@ -36,15 +38,14 @@ public:
 
   SceneManager &scenes();
 
-protected:
+private:
+  boost::filesystem::path config_;
+
   std::string title_;
   boost::filesystem::path assets_;
 
   unsigned int width_;
   unsigned int height_;
-
-private:
-  static Game *game;
 
   typedef std::function<std::shared_ptr<Component>(const YAML::Node &)> ComponentLoader;
   std::map<std::string, ComponentLoader> loaders_;

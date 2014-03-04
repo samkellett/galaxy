@@ -11,7 +11,6 @@ namespace YAML { class Node; }
 
 namespace gxy {
 
-class Game;
 class Scene;
 
 typedef std::vector<std::shared_ptr<Scene>> SceneList;
@@ -19,8 +18,7 @@ typedef std::vector<std::shared_ptr<Scene>> SceneList;
 class SceneManager final : private SceneList, public mixins::Gameable
 {
 public:
-  SceneManager() = delete;
-  SceneManager(const std::shared_ptr<Game> game);
+  SceneManager();
   SceneManager(const SceneManager &) = delete;
   SceneManager &operator =(SceneManager) = delete;
 

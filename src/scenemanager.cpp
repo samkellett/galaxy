@@ -10,7 +10,7 @@
 
 namespace gxy {
 
-SceneManager::SceneManager(const std::shared_ptr<Game> game) : mixins::Gameable(game)
+SceneManager::SceneManager() : mixins::Gameable()
 {
 }
 

@@ -13,11 +13,6 @@ void Gameable::setGame(const std::shared_ptr<Game> game)
   game_ = game;
 }
 
-std::shared_ptr<Game> Gameable::game()
-{
-  return game_;
-}
-
 std::shared_ptr<Game> Gameable::game() const
 {
   return game_;

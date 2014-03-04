@@ -12,7 +12,6 @@ namespace mixins {
 class Gameable
 {
 public:
-  std::shared_ptr<Game> game();
   std::shared_ptr<Game> game() const;
   void setGame(const std::shared_ptr<Game> game);
 
@@ -21,7 +20,7 @@ protected:
   Gameable(std::shared_ptr<Game> game);
 
 private:
-  std::shared_ptr<Game> game_;
+  std::shared_ptr<Game> game_ = nullptr;
 };
 
 } // namespace mixins
