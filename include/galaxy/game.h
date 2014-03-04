@@ -19,8 +19,6 @@ namespace gxy {
 
 class Component;
 
-typedef std::function<std::shared_ptr<Component>(const YAML::Node &)> ComponentLoader;
-
 class Game
 {
 public:
@@ -37,7 +35,8 @@ public:
   unsigned int width() const;
   unsigned int height() const;
 
-  void registerComponent(const std::string &id, const ComponentLoader &loader);
+  template <typename T>
+  void registerComponent(const std::string &id);
   std::shared_ptr<Component> loadComponent(const std::string &id, const YAML::Node &d);
 
   SceneManager &scenes();
@@ -52,6 +51,7 @@ protected:
 private:
   static Game *game;
 
+  typedef std::function<std::shared_ptr<Component>(const YAML::Node &)> ComponentLoader;
   std::map<std::string, ComponentLoader> loaders_;
   SceneManager scenes_;
 };
@@ -61,9 +61,10 @@ private:
 struct component_id_exists : public std::runtime_error
 {
   component_id_exists(const std::string &id);
-}; 
+};
 
 } // namespace gxy
 
+#include "game.hpp"
 #endif // GALAXY_GAME_H
 

@@ -10,10 +10,6 @@ namespace gxy {
 class Component
 {
 public:
-  Component(const Component &) = delete;
-  virtual ~Component() = default;
-  Component &operator =(const Component &) = delete;
-
   virtual void update(const std::chrono::nanoseconds &dt) = 0;
   virtual void render(const std::chrono::nanoseconds &dt) = 0;
 
