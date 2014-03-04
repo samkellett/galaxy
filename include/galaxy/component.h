@@ -4,10 +4,13 @@
 #include <chrono>
 
 #include "components.h"
+#include "mixins/gameable.h"
 
 namespace gxy {
 
-class Component
+class Game;
+
+class Component : public mixins::Gameable
 {
 public:
   virtual void update(const std::chrono::nanoseconds &dt) = 0;

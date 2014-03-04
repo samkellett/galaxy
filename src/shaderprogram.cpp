@@ -19,7 +19,7 @@ std::string to_file_ext(const gxy::ShaderType &type)
     case ShaderType::Fragment: return ".frag";
     case ShaderType::Geometry: return ".geom";
 
-    default: throw gxy::unknown_shader(type); 
+    default: throw gxy::unknown_shader(type);
   }
 }
 
@@ -32,7 +32,7 @@ GLenum to_glenum(const gxy::ShaderType &type)
     case ShaderType::Fragment: return GL_FRAGMENT_SHADER;
     case ShaderType::Geometry: return GL_GEOMETRY_SHADER;
 
-    default: throw gxy::unknown_shader(type); 
+    default: throw gxy::unknown_shader(type);
   }
 }
 
@@ -40,10 +40,11 @@ GLenum to_glenum(const gxy::ShaderType &type)
 
 namespace gxy {
 
-ShaderProgram::ShaderProgram(const std::string &name, const boost::filesystem::path &folder, const ShaderType &types) :
-  name_(name), program_(gfx::createProgram())
+ShaderProgram::ShaderProgram(const std::shared_ptr<Game> g, const std::string &name, const boost::filesystem::path &folder, const ShaderType &types) : mixins::Gameable(g),
+  name_(name),
+  program_(gfx::createProgram())
 {
-  auto path = myGame()->assets() / folder / name;  
+  auto path = game()->assets() / folder / name;
 
   for (const auto& shader_type : ShaderType()) {
     if (types & shader_type) {

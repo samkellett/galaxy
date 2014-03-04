@@ -12,8 +12,12 @@
 
 namespace gxy {
 
-Scene::Scene(const std::string &name, const YAML::Node &data) :
-  name_(name), data_(data)
+Scene::Scene(const std::shared_ptr<Game> g, const std::string &name, const YAML::Node &data) : mixins::Gameable(g),
+  name_(name),
+  data_(data),
+  fonts_(game()),
+  shaders_(game()),
+  objects_(game())
 {
 }
 
@@ -23,10 +27,10 @@ void Scene::init()
   assert(shaders_.empty());
   assert(objects_.empty());
 
-  LOG(INFO) << "Scene: " << name_; 
+  LOG(INFO) << "Scene: " << name_;
   if (data_["fonts"]) {
     assert(data_["fonts"].IsSequence());
- 
+
     LOG(INFO) << "Loading fonts...";
     for(const auto &font : data_["fonts"]) {
       auto name = font["name"].as<std::string>();
@@ -48,7 +52,7 @@ void Scene::init()
 
       LOG(INFO) << " - Shader: " << name << " (" << shader["type"].as<std::string>() << "), at: " << path;
       shaders_.push(name, path, type);
-    } 
+    }
   }
 
   assert(data_["objects"] && data_["objects"].IsSequence());
@@ -58,7 +62,7 @@ void Scene::init()
 
     auto data = object.begin();
     auto name = data->first.as<std::string>();
-    
+
     LOG(INFO) << " - Object: " << name;
     objects_.push(name, data->second);
   }

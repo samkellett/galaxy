@@ -8,6 +8,7 @@ namespace YAML { class Node; }
 namespace gxy {
 
 class Component;
+class Game;
 
 namespace mixins {
 

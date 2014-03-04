@@ -34,7 +34,7 @@ int Galaxy::exec()
   if (glfwInit() != GL_TRUE) {
     throw std::runtime_error("Failed to initialise GLFW.");
   }
-  
+
   if (glxwInit() != 0) {
     throw std::runtime_error("Cannot initialise GLXW.");
   }
@@ -52,7 +52,7 @@ int Galaxy::exec()
 
   LOG(INFO) << "OpenGL Version: " << gfx::getString(GL_VERSION);
   LOG(INFO) << "OpenGL Vendor: " << gfx::getString(GL_VENDOR);
-  LOG(INFO) << "OpenGL Renderer: " << gfx::getString(GL_RENDERER); 
+  LOG(INFO) << "OpenGL Renderer: " << gfx::getString(GL_RENDERER);
   LOG(INFO) << "GLSL Version: " << gfx::getString(GL_SHADING_LANGUAGE_VERSION);
   LOG(INFO) << "GLFW Version: " << glfwGetVersionString();
 
@@ -60,9 +60,9 @@ int Galaxy::exec()
   gfx::clearColor(1.0f, 0.83f, 0.33f, 1.0f);
 
   // Load the first scene
-  auto scene = myGame()->scenes().next();
+  auto scene = game_.scenes().next();
   scene->init();
-  
+
   LOG(INFO) << "Beginning game loop";
   std::chrono::nanoseconds dt(0);
   while(!glfwWindowShouldClose(window)) {
@@ -74,7 +74,7 @@ int Galaxy::exec()
       component->update(dt);
       component->render(dt);
     }
-    
+
     glfwSwapBuffers(window);
     glfwPollEvents();
 
@@ -87,5 +87,5 @@ int Galaxy::exec()
 
   return 0;
 }
-  
+
 } // namespace gxy

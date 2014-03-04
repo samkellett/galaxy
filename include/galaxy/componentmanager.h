@@ -4,16 +4,20 @@
 #include <memory>
 #include <vector>
 
+#include "mixins/gameable.h"
+
 namespace gxy {
 
 class Component;
+class Game;
 
 typedef std::vector<std::shared_ptr<Component>> ComponentList;
 
-class ComponentManager final : private ComponentList
+class ComponentManager final : private ComponentList, public mixins::Gameable
 {
 public:
-  ComponentManager() = default;
+  ComponentManager() = delete;
+  ComponentManager(const std::shared_ptr<Game> game);
   ComponentManager(const ComponentManager &) = delete;
   ComponentManager &operator =(ComponentManager) = delete;
 

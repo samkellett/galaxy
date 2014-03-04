@@ -5,17 +5,21 @@
 #include <string>
 #include <vector>
 
+#include "mixins/gameable.h"
+
 namespace YAML { class Node; }
 
 namespace gxy {
 
+class Game;
 class GameObject;
 
 typedef std::vector<std::shared_ptr<GameObject>> ObjectList;
-class ObjectManager final : private ObjectList
+class ObjectManager final : private ObjectList, public mixins::Gameable
 {
 public:
-  ObjectManager() = default;
+  ObjectManager() = delete;
+  ObjectManager(const std::shared_ptr<Game> game);
   ObjectManager(const ObjectManager &) = delete;
   ObjectManager &operator =(ObjectManager) = delete;
 

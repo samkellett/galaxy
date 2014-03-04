@@ -9,13 +9,9 @@
 
 namespace gxy {
 
-Game *Game::game = nullptr;
-
-Game::Game(const std::string &config_file)
+Game::Game(const std::string &config_file) :
+  scenes_(shared_from_this())
 {
-  assert(game == nullptr);
-  game = this;
-
   auto config = YAML::LoadFile(config_file);
 
   title_ = config["title"].as<std::string>();
@@ -36,12 +32,6 @@ Game::Game(const std::string &config_file)
 
   assert(!scenes().empty());
   LOG(INFO) << "First scene: " << scenes().front();
-}
-
-Game *Game::instance()
-{
-  assert(game != nullptr);
-  return game;
 }
 
 const std::string &Game::title() const
@@ -68,7 +58,10 @@ std::shared_ptr<Component> Game::loadComponent(const std::string &id, const YAML
 {
   assert(loaders_.find(id) != loaders_.end());
 
-  return loaders_.at(id)(data);
+  std::shared_ptr<Component> component = loaders_.at(id)(data);
+  component->setGame(shared_from_this());
+
+  return component;
 }
 
 SceneManager &Game::scenes()

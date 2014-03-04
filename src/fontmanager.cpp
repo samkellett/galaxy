@@ -12,7 +12,7 @@
 
 namespace gxy {
 
-FontManager::FontManager() :
+FontManager::FontManager(const std::shared_ptr<Game> game) : mixins::Gameable(game),
   freetype_(new FT_Library)
 {
   auto ret = FT_Init_FreeType(freetype_.get());
@@ -22,7 +22,7 @@ FontManager::FontManager() :
 void FontManager::push(const std::string &name, const boost::filesystem::path &file)
 {
   auto face = std::make_shared<FT_Face>();
-  auto fullpath = myGame()->assets() / file;
+  auto fullpath = game()->assets() / file;
 
   auto ret = FT_New_Face(*freetype_.get(), fullpath.c_str(), 0, face.get());
   assert(ret == 0);

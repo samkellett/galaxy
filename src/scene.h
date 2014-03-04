@@ -11,16 +11,18 @@
 #include "fontmanager.h"
 #include "objectmanager.h"
 #include "shadermanager.h"
+#include "mixins/gameable.h"
 
 namespace gxy {
 
 class Component;
+class Game;
 
-class Scene
+class Scene : public mixins::Gameable
 {
 public:
   Scene() = delete;
-  Scene(const std::string &name, const YAML::Node &data);  
+  Scene(const std::shared_ptr<Game> game, const std::string &name, const YAML::Node &data);
 
   virtual ~Scene() = default;
   Scene(const Scene &) = delete;

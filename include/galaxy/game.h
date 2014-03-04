@@ -10,24 +10,19 @@
 
 #include "scenemanager.h"
 
-#define myGame() gxy::Game::instance()
-#define myScene() myGame()->scenes().current()
-
 namespace YAML { class Node; }
 
 namespace gxy {
 
 class Component;
 
-class Game
+class Game : public std::enable_shared_from_this<Game>
 {
 public:
   Game(const std::string &config);
   Game(const Game &) = delete;
   virtual ~Game() = default;
   Game &operator =(Game) = delete;
-
-  static Game *instance();
 
   const std::string &title() const;
   const boost::filesystem::path &assets() const;

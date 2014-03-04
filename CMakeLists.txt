@@ -15,7 +15,7 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 endif()
 
 set(GXY_FLAGS "-Wall -Wextra -Wfatal-errors -Werror -fPIC")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${GXY_FLAGS}")  
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${GXY_FLAGS}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GXY_FLAGS}")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DGALAXY_DEBUG")
 
@@ -27,7 +27,7 @@ set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation")
 set(GLFW_INSTALL OFF CACHE BOOL "Generate installation target")
 
 # CMake packages:
-find_package(Boost 1.49 REQUIRED COMPONENTS 
+find_package(Boost 1.49 REQUIRED COMPONENTS
   system
   filesystem
 )
@@ -73,6 +73,7 @@ include_directories(
 set(GALAXY_SOURCES
   # Core
   src/component.cpp
+  src/componentmanager.cpp
   src/fontmanager.cpp
   src/galaxy.cpp
   src/game.cpp
@@ -86,6 +87,9 @@ set(GALAXY_SOURCES
   src/shadermanager.cpp
   src/shaderprogram.cpp
   src/shadertype.cpp
+
+  # Mixins
+  src/gameable.cpp
 )
 
 file(GLOB_RECURSE GALAXY_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/*.h)

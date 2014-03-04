@@ -4,11 +4,14 @@
 #include <cassert>
 
 #include "componentmanager.h"
+#include "game.h"
 
 namespace gxy {
 
-GameObject::GameObject(const std::string &name, std::shared_ptr<GameObject> parent) :
-  name_(name), parent_(parent)
+GameObject::GameObject(const std::shared_ptr<Game> g, const std::string &name, std::shared_ptr<GameObject> parent) : mixins::Gameable(g),
+  name_(name),
+  parent_(parent),
+  components_(game())
 {
   if (parent) {
     parent->addChild(shared_from_this());

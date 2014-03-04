@@ -4,10 +4,15 @@
 
 #include <yaml-cpp/yaml.h>
 
+#include "game.h"
 #include "logger.h"
 #include "scene.h"
 
 namespace gxy {
+
+SceneManager::SceneManager(const std::shared_ptr<Game> game) : mixins::Gameable(game)
+{
+}
 
 void SceneManager::operator <<(const YAML::Node &scenes)
 {
@@ -17,7 +22,7 @@ void SceneManager::operator <<(const YAML::Node &scenes)
     assert(scene.IsMap());
 
     auto key = scene.begin();
-    auto scene_ptr = std::make_shared<Scene>(key->first.as<std::string>(), key->second);
+    auto scene_ptr = std::make_shared<Scene>(game(), key->first.as<std::string>(), key->second);
     push_back(scene_ptr);
   }
 }

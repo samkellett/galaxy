@@ -4,16 +4,20 @@
 #include <string>
 #include <vector>
 
+#include "mixins/gameable.h"
+
 namespace boost { namespace filesystem { class path; }}
 
 namespace gxy {
 
+class Game;
 enum class ShaderType;
 
-class ShaderProgram final
+class ShaderProgram final : public mixins::Gameable
 {
 public:
-  ShaderProgram(const std::string &name, const boost::filesystem::path &folder, const ShaderType &type);
+  ShaderProgram() = delete;
+  ShaderProgram(const std::shared_ptr<Game> game, const std::string &name, const boost::filesystem::path &folder, const ShaderType &type);
   ShaderProgram(const ShaderProgram &) = delete;
   ShaderProgram &operator =(ShaderProgram) = delete;
 
