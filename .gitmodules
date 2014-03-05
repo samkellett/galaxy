@@ -16,3 +16,6 @@
 [submodule "ext/yaml-cpp"]
 	path = ext/yaml-cpp
 	url = https://gitlab.com/bminor/yaml-cpp.git
+[submodule "ext/freetype2"]
+	path = ext/freetype2
+	url = git://git.sv.nongnu.org/freetype/freetype2.git

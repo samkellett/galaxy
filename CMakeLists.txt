@@ -32,7 +32,6 @@ find_package(Boost 1.49 REQUIRED COMPONENTS
   filesystem
 )
 find_package(Doxygen)
-find_package(Freetype REQUIRED)
 find_package(GLog REQUIRED)
 find_package(Lua51 REQUIRED)
 find_package(Luabind REQUIRED)
@@ -43,6 +42,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -w")
 
 # Submodule packages:
+add_subdirectory(ext/freetype2)
 add_subdirectory(ext/glfw)
 add_subdirectory(ext/glxw)
 add_subdirectory(ext/gmock)
@@ -57,6 +57,7 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/include/galaxy
   ${CMAKE_CURRENT_SOURCE_DIR}/include/galaxy/gui
 
+  ${CMAKE_CURRENT_SOURCE_DIR}/ext/freetype2/include
   ${CMAKE_CURRENT_SOURCE_DIR}/ext/glm
   ${CMAKE_CURRENT_SOURCE_DIR}/ext/glfw/include
   ${CMAKE_CURRENT_SOURCE_DIR}/ext/yaml-cpp/include
@@ -110,6 +111,7 @@ target_link_libraries(${PROJECT_NAME}
   ${LUA_LIBRARIES}
   ${LUABIND_LIBRARY}
 
+  freetype
   glxw
   glfw
   ${GLFW_LIBRARIES}
