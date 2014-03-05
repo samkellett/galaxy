@@ -12,6 +12,7 @@ void Game::registerComponent(const std::string &id)
     throw component_id_exists(id);
   }
 
+  // TODO: &YAML::Node::as<T>
   loaders_.insert({id, &T::registerComponent});
 }
 

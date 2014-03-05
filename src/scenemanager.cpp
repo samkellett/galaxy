@@ -21,8 +21,7 @@ void SceneManager::operator <<(const YAML::Node &scenes)
   for(const auto &scene : scenes) {
     assert(scene.IsMap());
 
-    auto key = scene.begin();
-    auto scene_ptr = std::make_shared<Scene>(game(), key->first.as<std::string>(), key->second);
+    auto scene_ptr = std::make_shared<Scene>(game(), scene);
     push_back(scene_ptr);
   }
 }

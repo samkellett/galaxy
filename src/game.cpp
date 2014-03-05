@@ -58,14 +58,10 @@ unsigned int Game::height() const
   return height_;
 }
 
-std::shared_ptr<Component> Game::loadComponent(const std::string &id, const YAML::Node &data)
+const Game::ComponentLoader &Game::component(const std::string &id) const
 {
-  assert(loaders_.find(id) != loaders_.end());
-
-  std::shared_ptr<Component> component = loaders_.at(id)(data);
-  component->setGame(shared_from_this());
-
-  return component;
+  assert(loaders_.count(id) == 1);
+  return loaders_.at(id);
 }
 
 SceneManager &Game::scenes()

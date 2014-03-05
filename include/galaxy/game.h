@@ -19,6 +19,8 @@ class Component;
 class Game : public std::enable_shared_from_this<Game>
 {
 public:
+  typedef std::function<std::shared_ptr<Component>(const std::string &type, const std::string &name, const YAML::Node &data)> ComponentLoader;
+
   Game(const boost::filesystem::path &config);
   Game(const Game &) = delete;
   virtual ~Game() = default;
@@ -34,7 +36,7 @@ public:
 
   template <typename T>
   void registerComponent(const std::string &id);
-  std::shared_ptr<Component> loadComponent(const std::string &id, const YAML::Node &d);
+  const ComponentLoader &component(const std::string &id) const;
 
   SceneManager &scenes();
 
@@ -47,7 +49,6 @@ private:
   unsigned int width_;
   unsigned int height_;
 
-  typedef std::function<std::shared_ptr<Component>(const YAML::Node &)> ComponentLoader;
   std::map<std::string, ComponentLoader> loaders_;
   SceneManager scenes_;
 };

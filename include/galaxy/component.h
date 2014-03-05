@@ -2,9 +2,11 @@
 #define GALAXY_COMPONENT_H
 
 #include <chrono>
+#include <memory>
 
-#include "components.h"
 #include "mixins/gameable.h"
+
+namespace YAML { class Node; }
 
 namespace gxy {
 
@@ -16,14 +18,16 @@ public:
   virtual void update(const std::chrono::nanoseconds &dt) = 0;
   virtual void render(const std::chrono::nanoseconds &dt) = 0;
 
-  ComponentType type() const;
-
-protected:
-  Component(const ComponentType type);
+  void setTypeAndName(const std::string &type, const std::string &name);
+  const std::string &type() const;
+  const std::string &name() const;
 
 private:
-  const ComponentType type_;
+  std::string name_;
+  std::string type_;
 };
+
+std::shared_ptr<Component> load_component(const std::shared_ptr<Game> game, const YAML::Node &data);
 
 } // namespace gxy
 

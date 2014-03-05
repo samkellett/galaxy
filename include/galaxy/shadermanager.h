@@ -7,7 +7,7 @@
 
 #include "mixins/gameable.h"
 
-namespace boost { namespace filesystem { class path; }}
+namespace YAML { class Node; }
 
 namespace gxy {
 
@@ -26,7 +26,7 @@ public:
   using ShaderMap::at;
   using ShaderMap::empty;
 
-  void push(const std::string &name, const boost::filesystem::path &path, const ShaderType &type);
+  void push(const YAML::Node &data);
 };
 
 } // namespace gxy

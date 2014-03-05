@@ -7,13 +7,31 @@
 #include <glog/logging.h>
 
 #include "component.h"
+#include "game.h"
 #include "gameobject.h"
 #include "shadertype.h"
 
+namespace {
+
+template <typename Manager>
+void load_data(const char *key, const YAML::Node &data, Manager &manager)
+{
+  if (data[key]) {
+    assert(data[key].IsSequence());
+
+    LOG(INFO) << "Loading " << key << "...";
+    for(const auto &node : data[key]) {
+      manager.push(node);
+    }
+  }
+}
+
+} // unnamed namespace
+
 namespace gxy {
 
-Scene::Scene(const std::shared_ptr<Game> g, const std::string &name, const YAML::Node &data) : mixins::Gameable(g),
-  name_(name),
+Scene::Scene(const std::shared_ptr<Game> g, const YAML::Node &data) : mixins::Gameable(g),
+  name_(data["name"].as<std::string>()),
   data_(data),
   fonts_(game()),
   shaders_(game()),
@@ -27,45 +45,12 @@ void Scene::init()
   assert(shaders_.empty());
   assert(objects_.empty());
 
-  LOG(INFO) << "Scene: " << name_;
-  if (data_["fonts"]) {
-    assert(data_["fonts"].IsSequence());
+  LOG(INFO) << "Initialising scene: " << name_;
+  load_data("fonts", data_, fonts_);
+  load_data("shaders", data_, shaders_);
 
-    LOG(INFO) << "Loading fonts...";
-    for(const auto &font : data_["fonts"]) {
-      auto name = font["name"].as<std::string>();
-      boost::filesystem::path path(font["path"].as<std::string>());
-
-      LOG(INFO) << " - Font: " << name << ", at: " << path;
-      fonts_.push(name, path);
-    }
-  }
-
-  if (data_["shaders"]) {
-    assert(data_["shaders"].IsSequence());
-
-    LOG(INFO) << "Loading shaders...";
-    for (const auto &shader : data_["shaders"]) {
-      auto name = shader["name"].as<std::string>();
-      boost::filesystem::path path(shader["path"].as<std::string>());
-      auto type = shader["type"].as<ShaderType>();
-
-      LOG(INFO) << " - Shader: " << name << " (" << shader["type"].as<std::string>() << "), at: " << path;
-      shaders_.push(name, path, type);
-    }
-  }
-
-  assert(data_["objects"] && data_["objects"].IsSequence());
-  LOG(INFO) << "Loading objects...";
-  for (const auto &object : data_["objects"]) {
-    assert(object.IsMap());
-
-    auto data = object.begin();
-    auto name = data->first.as<std::string>();
-
-    LOG(INFO) << " - Object: " << name;
-    objects_.push(name, data->second);
-  }
+  assert(data_["objects"]);
+  load_data("objects", data_, objects_);
 }
 
 const std::vector<std::shared_ptr<Component>> Scene::components()

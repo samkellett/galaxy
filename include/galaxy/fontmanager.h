@@ -12,7 +12,8 @@ typedef struct FT_LibraryRec_ *FT_Library;
 
 struct FT_FaceRec_;
 struct FT_LibraryRec_;
-namespace boost { namespace filesystem { class path; }}
+
+namespace YAML { class Node; }
 
 namespace gxy {
 
@@ -30,7 +31,7 @@ public:
   using FontMap::at;
   using FontMap::empty;
 
-  void push(const std::string &name, const boost::filesystem::path &file);
+  void push(const YAML::Node &data);
 
 private:
   std::unique_ptr<FT_Library> freetype_;

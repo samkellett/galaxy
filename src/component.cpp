@@ -1,15 +1,41 @@
 #include "component.h"
 
+#include <yaml-cpp/yaml.h>
+
+#include "game.h"
+#include "logger.h"
+
 namespace gxy {
 
-Component::Component(const ComponentType type) :
-  type_(type)
+void Component::setTypeAndName(const std::string &type, const std::string &name)
 {
+  type_ = type;
+  name_ = name;
 }
 
-ComponentType Component::type() const
+const std::string &Component::type() const
 {
   return type_;
+}
+
+const std::string &Component::name() const
+{
+  return name_;
+}
+
+std::shared_ptr<Component> load_component(const std::shared_ptr<Game> game, const YAML::Node &data)
+{
+  assert(data.IsMap());
+  auto type = data["type"].as<std::string>();
+  auto name = data["name"] ? data["name"].as<std::string>() : type;
+
+  LOG(INFO) << "Adding component: " << name << ", of type: " << type;
+
+  auto loader = game->component(type);
+  std::shared_ptr<Component> component = loader(name, type, data);
+  component->setGame(game);
+
+  return component;
 }
 
 } // namespace gxy

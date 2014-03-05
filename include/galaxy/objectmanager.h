@@ -27,7 +27,7 @@ public:
   using ObjectList::end;
   using ObjectList::empty;
 
-  void push(const std::string &name, const YAML::Node &components);
+  void push(const YAML::Node &components);
 };
 
 } // namespace gxy

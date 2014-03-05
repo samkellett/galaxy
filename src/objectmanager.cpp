@@ -2,8 +2,10 @@
 
 #include <yaml-cpp/yaml.h>
 
+#include "component.h"
 #include "game.h"
 #include "gameobject.h"
+#include "logger.h"
 
 namespace gxy {
 
@@ -11,18 +13,17 @@ ObjectManager::ObjectManager(const std::shared_ptr<Game> game) : mixins::Gameabl
 {
 }
 
-void ObjectManager::push(const std::string &name, const YAML::Node &components)
+void ObjectManager::push(const YAML::Node &data)
 {
-  assert(components.IsSequence());
+  assert(data.IsMap());
+  auto name = data["name"].as<std::string>();
+
+  LOG(INFO) << "Adding object: " << name;
   auto object = std::make_shared<GameObject>(game(), name);
 
-  for(const auto &component : components) {
-    assert(component.IsMap());
-
-    auto data = component.begin();
-    auto name = data->first.as<std::string>();
-
-    auto component_ptr = game()->loadComponent(name, data->second);
+  LOG(INFO) << "Loading components...";
+  for(const auto &component : data["components"]) {
+    auto component_ptr = load_component(game(), component);
     object->components().push_back(component_ptr);
   }
 
