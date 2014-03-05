@@ -28,6 +28,7 @@ void FontManager::push(const YAML::Node &data)
 
   auto face = std::make_shared<FT_Face>();
   auto fullpath = game()->assets() / path;
+  assert(boost::filesystem::exists(fullpath));
 
   auto ret = FT_New_Face(*freetype_.get(), fullpath.c_str(), 0, face.get());
   assert(ret == 0);

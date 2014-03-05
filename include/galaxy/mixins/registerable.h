@@ -15,7 +15,7 @@ template <typename T>
 class Registerable
 {
 public:
-  static std::shared_ptr<Component> registerComponent(const std::string &type, const std::string &name, const YAML::Node &node);
+  static std::shared_ptr<Component> registerComponent(const YAML::Node &node);
 };
 
 } // namespace mixins

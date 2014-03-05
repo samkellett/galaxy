@@ -31,8 +31,8 @@ std::shared_ptr<Component> load_component(const std::shared_ptr<Game> game, cons
 
   LOG(INFO) << "Adding component: " << name << ", of type: " << type;
 
-  auto loader = game->component(type);
-  std::shared_ptr<Component> component = loader(name, type, data);
+  std::shared_ptr<Component> component = game->component(type)(data);
+  component->setTypeAndName(type, name);
   component->setGame(game);
 
   return component;

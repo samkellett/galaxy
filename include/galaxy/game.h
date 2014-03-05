@@ -19,7 +19,7 @@ class Component;
 class Game : public std::enable_shared_from_this<Game>
 {
 public:
-  typedef std::function<std::shared_ptr<Component>(const std::string &type, const std::string &name, const YAML::Node &data)> ComponentLoader;
+  typedef std::function<std::shared_ptr<Component>(const YAML::Node &data)> ComponentLoader;
 
   Game(const boost::filesystem::path &config);
   Game(const Game &) = delete;
