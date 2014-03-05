@@ -4,15 +4,18 @@
 #include <string>
 
 #include <boost/filesystem.hpp>
+#include <yaml-cpp/yaml.h>
+
+#include "mixins/gameable.h"
 
 class lua_State;
 
 namespace gxy {
 
-class LuaState
+class LuaState : public mixins::Gameable
 {
 public:
-  enum Libraries
+  enum class Libraries
   {
     NoLibs = 0x0,
 
@@ -28,15 +31,36 @@ public:
     CoreLibs = BasicLib | IOLib | OSLib | StringLib | TableLib | MathLib | DebugLib | PackageLib
   };
 
-  LuaState(const boost::filesystem::path &file, const Libraries libraries);
+  LuaState();
   operator lua_State *() const;
+
+  void init();
+
+  void setFile(const boost::filesystem::path &file);
+  const boost::filesystem::path &file() const;
+
+  void setLibraries(const Libraries &libraries);
+  const Libraries &libraries() const;
 
 private:
   lua_State *L;
-  const Libraries libraries_;
+  Libraries libraries_;
   boost::filesystem::path file_;
 };
 
+bool operator &(const LuaState::Libraries &lhs, const LuaState::Libraries &rhs);
+
 } // namespace gxy
+
+namespace YAML {
+
+template <>
+struct convert<gxy::LuaState::Libraries>
+{
+  static Node encode(const gxy::LuaState::Libraries &libs);
+  static bool decode(const Node &node, gxy::LuaState::Libraries &libs);
+};
+
+} // namespace YAML
 
 #endif // GALAXY_LUASTATE_H

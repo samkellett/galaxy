@@ -2,10 +2,10 @@
 
 #include <cassert>
 
-#include <glog/logging.h>
 #include <yaml-cpp/yaml.h>
 
 #include "component.h"
+#include "logger.h"
 
 namespace gxy {
 
@@ -60,7 +60,7 @@ unsigned int Game::height() const
 
 const Game::ComponentLoader &Game::component(const std::string &id) const
 {
-  assert(loaders_.count(id) == 1);
+  assert(loaders_.find(id) != loaders_.end());
   return loaders_.at(id);
 }
 

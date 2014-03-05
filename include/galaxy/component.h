@@ -15,6 +15,8 @@ class Game;
 class Component : public mixins::Gameable
 {
 public:
+  virtual void init();
+
   virtual void update(const std::chrono::nanoseconds &dt) = 0;
   virtual void render(const std::chrono::nanoseconds &dt) = 0;
 

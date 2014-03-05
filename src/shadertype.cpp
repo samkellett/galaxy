@@ -54,28 +54,30 @@ unknown_shader::unknown_shader(const ShaderType &type) :
 
 namespace YAML {
 
-Node convert<gxy::ShaderType>::encode(const gxy::ShaderType &type)
+typedef gxy::ShaderType ShaderType;
+
+Node convert<ShaderType>::encode(const ShaderType &type)
 {
   return Node(static_cast<int>(type));
 }
 
-bool convert<gxy::ShaderType>::decode(const Node &node, gxy::ShaderType &type)
+bool convert<ShaderType>::decode(const Node &node, ShaderType &type)
 {
-  std::string value = node.as<std::string>();
+  auto value = node.as<std::string>();
   if (value == "Vertex") {
-    type = gxy::ShaderType::Vertex;
+    type = ShaderType::Vertex;
   } else if (value == "Geometry") {
-    type = gxy::ShaderType::Geometry;
+    type = ShaderType::Geometry;
   } else if (value == "Fragment") {
-    type = gxy::ShaderType::Fragment;
+    type = ShaderType::Fragment;
   } else if (value == "None") {
-    type = gxy::ShaderType::None;
+    type = ShaderType::None;
   } else if (value == "Basic") {
-    type = gxy::ShaderType::Basic;
+    type = ShaderType::Basic;
   } else if (value == "All") {
-    type = gxy::ShaderType::All;
+    type = ShaderType::All;
   } else {
-    type = static_cast<gxy::ShaderType>(node.as<int>());
+    type = static_cast<ShaderType>(node.as<int>());
   }
 
   return true;

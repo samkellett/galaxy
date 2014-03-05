@@ -7,6 +7,10 @@
 
 namespace gxy {
 
+void Component::init()
+{
+}
+
 void Component::setTypeAndName(const std::string &type, const std::string &name)
 {
   type_ = type;
@@ -34,6 +38,7 @@ std::shared_ptr<Component> load_component(const std::shared_ptr<Game> game, cons
   std::shared_ptr<Component> component = game->component(type)(data);
   component->setTypeAndName(type, name);
   component->setGame(game);
+  component->init();
 
   return component;
 }
