@@ -61,13 +61,16 @@ void LuaState::init(const std::shared_ptr<Game> g)
     }
   }
 
+  luabind::open(L);
+}
+
+void LuaState::run()
+{
   int ret = luaL_dofile(L, file_.c_str());
   if (ret != 0) {
     LOG(ERROR) << lua_tostring(L, -1);
   }
   assert(ret == 0);
-
-  luabind::open(L);
 }
 
 void LuaState::setFile(const boost::filesystem::path &file)

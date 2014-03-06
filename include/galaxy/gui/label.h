@@ -15,10 +15,9 @@ class Label final : public Widget
 {
 public:
   static void init(const LuaState &state);
+  void render(const std::chrono::nanoseconds &dt);
 
   void setText(const std::string &text);
-
-  void render();
 
 private:
   std::string text_;

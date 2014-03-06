@@ -20,13 +20,14 @@ void Label::init(const LuaState &state)
   ];
 }
 
+void Label::render(const std::chrono::nanoseconds &)
+{
+}
+
 void Label::setText(const std::string &text)
 {
   LOG(INFO) << text;
-}
-
-void Label::render()
-{
+  text_ = text;
 }
 
 } // namespace gui
