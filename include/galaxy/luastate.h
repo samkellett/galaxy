@@ -12,6 +12,8 @@ class lua_State;
 
 namespace gxy {
 
+class Game;
+
 class LuaState : public mixins::Gameable
 {
 public:
@@ -34,7 +36,7 @@ public:
   LuaState();
   operator lua_State *() const;
 
-  void init();
+  void init(const std::shared_ptr<Game> g);
 
   void setFile(const boost::filesystem::path &file);
   const boost::filesystem::path &file() const;

@@ -27,8 +27,9 @@ LuaState::operator lua_State *() const
   return L;
 }
 
-void LuaState::init()
+void LuaState::init(const std::shared_ptr<Game> g)
 {
+  setGame(g);
   if (file_.is_relative()) {
     file_ = game()->assets() / file_;
   }
@@ -36,6 +37,7 @@ void LuaState::init()
 
   LOG(INFO) << "New Lua Script: " << file_;
 
+  // TODO: Make these std::array's
   // These two arrays must stay in the same order.
   const Libraries libraries[] = { Libraries::BasicLib, Libraries::IOLib, Libraries::OSLib, Libraries::StringLib, Libraries::TableLib, Libraries::MathLib, Libraries::DebugLib, Libraries::PackageLib };
   const luaL_Reg lualibs[] = {
@@ -60,6 +62,9 @@ void LuaState::init()
   }
 
   int ret = luaL_dofile(L, file_.c_str());
+  if (ret != 0) {
+    LOG(ERROR) << lua_tostring(L, -1);
+  }
   assert(ret == 0);
 
   luabind::open(L);
