@@ -24,18 +24,6 @@ Label::Label(const unsigned int x, const unsigned int y, const std::shared_ptr<G
   FT_Set_Pixel_Sizes(*face_.get(), 0, 48);
 }
 
-void Label::init(const LuaState &state)
-{
-  using luabind::module;
-  using luabind::class_;
-
-  module(state)
-  [
-    class_<Label>("Label")
-      .def("setText", &Label::setText)
-  ];
-}
-
 void Label::render(const std::chrono::nanoseconds &)
 {
   unsigned int x = x_;
@@ -64,20 +52,20 @@ void Label::render(const std::chrono::nanoseconds &)
       glyph->bitmap.buffer
     );
 
-    float x2 = x + glyph->bitmap_left * sx;
-    float y2 = -y - glyph->bitmap_top * sy;
-    float w = glyph->bitmap.width * sx;
-    float h = glyph->bitmap.rows * sy;
+    // float x2 = x + glyph->bitmap_left * sx;
+    // float y2 = -y - glyph->bitmap_top * sy;
+    // float w = glyph->bitmap.width * sx;
+    // float h = glyph->bitmap.rows * sy;
 
-    GLfloat box[4][4] = {
-      {x2, -y2, 0, 0},
-      {x2 + w, -y2, 1, 0},
-      {x2, -y2 - h, 0, 1},
-      {x2 + w, -y2 - h, 1, 1},
-    };
+    // GLfloat box[4][4] = {
+    //   {x2, -y2, 0, 0},
+    //   {x2 + w, -y2, 1, 0},
+    //   {x2, -y2 - h, 0, 1},
+    //   {x2 + w, -y2 - h, 1, 1},
+    // };
 
-    glBufferData(GL_ARRAY_BUFFER, sizeof(box), box, GL_DYNAMIC_DRAW);
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    // glBufferData(GL_ARRAY_BUFFER, sizeof(box), box, GL_DYNAMIC_DRAW);
+    // glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
     x += (glyph->advance.x >> 6) * sx;
     y += (glyph->advance.y >> 6) * sy;
@@ -88,6 +76,19 @@ void Label::setText(const std::string &text)
 {
   LOG(INFO) << text;
   text_ = text;
+}
+
+template <>
+void load_bindings<Label>(const LuaState &state)
+{
+  using luabind::module;
+  using luabind::class_;
+
+  module(state)
+  [
+    class_<Label>("Label")
+      .def("setText", &Label::setText)
+  ];
 }
 
 } // namespace gui

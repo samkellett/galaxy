@@ -9,6 +9,7 @@
 namespace gxy {
 
 class Game;
+class LuaState;
 
 namespace gui {
 
@@ -20,6 +21,9 @@ public:
 
   virtual void render(const std::chrono::nanoseconds &dt) = 0;
 };
+
+template <typename T>
+void load_bindings(const LuaState &state);
 
 } // namespace gui
 } // namespace gxy

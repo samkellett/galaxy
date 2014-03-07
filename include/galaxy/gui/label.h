@@ -18,8 +18,6 @@ class Label : public Widget
 {
 public:
   Label(const unsigned int x, const unsigned int y, const std::shared_ptr<Game> game);
-  static void init(const LuaState &state);
-
   void render(const std::chrono::nanoseconds &dt);
 
   void setText(const std::string &text);
@@ -31,6 +29,9 @@ private:
   std::shared_ptr<FT_Face> face_;
   std::string text_;
 };
+
+template <>
+void load_bindings<Label>(const LuaState &state);
 
 } // namespace gui
 } // namespace gxy
