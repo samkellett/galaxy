@@ -17,7 +17,7 @@ namespace gui {
 class Label : public Widget
 {
 public:
-  Label(const unsigned int x, const unsigned int y, const std::shared_ptr<Game> game);
+  Label(const unsigned int x, const unsigned int y, const std::shared_ptr<GuiScript> gui);
   void render(const std::chrono::nanoseconds &dt);
 
   void setText(const std::string &text);

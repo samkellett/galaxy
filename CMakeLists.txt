@@ -94,6 +94,7 @@ set(GALAXY_SOURCES
 
   # Widgets
   src/label.cpp
+  src/pen.cpp
   src/widget.cpp
 )
 

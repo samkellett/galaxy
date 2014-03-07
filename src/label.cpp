@@ -11,17 +11,19 @@
 #include "luastate.h"
 #include "scene.h"
 
+#include "gui/pen.h"
+
 namespace gxy {
 namespace gui {
 
-Label::Label(const unsigned int x, const unsigned int y, const std::shared_ptr<Game> g) : Widget(g),
+Label::Label(const unsigned int x, const unsigned int y, const std::shared_ptr<GuiScript> gui) : Widget(gui),
   x_(x),
   y_(y)
 {
   auto scene = game()->scenes().current();
-  face_ = scene->fonts().at("FreeSans");
+  face_ = scene->fonts().at(pen()->face());
 
-  FT_Set_Pixel_Sizes(*face_.get(), 0, 48);
+  FT_Set_Pixel_Sizes(*face_.get(), 0, pen()->size());
 }
 
 void Label::render(const std::chrono::nanoseconds &)

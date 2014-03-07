@@ -8,18 +8,26 @@
 
 namespace gxy {
 
-class Game;
+class GuiScript;
 class LuaState;
 
 namespace gui {
+
+class Pen;
 
 class Widget : public mixins::Gameable
 {
 public:
   Widget() = default;
-  Widget(std::shared_ptr<Game> game);
+  Widget(std::shared_ptr<GuiScript> gui);
 
   virtual void render(const std::chrono::nanoseconds &dt) = 0;
+
+protected:
+  std::shared_ptr<Pen> &pen();
+
+private:
+  const std::shared_ptr<Pen> pen_;
 };
 
 template <typename T>
