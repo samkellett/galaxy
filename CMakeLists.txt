@@ -94,6 +94,7 @@ set(GALAXY_SOURCES
 
   # Widgets
   src/label.cpp
+  src/widget.cpp
 )
 
 file(GLOB_RECURSE GALAXY_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/*.h)
