@@ -29,6 +29,7 @@ public:
   FontManager &operator =(FontManager) = delete;
 
   using FontMap::at;
+  using FontMap::count;
   using FontMap::empty;
 
   void push(const YAML::Node &data);
