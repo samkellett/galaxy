@@ -91,11 +91,6 @@ set(GALAXY_SOURCES
 
   # Mixins
   src/gameable.cpp
-
-  # Widgets
-  src/label.cpp
-  src/pen.cpp
-  src/widget.cpp
 )
 
 file(GLOB_RECURSE GALAXY_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/*.h)
