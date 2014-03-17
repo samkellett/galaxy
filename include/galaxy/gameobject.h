@@ -16,7 +16,7 @@ class Game;
 class GameObject : public std::enable_shared_from_this<GameObject>, public mixins::Gameable
 {
 public:
-  GameObject(const std::shared_ptr<Game> game, const std::string &name, std::shared_ptr<GameObject> parent = nullptr);
+  GameObject(Game &game, const std::string &name, std::shared_ptr<GameObject> parent = nullptr);
   virtual ~GameObject() = default;
 
   const std::string &name() const;

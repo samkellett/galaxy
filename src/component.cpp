@@ -27,7 +27,7 @@ const std::string &Component::name() const
   return name_;
 }
 
-std::shared_ptr<Component> load_component(const std::shared_ptr<Game> game, const YAML::Node &data)
+std::shared_ptr<Component> load_component(Game &game, const YAML::Node &data)
 {
   assert(data.IsMap());
   auto type = data["type"].as<std::string>();
@@ -35,7 +35,7 @@ std::shared_ptr<Component> load_component(const std::shared_ptr<Game> game, cons
 
   LOG(INFO) << "Adding component: " << name << ", of type: " << type;
 
-  std::shared_ptr<Component> component = game->component(type)(data);
+  std::shared_ptr<Component> component = game.component(type)(data);
   component->setTypeAndName(type, name);
   component->setGame(game);
   component->init();

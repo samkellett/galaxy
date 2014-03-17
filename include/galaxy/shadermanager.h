@@ -19,7 +19,7 @@ class ShaderManager final : private ShaderMap, mixins::Gameable
 {
 public:
   ShaderManager() = delete;
-  ShaderManager(const std::shared_ptr<Game> game);
+  ShaderManager(Game &game);
   ShaderManager(const ShaderManager &) = delete;
   ShaderManager &operator =(ShaderManager) = delete;
 

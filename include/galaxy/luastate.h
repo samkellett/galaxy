@@ -36,7 +36,7 @@ public:
   LuaState();
   operator lua_State *() const;
 
-  void init(const std::shared_ptr<Game> g);
+  void init(Game &g);
   void run();
 
   void setFile(const boost::filesystem::path &file);

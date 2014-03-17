@@ -40,11 +40,11 @@ GLenum to_glenum(const gxy::ShaderType &type)
 
 namespace gxy {
 
-ShaderProgram::ShaderProgram(const std::shared_ptr<Game> g, const std::string &name, const boost::filesystem::path &folder, const ShaderType &types) : mixins::Gameable(g),
+ShaderProgram::ShaderProgram(Game &g, const std::string &name, const boost::filesystem::path &folder, const ShaderType &types) : mixins::Gameable(g),
   name_(name),
   program_(gfx::createProgram())
 {
-  auto path = game()->assets() / folder / name;
+  auto path = game().assets() / folder / name;
 
   for (const auto& shader_type : ShaderType()) {
     if (types & shader_type) {

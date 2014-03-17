@@ -9,7 +9,7 @@
 
 namespace gxy {
 
-ObjectManager::ObjectManager(const std::shared_ptr<Game> game) : mixins::Gameable(game)
+ObjectManager::ObjectManager(Game &game) : mixins::Gameable(game)
 {
 }
 

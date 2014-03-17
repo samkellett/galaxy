@@ -3,19 +3,20 @@
 namespace gxy {
 namespace mixins {
 
-Gameable::Gameable(std::shared_ptr<Game> game) :
+Gameable::Gameable(Game &game) :
   game_(game)
 {
 }
 
-void Gameable::setGame(const std::shared_ptr<Game> game)
+void Gameable::setGame(Game &game)
 {
   game_ = game;
 }
 
-std::shared_ptr<Game> Gameable::game() const
+Game &Gameable::game() const
 {
-  return game_;
+  assert(game_);
+  return *game_;
 }
 
 } // namespace mixins

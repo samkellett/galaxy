@@ -2,7 +2,7 @@
 
 namespace gxy {
 
-ComponentManager::ComponentManager(const std::shared_ptr<Game> game) : mixins::Gameable(game)
+ComponentManager::ComponentManager(Game &game) : mixins::Gameable(game)
 {
 }
 

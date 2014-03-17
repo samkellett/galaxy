@@ -22,7 +22,7 @@ class Scene : public mixins::Gameable
 {
 public:
   Scene() = delete;
-  Scene(const std::shared_ptr<Game> g, const YAML::Node &data);
+  Scene(Game &game, const YAML::Node &data);
 
   virtual ~Scene() = default;
   Scene(const Scene &) = delete;

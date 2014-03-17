@@ -30,7 +30,7 @@ void load_data(const char *key, const YAML::Node &data, Manager &manager)
 
 namespace gxy {
 
-Scene::Scene(const std::shared_ptr<Game> g, const YAML::Node &data) : mixins::Gameable(g),
+Scene::Scene(Game &g, const YAML::Node &data) : mixins::Gameable(g),
   name_(data["name"].as<std::string>()),
   data_(data),
   fonts_(game()),

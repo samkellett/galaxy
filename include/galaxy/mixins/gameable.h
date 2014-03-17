@@ -1,7 +1,7 @@
 #ifndef GXY_MIXINS_GAMEABLE
 #define GXY_MIXINS_GAMEABLE
 
-#include <memory>
+#include <boost/optional.hpp>
 
 namespace gxy {
 
@@ -12,15 +12,15 @@ namespace mixins {
 class Gameable
 {
 public:
-  std::shared_ptr<Game> game() const;
-  void setGame(const std::shared_ptr<Game> game);
+  Game &game() const;
+  void setGame(Game &game);
 
 protected:
   Gameable() = default;
-  Gameable(std::shared_ptr<Game> game);
+  Gameable(Game &game);
 
 private:
-  std::shared_ptr<Game> game_ = nullptr;
+  boost::optional<Game &> game_;
 };
 
 } // namespace mixins

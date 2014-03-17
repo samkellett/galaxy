@@ -10,7 +10,7 @@
 
 namespace gxy {
 
-ShaderManager::ShaderManager(const std::shared_ptr<Game> game) : mixins::Gameable(game)
+ShaderManager::ShaderManager(Game &game) : mixins::Gameable(game)
 {
 }
 

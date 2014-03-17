@@ -14,7 +14,7 @@
 
 namespace gxy {
 
-Galaxy::Galaxy(const std::shared_ptr<Game> game) :
+Galaxy::Galaxy(Game &game) :
   game_(game)
 {
   LOG(INFO) << "Initialising Galaxy";
@@ -22,7 +22,7 @@ Galaxy::Galaxy(const std::shared_ptr<Game> game) :
 
 int Galaxy::exec()
 {
-  game_->init();
+  game_.init();
 
   glfwSetErrorCallback([] (int code, const char *msg) {
     glfwTerminate();
@@ -47,7 +47,7 @@ int Galaxy::exec()
 //  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
   LOG(INFO) << "Creating GLFW window...";
-  GLFWwindow *window = glfwCreateWindow(game_->width(), game_->height(), game_->title().c_str(), nullptr, nullptr);
+  GLFWwindow *window = glfwCreateWindow(game_.width(), game_.height(), game_.title().c_str(), nullptr, nullptr);
 
   glfwMakeContextCurrent(window);
   glfwSwapInterval(0);
@@ -62,7 +62,7 @@ int Galaxy::exec()
   gfx::clearColor(1.0f, 0.83f, 0.33f, 1.0f);
 
   // Load the first scene
-  auto scene = game_->scenes().next();
+  auto scene = game_.scenes().next();
   scene->init();
 
   LOG(INFO) << "Beginning game loop";

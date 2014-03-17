@@ -8,7 +8,7 @@
 
 namespace gxy {
 
-GameObject::GameObject(const std::shared_ptr<Game> g, const std::string &name, std::shared_ptr<GameObject> parent) : mixins::Gameable(g),
+GameObject::GameObject(Game &g, const std::string &name, std::shared_ptr<GameObject> parent) : mixins::Gameable(g),
   name_(name),
   parent_(parent),
   components_(game())

@@ -19,7 +19,7 @@ class ObjectManager final : private ObjectList, public mixins::Gameable
 {
 public:
   ObjectManager() = delete;
-  ObjectManager(const std::shared_ptr<Game> game);
+  ObjectManager(Game &game);
   ObjectManager(const ObjectManager &) = delete;
   ObjectManager &operator =(ObjectManager) = delete;
 

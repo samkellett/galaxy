@@ -16,7 +16,7 @@ Game::Game(const boost::filesystem::path &config) :
 
 void Game::init()
 {
-  scenes().setGame(shared_from_this());
+  scenes().setGame(*this);
   auto config = YAML::LoadFile(config_.string());
 
   title_ = config["title"].as<std::string>();

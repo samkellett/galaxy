@@ -16,7 +16,7 @@ namespace gxy {
 
 class Component;
 
-class Game : public std::enable_shared_from_this<Game>
+class Game
 {
 public:
   typedef std::function<std::shared_ptr<Component>(const YAML::Node &data)> ComponentLoader;

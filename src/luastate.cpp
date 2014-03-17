@@ -27,11 +27,11 @@ LuaState::operator lua_State *() const
   return L;
 }
 
-void LuaState::init(const std::shared_ptr<Game> g)
+void LuaState::init(Game &g)
 {
   setGame(g);
   if (file_.is_relative()) {
-    file_ = game()->assets() / file_;
+    file_ = game().assets() / file_;
   }
   assert(boost::filesystem::exists(file_));
 

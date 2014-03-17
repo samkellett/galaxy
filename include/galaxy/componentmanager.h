@@ -17,7 +17,7 @@ class ComponentManager final : private ComponentList, public mixins::Gameable
 {
 public:
   ComponentManager() = delete;
-  ComponentManager(const std::shared_ptr<Game> game);
+  ComponentManager(Game &game);
   ComponentManager(const ComponentManager &) = delete;
   ComponentManager &operator =(ComponentManager) = delete;
 

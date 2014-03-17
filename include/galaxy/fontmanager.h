@@ -24,7 +24,7 @@ class FontManager final : private FontMap, public mixins::Gameable
 {
 public:
   FontManager() = delete;
-  FontManager(const std::shared_ptr<Game> game);
+  FontManager(Game &game);
   FontManager(const FontManager &) = delete;
   FontManager &operator =(FontManager) = delete;
 

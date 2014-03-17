@@ -17,7 +17,7 @@ class ShaderProgram final : public mixins::Gameable
 {
 public:
   ShaderProgram() = delete;
-  ShaderProgram(const std::shared_ptr<Game> game, const std::string &name, const boost::filesystem::path &folder, const ShaderType &type);
+  ShaderProgram(Game &game, const std::string &name, const boost::filesystem::path &folder, const ShaderType &type);
   ShaderProgram(const ShaderProgram &) = delete;
   ShaderProgram &operator =(ShaderProgram) = delete;
 

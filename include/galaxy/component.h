@@ -29,7 +29,7 @@ private:
   std::string type_;
 };
 
-std::shared_ptr<Component> load_component(const std::shared_ptr<Game> game, const YAML::Node &data);
+std::shared_ptr<Component> load_component(Game &game, const YAML::Node &data);
 
 } // namespace gxy
 
