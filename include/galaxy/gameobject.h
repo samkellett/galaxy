@@ -2,9 +2,12 @@
 #define GALAXY_GAMEOBJECT_H
 
 #include <chrono>
+#include <functional>
 #include <memory>
 #include <string>
 #include <vector>
+
+#include <boost/optional.hpp>
 
 #include "componentmanager.h"
 #include "mixins/gameable.h"
@@ -16,24 +19,24 @@ class Game;
 class GameObject : public std::enable_shared_from_this<GameObject>, public mixins::Gameable
 {
 public:
-  GameObject(Game &game, const std::string &name, std::shared_ptr<GameObject> parent = nullptr);
+  GameObject(Game &game, const std::string &name, const boost::optional<GameObject &> &parent = boost::optional<GameObject &>());
   virtual ~GameObject() = default;
 
   const std::string &name() const;
 
   ComponentManager &components();
 
-  void setParent(const std::shared_ptr<GameObject> &parent);
-  const std::shared_ptr<GameObject> parent() const;
+  void setParent(GameObject &parent);
+  const boost::optional<GameObject &> &parent() const;
 
-  void addChild(const std::shared_ptr<GameObject> &child);
-  const std::vector<std::shared_ptr<GameObject>> children() const;
+  void addChild(GameObject &child);
+  const std::vector<std::reference_wrapper<GameObject>> &children() const;
 
 private:
   const std::string name_;
 
-  std::shared_ptr<GameObject> parent_;
-  std::vector<std::shared_ptr<GameObject>> children_;
+  boost::optional<GameObject &> parent_;
+  std::vector<std::reference_wrapper<GameObject>> children_;
 
   ComponentManager components_;
 };

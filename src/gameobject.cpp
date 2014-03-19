@@ -8,13 +8,13 @@
 
 namespace gxy {
 
-GameObject::GameObject(Game &g, const std::string &name, std::shared_ptr<GameObject> parent) : mixins::Gameable(g),
+GameObject::GameObject(Game &g, const std::string &name, const boost::optional<GameObject &> &parent) : mixins::Gameable(g),
   name_(name),
   parent_(parent),
   components_(game())
 {
   if (parent) {
-    parent->addChild(shared_from_this());
+    (*parent).addChild(*this);
   }
 }
 
@@ -28,30 +28,23 @@ ComponentManager &GameObject::components()
   return components_;
 }
 
-void GameObject::setParent(const std::shared_ptr<GameObject> &parent)
+void GameObject::setParent(GameObject &parent)
 {
   parent_ = parent;
-
-#ifdef GALAXY_DEBUG
-  auto children = parent_->children();
-  assert(std::find(children.begin(), children.end(), shared_from_this()) != children.end());
-#endif
 }
 
-const std::shared_ptr<GameObject> GameObject::parent() const
+const boost::optional<GameObject &> &GameObject::parent() const
 {
   return parent_;
 }
 
-void GameObject::addChild(const std::shared_ptr<GameObject> &child)
+void GameObject::addChild(GameObject &child)
 {
-  children_.push_back(child);
-  if (child->parent().get() != this) {
-    child->setParent(shared_from_this());
-  }
+  children_.push_back(std::ref(child));
+  child.setParent(*this);
 }
 
-const std::vector<std::shared_ptr<GameObject>> GameObject::children() const
+const std::vector<std::reference_wrapper<GameObject>> &GameObject::children() const
 {
   return children_;
 }
