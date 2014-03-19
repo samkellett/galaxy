@@ -8,6 +8,7 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
+#include "face.h"
 #include "game.h"
 #include "logger.h"
 
@@ -26,14 +27,17 @@ void FontManager::push(const YAML::Node &data)
   boost::filesystem::path path(data["path"].as<std::string>());
   LOG(INFO) << "Adding font: " << name << ", at: " << path;
 
-  auto face = std::make_shared<FT_Face>();
+  assert(data["size"]);
+  unsigned int size = data["size"].as<unsigned int>();
+
+  auto face = std::unique_ptr<FT_Face>(new FT_Face);
   auto fullpath = game().assets() / path;
   assert(boost::filesystem::exists(fullpath));
 
   auto ret = FT_New_Face(*freetype_.get(), fullpath.c_str(), 0, face.get());
   assert(ret == 0);
 
-  insert({name, face});
+  insert({name, Face(face, size)});
 }
 
 } // namespace gxy

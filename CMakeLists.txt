@@ -75,6 +75,7 @@ set(GALAXY_SOURCES
   # Core
   src/component.cpp
   src/componentmanager.cpp
+  src/face.cpp
   src/fontmanager.cpp
   src/galaxy.cpp
   src/game.cpp

@@ -5,13 +5,11 @@
 #include <memory>
 #include <string>
 
+#include "face.h"
 #include "mixins/gameable.h"
 
-typedef struct FT_FaceRec_ *FT_Face;
-typedef struct FT_LibraryRec_ *FT_Library;
-
-struct FT_FaceRec_;
 struct FT_LibraryRec_;
+typedef struct FT_LibraryRec_ *FT_Library;
 
 namespace YAML { class Node; }
 
@@ -19,7 +17,8 @@ namespace gxy {
 
 class Game;
 
-typedef std::map<std::string, std::shared_ptr<FT_Face>> FontMap;
+typedef std::map<std::string, Face> FontMap;
+
 class FontManager final : private FontMap, public mixins::Gameable
 {
 public:
