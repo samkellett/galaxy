@@ -96,11 +96,11 @@ void linkProgram(GLuint program)
   if (ret == GL_FALSE) {
     GLint log_length = 0;
     glGetProgramiv(program, GL_INFO_LOG_LENGTH, &log_length);
-    GLchar *log = static_cast<GLchar *>(malloc(log_length));
-    glGetProgramInfoLog(program, log_length, nullptr, log);
+    GLchar *message = new GLchar(log_length);
+    glGetProgramInfoLog(program, log_length, nullptr, message);
 
-    LOG(ERROR) << log;
-    free(log);
+    LOG(ERROR) << message;
+    delete message;
   }
 }
 
