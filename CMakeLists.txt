@@ -44,7 +44,12 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -w")
 # Submodule packages:
 add_subdirectory(ext/freetype2)
 add_subdirectory(ext/glfw)
-add_subdirectory(ext/glxw)
+
+if(UNIX AND NOT APPLE)
+  add_subdirectory(ext/glxw)
+  set(GLXW glxw)
+endif()
+
 add_subdirectory(ext/gmock)
 add_subdirectory(ext/yaml-cpp)
 
@@ -113,7 +118,7 @@ target_link_libraries(${PROJECT_NAME}
   ${LUABIND_LIBRARY}
 
   freetype
-  glxw
+  ${GLXW}
   glfw
   ${GLFW_LIBRARIES}
   yaml-cpp

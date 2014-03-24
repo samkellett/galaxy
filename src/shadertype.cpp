@@ -15,7 +15,7 @@ std::array<const char *, 3> types {{
   "fragment"
 }};
 
-static_assert(gxy::begin(gxy::ShaderType()) << types.size() == gxy::end(gxy::ShaderType()), "");
+static_assert((gxy::begin(gxy::ShaderType()) << types.size()) == gxy::end(gxy::ShaderType()), "");
 
 } // unnamed namespace
 

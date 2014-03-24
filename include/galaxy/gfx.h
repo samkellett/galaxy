@@ -1,7 +1,9 @@
 #ifndef GALAXY_GFX_H
 #define GALAXY_GFX_H
 
-#include <GLXW/glxw.h>
+#if defined(__linux) && !defined(__APPLE__)
+  #include <GLXW/glxw.h>
+#endif
 
 #define GLFW_INCLUDE_GLCOREARB
 #include <GLFW/glfw3.h>
