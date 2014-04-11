@@ -14,7 +14,7 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 endif()
 
-set(GXY_FLAGS "-Wall -Wextra -Wfatal-errors -Werror -fPIC")
+set(GXY_FLAGS "-Wall -Wextra -Wfatal-errors -Werror -Wno-missing-field-initializers -fPIC")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${GXY_FLAGS}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GXY_FLAGS}")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DGALAXY_DEBUG")
@@ -32,48 +32,38 @@ find_package(Boost 1.49 REQUIRED COMPONENTS
   filesystem
 )
 find_package(Doxygen)
+find_package(FreeType REQUIRED)
+find_package(GLFW3 REQUIRED)
+find_package(GLM REQUIRED)
 find_package(GLog REQUIRED)
 find_package(Lua51 REQUIRED)
 find_package(Luabind REQUIRED)
 find_package(OpenGL REQUIRED)
-
-# Disable warnings for submodules:
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -w")
+find_package(YamlCpp REQUIRED)
 
 # Submodule packages:
-add_subdirectory(ext/freetype2)
-add_subdirectory(ext/glfw)
-
 if(UNIX AND NOT APPLE)
   add_subdirectory(ext/glxw)
   set(GLXW glxw)
 endif()
-
 add_subdirectory(ext/gmock)
-add_subdirectory(ext/yaml-cpp)
-
-# Renable warnings again:
-string(REPLACE "-w" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-string(REPLACE "-w" "" CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
 
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/src
   ${CMAKE_CURRENT_SOURCE_DIR}/include/galaxy
   ${CMAKE_CURRENT_SOURCE_DIR}/include/galaxy/gui
 
-  ${CMAKE_CURRENT_SOURCE_DIR}/ext/freetype2/include
-  ${CMAKE_CURRENT_SOURCE_DIR}/ext/glm
-  ${CMAKE_CURRENT_SOURCE_DIR}/ext/glfw/include
-  ${CMAKE_CURRENT_SOURCE_DIR}/ext/yaml-cpp/include
-
   ${CMAKE_CURRENT_BINARY_DIR}/ext/glxw/include
 
-  ${GLOG_INCLUDE_DIR}
   ${Boost_INCLUDE_DIR}
+  ${GLFW3_INCLUDE_PATH}
+  ${GLM_INCLUDE_DIR}
+  ${GLOG_INCLUDE_DIR}
   ${FREETYPE_INCLUDE_DIRS}
   ${LUA_INCLUDE_DIR}
   ${LUABIND_INCLUDE_DIR}
+  ${OPENGL_INCLUDE_DIR}
+  ${YAMLCPP_INCLUDE_DIR}
 )
 
 set(GALAXY_SOURCES
@@ -110,18 +100,15 @@ add_library(${PROJECT_NAME} SHARED
 )
 
 target_link_libraries(${PROJECT_NAME}
-  ${GLOG_LIBRARY}
-
   ${Boost_LIBRARIES}
+  ${GLFW3_LIBRARY}
+  ${GLOG_LIBRARY}
+  ${GLXW}
   ${FREETYPE_LIBRARY}
   ${LUA_LIBRARIES}
   ${LUABIND_LIBRARY}
-
-  freetype
-  ${GLXW}
-  glfw
-  ${GLFW_LIBRARIES}
-  yaml-cpp
+  ${OPENGL_LIBRARIES}
+  ${YAMLCPP_LIBRARY}
 )
 
 if(DOXYGEN_FOUND)
