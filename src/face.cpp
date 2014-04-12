@@ -20,10 +20,7 @@ Face::Face(std::unique_ptr<FT_Face> &ftface, const unsigned int size)
       continue;
     }
 
-    FT_GlyphSlot glyph = nullptr;
-    std::memcpy(glyph, (*face)->glyph, sizeof(FT_GlyphSlotRec_));
-
-    glyphs_[c - 32] = glyph;
+    glyphs_[c - 32] = FT_GlyphSlot((*face)->glyph);
   }
 }
 
