@@ -16,11 +16,10 @@ namespace gxy {
 
 class Game;
 
-class GameObject : public std::enable_shared_from_this<GameObject>, public mixins::Gameable
+class GameObject : public mixins::Gameable
 {
 public:
   GameObject(Game &game, const std::string &name, const boost::optional<GameObject &> &parent = boost::optional<GameObject &>());
-  virtual ~GameObject() = default;
 
   const std::string &name() const;
 

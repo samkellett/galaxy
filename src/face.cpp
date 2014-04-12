@@ -24,7 +24,7 @@ Face::Face(std::unique_ptr<FT_Face> &ftface, const unsigned int size)
   }
 }
 
-FT_GlyphSlot &Face::glyph(const char character)
+const FT_GlyphSlot &Face::glyph(const char character)
 {
   auto code = static_cast<unsigned int>(character) - 32;
   assert(character >= 32 && code < glyphs_.size());

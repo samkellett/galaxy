@@ -30,12 +30,12 @@ LuaState::operator lua_State *() const
 void LuaState::init(Game &g)
 {
   setGame(g);
+
+  LOG(INFO) << "New Lua Script: " << file_;
   if (file_.is_relative()) {
     file_ = game().assets() / file_;
   }
   assert(boost::filesystem::exists(file_));
-
-  LOG(INFO) << "New Lua Script: " << file_;
 
   // TODO: Make these std::array's
   // These two arrays must stay in the same order.

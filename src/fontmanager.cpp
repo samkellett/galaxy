@@ -3,10 +3,9 @@
 #include <cassert>
 
 #include <boost/filesystem.hpp>
-#include <yaml-cpp/yaml.h>
-
 #include <ft2build.h>
 #include FT_FREETYPE_H
+#include <yaml-cpp/yaml.h>
 
 #include "face.h"
 #include "game.h"

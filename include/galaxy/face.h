@@ -17,7 +17,7 @@ class Face
 public:
   Face(std::unique_ptr<FT_Face> &ftface, unsigned int size);
 
-  FT_GlyphSlot &glyph(const char character);
+  const FT_GlyphSlot &glyph(const char character);
 
 private:
   std::array<FT_GlyphSlot, 95> glyphs_;
