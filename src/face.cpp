@@ -14,14 +14,16 @@ Face::Face(std::unique_ptr<FT_Face> &ftface, const unsigned int size)
   auto face = std::move(ftface);
   FT_Set_Pixel_Sizes(*face.get(), 0, size);
 
-
   for (char c = 32; c <= 126; ++c) {
     if(FT_Load_Char(*face.get(), c, FT_LOAD_RENDER)) {
       LOG(ERROR) << "Could not load character: " << c;
       continue;
     }
 
-    glyphs_[c - 32] = (*face)->glyph;
+    FT_GlyphSlot glyph = nullptr;
+    std::memcpy(glyph, (*face)->glyph, sizeof(FT_GlyphSlotRec_));
+
+    glyphs_[c - 32] = glyph;
   }
 }
 
