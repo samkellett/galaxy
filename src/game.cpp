@@ -2,6 +2,7 @@
 
 #include <cassert>
 
+#include <boost/filesystem.hpp>
 #include <yaml-cpp/yaml.h>
 
 #include "component.h"
@@ -17,6 +18,8 @@ Game::Game(const boost::filesystem::path &config) :
 void Game::init()
 {
   scenes().setGame(*this);
+  LOG(INFO) << "Loading config: " << config_.string();
+  assert(boost::filesystem::exists(config_.string()));
   auto config = YAML::LoadFile(config_.string());
 
   title_ = config["title"].as<std::string>();

@@ -3,12 +3,7 @@
 #include <cassert>
 #include <cstdint>
 
-extern "C" {
-  #include "lua.h"
-  #include "lualib.h"
-  #include "lauxlib.h"
-}
-
+#include <lua.hpp>
 #include <luabind/luabind.hpp>
 
 #include "game.h"
