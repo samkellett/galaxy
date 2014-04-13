@@ -39,6 +39,7 @@ find_package(GLog REQUIRED)
 find_package(Lua51 REQUIRED)
 find_package(Luabind REQUIRED)
 find_package(OpenGL REQUIRED)
+find_package(PNG, REQUIRED)
 find_package(YamlCpp REQUIRED)
 
 # Submodule packages:
@@ -63,6 +64,7 @@ include_directories(
   ${LUA_INCLUDE_DIR}
   ${LUABIND_INCLUDE_DIR}
   ${OPENGL_INCLUDE_DIR}
+  ${PNG_INCLUDE_DIRS}
   ${YAMLCPP_INCLUDE_DIR}
 )
 
@@ -84,6 +86,7 @@ set(GALAXY_SOURCES
   src/shadermanager.cpp
   src/shaderprogram.cpp
   src/shadertype.cpp
+  src/vbo.cpp
 
   # Mixins
   src/gameable.cpp
@@ -108,6 +111,7 @@ target_link_libraries(${PROJECT_NAME}
   ${LUA_LIBRARIES}
   ${LUABIND_LIBRARY}
   ${OPENGL_LIBRARIES}
+  ${PNG_LIBRARIES}
   ${YAMLCPP_LIBRARY}
 )
 
