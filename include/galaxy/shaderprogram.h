@@ -21,6 +21,12 @@ public:
   ShaderProgram(const ShaderProgram &) = delete;
   ShaderProgram &operator =(ShaderProgram) = delete;
 
+  unsigned int id() const;
+  const std::string &name() const;
+
+  template <typename T>
+  int setUniform(const std::string &key, const T &value);
+
 private:
   const std::string name_;
   const unsigned int program_;
@@ -28,4 +34,5 @@ private:
 
 } // namespace gxy
 
+#include "shaderprogram.hpp"
 #endif // GALAXY_SHADERPROGRAM_H

@@ -59,4 +59,14 @@ ShaderProgram::ShaderProgram(Game &g, const std::string &name, const boost::file
   gfx::linkProgram(program_);
 }
 
+unsigned int ShaderProgram::id() const
+{
+  return program_;
+}
+
+const std::string &ShaderProgram::name() const
+{
+  return name_;
+}
+
 } // namespace gxy
