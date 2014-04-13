@@ -1,5 +1,7 @@
 #include <cassert>
 
+#include <glm/gtc/type_ptr.hpp>
+
 #include "logger.h"
 
 namespace gxy {
@@ -220,9 +222,9 @@ void *mapBufferRange(GLenum target, GLintptr offset, GLsizeiptr length, GLbitfie
 // Q:
 // R:
 // S:
-void sampleParameter(GLuint sampler, GLenum pname, GLint param)
+void samplerParameter(GLuint sampler, GLenum pname, GLint param)
 {
-  glSampleParameteri(sampler, pname, param);
+  glSamplerParameteri(sampler, pname, param);
   assert(glGetError() == GL_NO_ERROR);
 }
 
@@ -240,59 +242,51 @@ void texImage2D(GLenum target, GLint level, GLint internalFormat, GLsizei width,
 }
 
 // U:
-template <GLfloat>
 void uniform(GLint location, const GLfloat &value)
 {
   glUniform1f(location, value);
   assert(glGetError() == GL_NO_ERROR);
 }
 
-template <GLint>
 void uniform(GLint location, const GLint &value)
 {
   glUniform1i(location, value);
   assert(glGetError() == GL_NO_ERROR);
 }
 
-template <GLuint>
 void uniform(GLint location, const GLuint &value)
 {
   glUniform1ui(location, value);
   assert(glGetError() == GL_NO_ERROR);
 }
 
-template <glm::vec2>
 void uniform(GLint location, const glm::vec2 &value)
 {
-  glUniform2fv(location, glm::value_ptr(value));
+  glUniform2fv(location, 1, glm::value_ptr(value));
   assert(glGetError() == GL_NO_ERROR);
 }
 
-template <glm::vec3>
 void uniform(GLint location, const glm::vec3 &value)
 {
-  glUniform3fv(location, glm::value_ptr(value));
+  glUniform3fv(location, 1, glm::value_ptr(value));
   assert(glGetError() == GL_NO_ERROR);
 }
 
-template <glm::vec4>
 void uniform(GLint location, const glm::vec4 &value)
 {
-  glUniform4fv(location, glm::value_ptr(value));
+  glUniform4fv(location, 1, glm::value_ptr(value));
   assert(glGetError() == GL_NO_ERROR);
 }
 
-template <glm::mat3>
-void uniform(GLint location, GLboolean transpose, const glm::mat3 &value)
+void uniform(GLint location, const glm::mat3 &value)
 {
-  glUniformMatrix3fv(location, transpose, glm::value_ptr(value));
+  glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(value));
   assert(glGetError() == GL_NO_ERROR);
 }
 
-template <glm::mat4>
-void uniform(GLint location, GLboolean transpose, const glm::mat4 &value)
+void uniform(GLint location, const glm::mat4 &value)
 {
-  glUniformMatrix4fv(location, transpose, glm::value_ptr(value));
+  glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
   assert(glGetError() == GL_NO_ERROR);
 }
 

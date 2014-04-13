@@ -12,18 +12,18 @@ namespace {
 
 struct Image
 {
-  Image(const std::ifstream &file) :
+  Image(const boost::filesystem::path &file) :
     read(nullptr),
     info(nullptr)
   {
-    read = png_create_read_struct(PNG_LIBPNG_VER_STRING);
+    read = png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
     if (!read) {
-      throw unknown_texture(file);
+      throw gxy::unknown_texture(file);
     }
 
     info = png_create_info_struct(read);
     if (!info) {
-      throw unknown_texture(file);
+      throw gxy::unknown_texture(file);
     }
   }
 
@@ -36,11 +36,11 @@ struct Image
   png_infop info;
 };
 
-bool validate_png(const std::ifstream &stream)
+bool validate_png(std::ifstream &stream)
 {
   png_byte header[8];
 
-  stream.read(static_cast<uint8_t *>(header), 8);
+  stream.read(reinterpret_cast<char *>(header), 8);
   if (!stream.good()) {
     return false;
   }
@@ -52,7 +52,7 @@ void read_data(const png_structp png, const png_bytep data, const png_size_t len
 {
   png_voidp io = png_get_io_ptr(png);
   auto stream = static_cast<std::istream *>(io);
-  stream->read(static_cast<uint8_t *>(data), length);
+  stream->read(reinterpret_cast<char *>(data), length);
 }
 
 } // unnamed namespace
@@ -80,7 +80,7 @@ Texture::~Texture()
   clear();
 }
 
-void Texture::load(const uint8_t *const data, const unsigned int width, const unsigned int height, const int bpp, const int format, const bool mipmaps)
+void Texture::load(const uint8_t *const data, const unsigned int width, const unsigned int height, const unsigned int bpp, const int format, const bool mipmaps)
 {
   mipmaps_ = mipmaps;
   width_ = width;
@@ -107,12 +107,12 @@ void Texture::Texture::load(const boost::filesystem::path &path, const bool mipm
 {
   std::ifstream file(path.c_str());
   if (!validate_png(file)) {
-    thrown unknown_texture(path);
+    throw unknown_texture(path);
   }
 
-  Image png(file);
+  Image png(path);
   if (setjmp(png_jmpbuf(png.read))) {
-    throw unknown_texture(file);
+    throw unknown_texture(path);
   }
 
   png_set_read_fn(png.read, static_cast<png_voidp>(&file), read_data);
@@ -154,7 +154,7 @@ void Texture::Texture::load(const boost::filesystem::path &path, const bool mipm
 
   for (size_t i = 0; i < height; i++) {
     png_uint_32 q = (height - i - 1) * stride;
-    rows[i] = static_cast<png_bytep>(data.get()) + q;
+    (*rows)[i] = *static_cast<png_bytep>(data.get()) + q;
   }
 
   png_read_image(png.read, rows.get());
@@ -167,7 +167,7 @@ void Texture::Texture::load(const boost::filesystem::path &path, const bool mipm
   } else if (bpp == 24) {
     format = GL_BGR;
   } else if (bpp == 8) {
-    format = GL_LUMINANCE;
+    format = GL_R8;
   }
 
   load(data.get(), width, height, bpp, format, mipmaps);
@@ -219,15 +219,15 @@ void Texture::setFiltering(const Minification &min, const Magnification &mag)
 
 void Texture::setSamplerParameter(const int key, const int value)
 {
-  gfx::sampleParameteri(sampler_, key, value);
+  gfx::samplerParameter(sampler_, key, value);
 }
 
-Minification Texture::minification() const
+Texture::Minification Texture::minification() const
 {
   return min_;
 }
 
-Magnification Texture::magnification() const
+Texture::Magnification Texture::magnification() const
 {
   return mag_;
 }
@@ -247,4 +247,11 @@ int Texture::bpp() const
   return bpp_;
 }
 
+// Exceptions
+
+unknown_texture::unknown_texture(const boost::filesystem::path &image) : std::runtime_error(image.c_str())
+{
+}
+
 } // namespace gxy
+

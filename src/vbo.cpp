@@ -6,8 +6,7 @@ namespace gxy {
 
 VBO::VBO(int size) :
   type_(-1),
-  uploaded_(false),
-  data_(nullptr)
+  uploaded_(false)
 {
   gfx::genBuffers(1, &id_);
 
@@ -18,7 +17,7 @@ VBO::VBO(int size) :
 
 VBO::~VBO()
 {
-  gfx::deleteBuffers(1, &id_);  
+  gfx::deleteBuffers(1, &id_);
 }
 
 unsigned int VBO::id() const
@@ -47,9 +46,9 @@ void VBO::clear()
   data_.clear();
 }
 
-void VBO::addData(const void *const data, unsigned int size)
+void VBO::addData(void *data, unsigned int size)
 {
-  data_.insert(data_.end(), static_cast<uint8_t *>(data), static_cast<uint8_t>(data) + size);
+  data_.insert(data_.end(), static_cast<uint8_t *>(data), static_cast<uint8_t *>(data) + size);
 }
 
 const std::vector<uint8_t> &VBO::data() const
@@ -63,7 +62,7 @@ void *VBO::mapBuffer(int usage)
     return nullptr;
   }
 
-  return = gfx::mapBuffer(type_, usage);
+  return gfx::mapBuffer(type_, usage);
 }
 
 void *VBO::mapBuffer(int usage, unsigned int offset, unsigned int length)

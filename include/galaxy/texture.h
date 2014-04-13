@@ -2,6 +2,7 @@
 #define GXY_TEXTURE_H
 
 #include <cstdint>
+#include <stdexcept>
 
 namespace boost { namespace filesystem { class path; }}
 
@@ -25,8 +26,10 @@ public:
     Bilinear
   };
 
+  Texture();
   Texture(const uint8_t *const data, const unsigned int width, const unsigned int height, const unsigned int bpp, const int format, const bool mipmaps);
   Texture(const boost::filesystem::path &file, const bool mipmaps);
+  ~Texture();
 
   void load(const uint8_t *const data, const unsigned int width, const unsigned int height, const unsigned int bpp, const int format, const bool mipmaps);
   void load(const boost::filesystem::path &file, const bool mipmaps);
@@ -54,6 +57,12 @@ private:
 
   Magnification mag_;
   Minification min_;
+};
+
+// Exceptions
+struct unknown_texture : public std::runtime_error
+{
+  unknown_texture(const boost::filesystem::path &image);
 };
 
 } // namespace gxy

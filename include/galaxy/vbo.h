@@ -17,7 +17,7 @@ public:
   void upload(int drawing);
   void clear();
 
-  void addData(const void *const data, unsigned int size);
+  void addData(void *data, unsigned int size);
   const std::vector<uint8_t> &data() const;
 
   void *mapBuffer(int usage);
@@ -29,7 +29,7 @@ private:
   int type_;
   bool uploaded_;
 
-  std::vector<int8_t> data_;
+  std::vector<uint8_t> data_;
 };
 
 } // namespace gxy

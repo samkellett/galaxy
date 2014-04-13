@@ -39,7 +39,7 @@ find_package(GLog REQUIRED)
 find_package(Lua51 REQUIRED)
 find_package(Luabind REQUIRED)
 find_package(OpenGL REQUIRED)
-find_package(PNG, REQUIRED)
+find_package(PNG REQUIRED)
 find_package(YamlCpp REQUIRED)
 
 # Submodule packages:
@@ -86,6 +86,7 @@ set(GALAXY_SOURCES
   src/shadermanager.cpp
   src/shaderprogram.cpp
   src/shadertype.cpp
+  src/texture.cpp
   src/vbo.cpp
 
   # Mixins

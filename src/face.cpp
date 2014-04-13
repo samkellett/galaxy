@@ -5,6 +5,7 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
+#include "gfx.h"
 #include "logger.h"
 
 namespace gxy {
@@ -23,7 +24,7 @@ Face::Face(std::unique_ptr<FT_Face> &ftface, const unsigned int size)
     }
 
     auto texture = Texture(glyph->bitmap.buffer, glyph->bitmap.width, glyph->bitmap.rows, 8, GL_R8, false);
-    texture.setFiltering(Minification::Linear, Magnification::Linear);
+    texture.setFiltering(Texture::Minification::Bilinear, Texture::Magnification::Bilinear);
     texture.setSamplerParameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     texture.setSamplerParameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
@@ -32,7 +33,7 @@ Face::Face(std::unique_ptr<FT_Face> &ftface, const unsigned int size)
   }
 }
 
-const FT_GlyphSlot &Face::glyph(const char character)
+const FT_GlyphSlot &Face::glyph(const char character) const
 {
   auto code = static_cast<unsigned int>(character) - 32;
   assert(character >= 32 && code < glyphs_.size());

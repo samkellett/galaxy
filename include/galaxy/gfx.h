@@ -8,6 +8,8 @@
 #define GLFW_INCLUDE_GLCOREARB
 #include <GLFW/glfw3.h>
 
+#include <glm/glm.hpp>
+
 namespace gxy {
 namespace gfx {
 
@@ -55,13 +57,19 @@ inline void *mapBufferRange(GLenum target, GLintptr offset, GLsizeiptr length, G
 // Q:
 // R:
 // S:
-inline void sampleParamter(GLuint sampler, GLenum pname, GLint param);
+inline void samplerParameter(GLuint sampler, GLenum pname, GLint param);
 inline void shaderSource(GLuint shader, GLsizei count, const GLchar *const *string, const GLint *length);
 // T:
 inline void texImage2D(GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid * data);
 // U:
-template <typename T> inline void uniform(GLint location, const T &value);
-template <typename T> inline void uniform(GLint location, GLboolean transpose, const T &value);
+inline void uniform(GLint location, const GLfloat &value);
+inline void uniform(GLint location, const GLint &value);
+inline void uniform(GLint location, const GLuint &value);
+inline void uniform(GLint location, const glm::vec2 &value);
+inline void uniform(GLint location, const glm::vec3 &value);
+inline void uniform(GLint location, const glm::vec4 &value);
+inline void uniform(GLint location, const glm::mat3 &value);
+inline void uniform(GLint location, const glm::mat4 &value);
 inline bool unmapBuffer(GLenum target);
 // V:
 // W:
