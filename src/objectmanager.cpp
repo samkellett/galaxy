@@ -22,11 +22,14 @@ void ObjectManager::push(const YAML::Node &data)
   auto object = std::make_shared<GameObject>(game(), name);
 
   LOG(INFO) << "Loading components...";
-  for(const auto &component : data["components"]) {
-    auto component_ptr = load_component(game(), component);
-    object->components().push_back(component_ptr);
+  if (data["components"]) {
+    for(const auto &component : data["components"]) {
+      auto component_ptr = load_component(game(), component);
+      object->components().push_back(component_ptr);
+    }
+  } else {
+    LOG(INFO) << "None found. Moving on...";
   }
-
   push_back(object);
 }
 
