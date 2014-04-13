@@ -93,7 +93,8 @@ void Texture::load(const uint8_t *const data, const unsigned int width, const un
   if (format == GL_RGBA || format == GL_BGRA || format == GL_RGB || format == GL_BGR) {
     gfx::texImage2D(GL_TEXTURE_2D, 0, GL_RGB, width_, height_, 0, format, GL_UNSIGNED_BYTE, data);
   } else {
-    gfx::texImage2D(GL_TEXTURE_2D, 0, format, width_, height_, 0, format, GL_UNSIGNED_BYTE, data);
+    auto format2 = format == GL_R8 ? GL_RED : format;
+    gfx::texImage2D(GL_TEXTURE_2D, 0, format, width_, height_, 0, format2, GL_UNSIGNED_BYTE, data);
   }
 
   if (mipmaps_) {
