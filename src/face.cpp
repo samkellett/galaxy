@@ -12,6 +12,8 @@ namespace gxy {
 Face::Face(std::unique_ptr<FT_Face> &ftface, const unsigned int size)
 {
   auto face = std::move(ftface);
+  auto *glyph = (*face)->glyph;
+
   FT_Set_Pixel_Sizes(*face.get(), 0, size);
 
   for (char c = 32; c <= 126; ++c) {
@@ -20,7 +22,13 @@ Face::Face(std::unique_ptr<FT_Face> &ftface, const unsigned int size)
       continue;
     }
 
-    glyphs_[c - 32] = FT_GlyphSlot((*face)->glyph);
+    auto texture = Texture(glyph->bitmap.buffer, glyph->bitmap.width, glyph->bitmap.rows, 8, GL_R8, false);
+    texture.setFiltering(Minification::Linear, Magnification::Linear);
+    texture.setSamplerParameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    texture.setSamplerParameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+    glyphs_[c - 32] = FT_GlyphSlot(glyph);
+    textures_[c - 32] = texture;
   }
 }
 
@@ -30,6 +38,14 @@ const FT_GlyphSlot &Face::glyph(const char character)
   assert(character >= 32 && code < glyphs_.size());
 
   return glyphs_.at(code);
+}
+
+const Texture &Face::texture(const char character) const
+{
+  auto code = static_cast<unsigned int>(character) - 32;
+  assert(character >= 32 && code < textures_.size());
+
+  return textures_.at(code);
 }
 
 } // namespace gxy
