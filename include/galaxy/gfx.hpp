@@ -104,6 +104,12 @@ void deleteBuffers(GLsizei n, const GLuint *buffers)
   assert(glGetError() == GL_NO_ERROR);
 }
 
+void deleteProgram(GLuint program)
+{
+  glDeleteProgram(program);
+  assert(glGetError() == GL_NO_ERROR);
+}
+
 void deleteSamplers(GLsizei n, const GLuint *samplers)
 {
   glDeleteSamplers(n, samplers);
@@ -159,6 +165,14 @@ void genTextures(GLsizei n, GLuint *textures)
 {
   glGenTextures(n, textures);
   assert(glGetError() == GL_NO_ERROR);
+}
+
+GLint getAttribLocation(GLuint program, const GLchar *name)
+{
+  auto ret = glGetAttribLocation(program, name);
+  assert(glGetError() == GL_NO_ERROR);
+
+  return ret;
 }
 
 const GLubyte *getString(GLenum name)
@@ -296,6 +310,12 @@ bool unmapBuffer(GLenum target)
   assert(glGetError() == GL_NO_ERROR);
 
   return ret;
+}
+
+void useProgram(GLuint program)
+{
+  glUseProgram(program);
+  assert(glGetError() == GL_NO_ERROR);
 }
 
 // V:

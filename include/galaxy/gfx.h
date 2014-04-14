@@ -28,6 +28,7 @@ inline GLuint createProgram();
 inline GLuint createShader(GLenum type);
 // D:
 inline void deleteBuffers(GLsizei n, const GLuint *buffers);
+inline void deleteProgram(GLuint program);
 inline void deleteSamplers(GLsizei n, const GLuint *samplers);
 inline void deleteTextures(GLsizei n, const GLuint *textures);
 inline void disable(GLenum cap);
@@ -40,6 +41,7 @@ inline void genBuffers(GLsizei n, GLuint *buffers);
 inline void generateMipmap(GLenum target);
 inline void genSamplers(GLsizei n, GLuint *samplers);
 inline void genTextures(GLsizei n, GLuint *textures);
+inline GLint getAttribLocation(GLuint program, const GLchar *name);
 inline const GLubyte *getString(GLenum name);
 inline GLint getUniformLocation(GLuint program, const GLchar *name);
 // H:
@@ -71,6 +73,7 @@ inline void uniform(GLint location, const glm::vec4 &value);
 inline void uniform(GLint location, const glm::mat3 &value);
 inline void uniform(GLint location, const glm::mat4 &value);
 inline bool unmapBuffer(GLenum target);
+inline void useProgram(GLuint program);
 // V:
 // W:
 // X:

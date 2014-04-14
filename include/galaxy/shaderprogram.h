@@ -20,9 +20,13 @@ public:
   ShaderProgram(Game &game, const std::string &name, const boost::filesystem::path &folder, const ShaderType &type);
   ShaderProgram(const ShaderProgram &) = delete;
   ShaderProgram &operator =(ShaderProgram) = delete;
+  ~ShaderProgram();
 
+  void use() const;
   unsigned int id() const;
   const std::string &name() const;
+
+  int attribute(const std::string &name) const;
 
   template <typename T>
   int setUniform(const std::string &key, const T &value);

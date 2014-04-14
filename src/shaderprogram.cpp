@@ -59,6 +59,16 @@ ShaderProgram::ShaderProgram(Game &g, const std::string &name, const boost::file
   gfx::linkProgram(program_);
 }
 
+ShaderProgram::~ShaderProgram()
+{
+  gfx::deleteProgram(program_);
+}
+
+void ShaderProgram::use() const
+{
+  gfx::useProgram(program_);
+}
+
 unsigned int ShaderProgram::id() const
 {
   return program_;
@@ -67,6 +77,11 @@ unsigned int ShaderProgram::id() const
 const std::string &ShaderProgram::name() const
 {
   return name_;
+}
+
+int ShaderProgram::attribute(const std::string &name) const
+{
+  return gfx::getAttribLocation(program_, name.c_str());
 }
 
 } // namespace gxy
