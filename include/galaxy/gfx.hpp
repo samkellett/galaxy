@@ -27,6 +27,12 @@ void bindTexture(GLenum target, GLuint texture)
   assert(glGetError() == GL_NO_ERROR);
 }
 
+void bindVertexArray(GLuint array)
+{
+  glBindVertexArray(array);
+  assert(glGetError() == GL_NO_ERROR);
+}
+
 void blendFunc(GLenum sfactor, GLenum dfactor)
 {
   glBlendFunc(sfactor, dfactor);
@@ -128,6 +134,12 @@ void disable(GLenum cap)
   assert(glGetError() == GL_NO_ERROR);
 }
 
+void disableVertexAttribArray(GLuint index)
+{
+  glDisableVertexAttribArray(index);
+  assert(glGetError() == GL_NO_ERROR);
+}
+
 void drawArrays(GLenum mode, GLint first, GLsizei count)
 {
   glDrawArrays(mode, first, count);
@@ -138,6 +150,12 @@ void drawArrays(GLenum mode, GLint first, GLsizei count)
 void enable(GLenum cap)
 {
   glEnable(cap);
+  assert(glGetError() == GL_NO_ERROR);
+}
+
+void enableVertexAttribArray(GLuint index)
+{
+  glEnableVertexAttribArray(index);
   assert(glGetError() == GL_NO_ERROR);
 }
 
@@ -164,6 +182,12 @@ void genSamplers(GLsizei n, GLuint *samplers)
 void genTextures(GLsizei n, GLuint *textures)
 {
   glGenTextures(n, textures);
+  assert(glGetError() == GL_NO_ERROR);
+}
+
+void genVertexArray(GLsizei n, GLuint *arrays)
+{
+  glGenVertexArrays(n, arrays);
   assert(glGetError() == GL_NO_ERROR);
 }
 
@@ -319,6 +343,11 @@ void useProgram(GLuint program)
 }
 
 // V:
+void vertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer)
+{
+  glVertexAttribPointer(index, size, type, normalized, stride, pointer);
+  assert(glGetError() == GL_NO_ERROR);
+}
 // W:
 // X:
 // Y:

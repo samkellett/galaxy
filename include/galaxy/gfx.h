@@ -18,6 +18,7 @@ inline void attachShader(GLuint program, GLuint shader);
 // B:
 inline void bindBuffer(GLenum target, GLuint buffer);
 inline void bindTexture(GLenum target, GLuint texture);
+inline void bindVertexArray(GLuint array);
 inline void blendFunc(GLenum sfactor, GLenum dfactor);
 inline void bufferData(GLenum target, GLsizeiptr size, const GLvoid *data, GLenum usage);
 // C:
@@ -32,15 +33,18 @@ inline void deleteProgram(GLuint program);
 inline void deleteSamplers(GLsizei n, const GLuint *samplers);
 inline void deleteTextures(GLsizei n, const GLuint *textures);
 inline void disable(GLenum cap);
+inline void disableVertexAttribArray(GLuint index);
 inline void drawArrays(GLenum mode, GLint first, GLsizei count);
 // E:
 inline void enable(GLenum cap);
+inline void enableVertexAttribArray(GLuint index);
 // F:
 // G:
 inline void genBuffers(GLsizei n, GLuint *buffers);
 inline void generateMipmap(GLenum target);
 inline void genSamplers(GLsizei n, GLuint *samplers);
 inline void genTextures(GLsizei n, GLuint *textures);
+inline void genVertexArrays(GLsizei n, GLuint *arrays);
 inline GLint getAttribLocation(GLuint program, const GLchar *name);
 inline const GLubyte *getString(GLenum name);
 inline GLint getUniformLocation(GLuint program, const GLchar *name);
@@ -75,6 +79,7 @@ inline void uniform(GLint location, const glm::mat4 &value);
 inline bool unmapBuffer(GLenum target);
 inline void useProgram(GLuint program);
 // V:
+inline void vertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer);
 // W:
 // X:
 // Y:
