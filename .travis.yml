@@ -1,0 +1,7 @@
+language: cpp
+compiler:
+  - clang
+before_install:
+  - brew update
+  - brew install boost doxygen freetype glfw3 glm glog lua luabind libpng ninja yaml-cpp
+script: cmake -GNinja . && ninja
