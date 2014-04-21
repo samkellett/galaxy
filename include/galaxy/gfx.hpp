@@ -185,7 +185,7 @@ void genTextures(GLsizei n, GLuint *textures)
   assert(glGetError() == GL_NO_ERROR);
 }
 
-void genVertexArray(GLsizei n, GLuint *arrays)
+void genVertexArrays(GLsizei n, GLuint *arrays)
 {
   glGenVertexArrays(n, arrays);
   assert(glGetError() == GL_NO_ERROR);
