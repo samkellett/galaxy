@@ -1,4 +1,7 @@
-#include <cassert>
+#include <string>
+
+#include <boost/assert.hpp>
+#include <boost/lexical_cast.hpp>
 
 #include <glm/gtc/type_ptr.hpp>
 
@@ -11,51 +14,59 @@ namespace gfx {
 void attachShader(GLuint program, GLuint shader)
 {
   glAttachShader(program, shader);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 // B:
 void bindBuffer(GLenum target, GLuint buffer)
 {
   glBindBuffer(target, buffer);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void bindTexture(GLenum target, GLuint texture)
 {
   glBindTexture(target, texture);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void bindVertexArray(GLuint array)
 {
   glBindVertexArray(array);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void blendFunc(GLenum sfactor, GLenum dfactor)
 {
   glBlendFunc(sfactor, dfactor);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void bufferData(GLenum target, GLsizeiptr size, const GLvoid *data, GLenum usage)
 {
   glBufferData(target, size, data, usage);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 // C:
 void clear(GLbitfield mask)
 {
   glClear(mask);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void clearColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha)
 {
   glClearColor(red, green, blue, alpha);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void compileShader(GLuint shader)
@@ -83,14 +94,15 @@ void compileShader(GLuint shader)
     }
 
     LOG(ERROR) << std::string(info.begin(), info.end());
-    assert(status != GL_FALSE);
+    BOOST_ASSERT(status != GL_FALSE);
   }
 }
 
 GLuint createProgram()
 {
   auto ret = glCreateProgram();
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 
   return ret;
 }
@@ -98,7 +110,8 @@ GLuint createProgram()
 GLuint createShader(GLenum type)
 {
   auto ret = glCreateShader(type);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 
   return ret;
 }
@@ -107,56 +120,65 @@ GLuint createShader(GLenum type)
 void deleteBuffers(GLsizei n, const GLuint *buffers)
 {
   glDeleteBuffers(n, buffers);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void deleteProgram(GLuint program)
 {
   glDeleteProgram(program);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void deleteSamplers(GLsizei n, const GLuint *samplers)
 {
   glDeleteSamplers(n, samplers);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void deleteTextures(GLsizei n, const GLuint *textures)
 {
   glDeleteTextures(n, textures);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void disable(GLenum cap)
 {
   glDisable(cap);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void disableVertexAttribArray(GLuint index)
 {
   glDisableVertexAttribArray(index);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void drawArrays(GLenum mode, GLint first, GLsizei count)
 {
   glDrawArrays(mode, first, count);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 // E:
 void enable(GLenum cap)
 {
   glEnable(cap);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void enableVertexAttribArray(GLuint index)
 {
   glEnableVertexAttribArray(index);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 // F:
@@ -164,45 +186,67 @@ void enableVertexAttribArray(GLuint index)
 void genBuffers(GLsizei n, GLuint *buffers)
 {
   glGenBuffers(n, buffers);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void generateMipmap(GLenum target)
 {
   glGenerateMipmap(target);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void genSamplers(GLsizei n, GLuint *samplers)
 {
   glGenSamplers(n, samplers);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void genTextures(GLsizei n, GLuint *textures)
 {
   glGenTextures(n, textures);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void genVertexArrays(GLsizei n, GLuint *arrays)
 {
   glGenVertexArrays(n, arrays);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 GLint getAttribLocation(GLuint program, const GLchar *name)
 {
   auto ret = glGetAttribLocation(program, name);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 
   return ret;
+}
+
+const char *getErrorString(GLenum error)
+{
+  switch(error) {
+    case GL_NO_ERROR: return "NO_ERROR";
+    case GL_INVALID_ENUM: return "INVALID_ENUM";
+    case GL_INVALID_VALUE: return "INVALID_VALUE";
+    case GL_INVALID_OPERATION: return "INVALID_OPERATION";
+    case GL_INVALID_FRAMEBUFFER_OPERATION: return "INVALID_FRAMEBUFFER_OPERATION";
+    case GL_OUT_OF_MEMORY: return "OUT_OF_MEMORY";
+    // case GL_STACK_UNDERFLOW: return "STACK_UNDERFLOW";
+    // case GL_STACK_OVERFLOW: return "STACK_OVERFLOW";
+    default: return boost::lexical_cast<std::string>(error).c_str();
+  }
 }
 
 const GLubyte *getString(GLenum name)
 {
   auto ret = glGetString(name);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 
   return ret;
 }
@@ -210,7 +254,8 @@ const GLubyte *getString(GLenum name)
 GLint getUniformLocation(GLuint program, const GLchar *name)
 {
   auto ret = glGetUniformLocation(program, name);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 
   return ret;
 }
@@ -241,7 +286,8 @@ void linkProgram(GLuint program)
 void *mapBuffer(GLenum target, GLenum access)
 {
   auto ret = glMapBuffer(target, access);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 
   return ret;
 }
@@ -249,7 +295,8 @@ void *mapBuffer(GLenum target, GLenum access)
 void *mapBufferRange(GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access)
 {
   auto ret = glMapBufferRange(target, offset, length, access);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 
   return ret;
 }
@@ -263,75 +310,87 @@ void *mapBufferRange(GLenum target, GLintptr offset, GLsizeiptr length, GLbitfie
 void samplerParameter(GLuint sampler, GLenum pname, GLint param)
 {
   glSamplerParameteri(sampler, pname, param);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void shaderSource(GLuint shader, GLsizei count, const GLchar *const *string, const GLint *length)
 {
   glShaderSource(shader, count, string, length);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 // T:
 void texImage2D(GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid * data)
 {
   glTexImage2D(target, level, internalFormat, width, height, border, format, type, data);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 // U:
 void uniform(GLint location, const GLfloat &value)
 {
   glUniform1f(location, value);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void uniform(GLint location, const GLint &value)
 {
   glUniform1i(location, value);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void uniform(GLint location, const GLuint &value)
 {
   glUniform1ui(location, value);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void uniform(GLint location, const glm::vec2 &value)
 {
   glUniform2fv(location, 1, glm::value_ptr(value));
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void uniform(GLint location, const glm::vec3 &value)
 {
   glUniform3fv(location, 1, glm::value_ptr(value));
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void uniform(GLint location, const glm::vec4 &value)
 {
   glUniform4fv(location, 1, glm::value_ptr(value));
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void uniform(GLint location, const glm::mat3 &value)
 {
   glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(value));
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 void uniform(GLint location, const glm::mat4 &value)
 {
   glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 bool unmapBuffer(GLenum target)
 {
   auto ret = glUnmapBuffer(target);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 
   return ret;
 }
@@ -339,14 +398,16 @@ bool unmapBuffer(GLenum target)
 void useProgram(GLuint program)
 {
   glUseProgram(program);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 
 // V:
 void vertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer)
 {
   glVertexAttribPointer(index, size, type, normalized, stride, pointer);
-  assert(glGetError() == GL_NO_ERROR);
+  auto error = glGetError();
+  BOOST_ASSERT_MSG(error == GL_NO_ERROR, getErrorString(error));
 }
 // W:
 // X:

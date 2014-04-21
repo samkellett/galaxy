@@ -46,6 +46,7 @@ inline void genSamplers(GLsizei n, GLuint *samplers);
 inline void genTextures(GLsizei n, GLuint *textures);
 inline void genVertexArrays(GLsizei n, GLuint *arrays);
 inline GLint getAttribLocation(GLuint program, const GLchar *name);
+inline const char *getErrorString(GLenum error);
 inline const GLubyte *getString(GLenum name);
 inline GLint getUniformLocation(GLuint program, const GLchar *name);
 // H:
