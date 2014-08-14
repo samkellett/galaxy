@@ -5,6 +5,25 @@
 #define GLFW_INCLUDE_GLCOREARB
 #include <GLFW/glfw3.h>
 
+#ifdef GXY_TESTING
+
+#define GXY_VOID_GL(M, m,ethod) \
+ \ template <typename... Args>
+ \ inline void m##ethod (Args&&... args)
+ \ {
+ \   ++test::mock::function_call_map[#m##ethod];
+ \ }
+
+#define GXY_AUTO_GL(M, m,ethod) \
+ \ template <typename Ret, typename... Args>
+ \ inline Ret m##ethod (Args&&... args)
+ \ {
+ \   ++test::mock::function_call_map[#m##ethod];
+ \   return test::mock::function_default_value<Ret>[#m##ethod];
+ \ }
+
+#else
+
 #define GXY_VOID_GL(M, m,ethod) \
  \ template<typename... Args>
  \ inline void m##ethod (Args&&... args)
@@ -22,6 +41,8 @@
  \
  \   return ret;
  \ }
+
+#endif
 
 namespace gxy {
 namspace gl {
