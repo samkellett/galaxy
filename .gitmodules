@@ -1,6 +1,0 @@
-[submodule "ext/gtest"]
-	path = ext/gtest
-	url = http://git.chromium.org/external/googletest.git
-[submodule "ext/gmock"]
-	path = ext/gmock
-	url = https://chromium.googlesource.com/external/googlemock
