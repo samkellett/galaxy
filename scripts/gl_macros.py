@@ -1,22 +1,28 @@
 #!/usr/bin/env python
 
-import urllib2
+from operator import itemgetter
+from urllib2 import urlopen
 
 glcorearb = 'http://www.opengl.org/registry/api/GL/glcorearb.h'
 
-header = urllib2.urlopen(glcorearb)
+header = urlopen(glcorearb)
 data = header.read()
+data = data.replace("const GLubyte", "constGLubyte")
 
-for line in data.split('\n'):
-  if line.startswith("GLAPI"):
-    tokens = line.split(' ')
+lines = [l.split() for l in data.split('\n') if l.startswith("GLAPI")]
+lines.sort(key = itemgetter(3))
 
-    return_type = tokens[1]
-    method = tokens[4] if return_type == "const" else tokens[3]
-    method = method[2:]
+for tokens in lines:
+  return_type = tokens[1]
+  if return_type == "constGLubyte":
+    return_type = "const GLubyte *"
 
-    output = "GXY_"
-    output += "VOID" if return_type == "void" else "AUTO"
-    output += "_GL(" + method[0] + ", " + method[0].lower() + "," + method[1:] + ")"
+  method = tokens[3][2:]
 
-    print output
+  output_template = "GXY_{type}_GL({M}, {m},{ethod}" + (", {return_type})" if return_type != "void" else ")")
+  print output_template.format(
+    type = "VOID" if return_type == "void" else "AUTO",
+    M = method[0],
+    m = method[0].lower(),
+    ethod = method[1:],
+    return_type = return_type)
