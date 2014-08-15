@@ -19,8 +19,16 @@ include_directories(
 )
 
 set(GALAXY_SOURCES
-  src/galaxy.cpp
+  src/gxy/game.cpp
+
+  src/gxy/test/functioncallmap.cpp
 )
 
 add_library(${PROJECT_NAME} SHARED ${GALAXY_SOURCES})
 
+# Tests:
+add_subdirectory(ext/gmock)
+add_subdirectory(test)
+
+add_dependencies(unit gmock)
+add_test(test unit)
