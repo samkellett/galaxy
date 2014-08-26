@@ -3,7 +3,10 @@
 #include <cassert>
 #include <functional>
 
-#ifdef GXY_TESTING
+#define GLFW_INCLUDE_GLCOREARB
+#include <GLFW/glfw3.h>
+
+#ifdef GXY_MOCK_OPENGL
 #pragma message("Defining mock OpenGL functions")
 
 #include "gxy/macros.h"
@@ -23,9 +26,6 @@
 #pragma message("Defining real OpenGL functions")
 
 #include <GLXW/glxw.h>
-
-#define GLFW_INCLUDE_GLCOREARB
-#include <GLFW/glfw3.h>
 
 #define GXY_VOID_GL(M, m,ethod) \
  template<typename... Args> \
