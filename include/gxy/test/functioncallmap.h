@@ -3,6 +3,8 @@
 #include <map>
 #include <string>
 
+#include "gxy/macros.h"
+
 namespace {
 
 } // unnamed namespace
@@ -25,7 +27,7 @@ private:
 template <typename T>
 T FunctionCallMap::default_value(const std::string &method)
 {
-  (void) method;
+  GXY_UNUSED(method);
 
   return T();
 }
