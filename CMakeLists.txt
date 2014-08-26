@@ -20,6 +20,23 @@ endif()
 # Compiler Flags:
 add_cxxflag("-std=c++11")
 
+add_cxxflag("-Wall")
+add_cxxflag("-Wextra")
+add_cxxflag("-Wuninitialized")
+add_cxxflag("-Wold-style-cast")
+add_cxxflag("-Woverloaded-virtual")
+add_cxxflag("-Wpointer-arith")
+add_cxxflag("-Wcast-qual")
+add_cxxflag("-Woverflow")
+add_cxxflag("-Wmissing-declarations")
+add_cxxflag("-Wredundant-decls")
+
+add_cxxflag("-Werror")
+
+add_cxxflag("-Wno-#pragma-messages")
+add_cxxflag("-Wno-missing-field-initializers")
+
+
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   add_cxxflag("-stdlib=libc++")
 endif()

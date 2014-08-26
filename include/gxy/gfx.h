@@ -13,7 +13,7 @@
 
 #define GXY_AUTO_GL(M, m,ethod, return_type) \
  template <typename... Args> \
- inline return_type m##ethod (Args&&... args) \
+ inline return_type m##ethod (Args&&...) \
  { \
    ++test::function_call_map[GXY_STR( m##ethod )]; \
    return test::function_call_map.default_value<return_type>(GXY_STR( m##ethod )); \

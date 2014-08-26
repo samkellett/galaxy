@@ -15,5 +15,5 @@
 
 #define GXY_STR(str) #str
 
-#define GXY_UNUSED(var) (void) var
+#define GXY_UNUSED(var) static_cast<void>(var)
 
