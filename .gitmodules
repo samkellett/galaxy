@@ -1,0 +1,12 @@
+[submodule "ext/gmock"]
+	path = ext/gmock
+	url = https://chromium.googlesource.com/external/googlemock
+[submodule "ext/gtest"]
+	path = ext/gtest
+	url = https://chromium.googlesource.com/external/googletest
+[submodule "cmake"]
+	path = cmake
+	url = git@github.com:samkellett/cmake-modules.git
+[submodule "ext/glxw"]
+	path = ext/glxw
+	url = git@github.com:rikusalminen/glxw.git
