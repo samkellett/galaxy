@@ -1,4 +1,4 @@
-project(test)
+project(unit)
 
 enable_testing()
 

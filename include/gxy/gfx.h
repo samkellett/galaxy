@@ -25,7 +25,7 @@
 #include <cassert>
 #include <functional>
 
-#include <GLXW/glxw.h>
+//#include <GLXW/glxw.h>
 
 #define GXY_VOID_GL(M, m,ethod) \
  template<typename... Args> \
@@ -41,7 +41,6 @@
  { \
    return_type ret = gl##M##ethod (std::forward<Args>(args)...); \
    assert(glGetError() == GL_NO_ERROR); \
- \
    return ret; \
  }
 
