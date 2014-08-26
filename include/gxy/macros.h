@@ -11,9 +11,8 @@
   \
     T1 first ; \
     T2 second ; \
-  }
+  };
 
 #define GXY_STR(str) #str
 
 #define GXY_UNUSED(var) static_cast<void>(var)
-

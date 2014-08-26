@@ -17,4 +17,3 @@ target_link_libraries(${PROJECT_NAME}
   gmock
   gmock_main
 )
-

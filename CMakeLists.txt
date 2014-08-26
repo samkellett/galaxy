@@ -65,4 +65,3 @@ add_subdirectory(ext/gmock)
 add_subdirectory(test)
 
 add_dependencies(unit gmock gmock_main)
-
