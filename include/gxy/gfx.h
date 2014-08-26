@@ -1,8 +1,5 @@
 #pragma once
 
-#include <cassert>
-#include <functional>
-
 #define GLFW_INCLUDE_GLCOREARB
 #include <GLFW/glfw3.h>
 
@@ -24,6 +21,9 @@
 
 #else
 #pragma message("Defining real OpenGL functions")
+
+#include <cassert>
+#include <functional>
 
 #include <GLXW/glxw.h>
 
