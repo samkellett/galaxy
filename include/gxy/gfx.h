@@ -11,7 +11,7 @@
 #include "gxy/test/functioncallmap.h"
 
 #define GXY_VOID_GLFW(M, m,ethod) GXY_AUTO_GL(M, m,ethod, void)
-#define GXY_AUTO_GLFW(M, m,ethod, return_type) GXY_AUTO_GL(M, m,ethod, void)
+#define GXY_AUTO_GLFW(M, m,ethod, return_type) GXY_AUTO_GL(M, m,ethod, return_type)
 
 #define GXY_VOID_GL(M, m,ethod) GXY_AUTO_GL(M, m,ethod, void)
 
