@@ -7,7 +7,7 @@
 #elif defined(__WIN32)
   #define GXY_OS_WIN
 #else
-  #error "Galaxy is not supported on this system, please file an issue: "
+  #error "Galaxy is not supported on this system, please file an issue: " \
     "https://github.com/samkellett/galaxy/issues"
 #endif
 

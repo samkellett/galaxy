@@ -3,7 +3,7 @@
 namespace gxy {
 namespace test {
 
-int &FunctionCallMap::operator[] (const std::string &key)
+int &function_call_map::operator[] (const std::string &key)
 {
   return call_map_[key];
 }

@@ -4,7 +4,7 @@
 
 namespace gxy {
 
-void Game::init()
+void game::init()
 {
 }
 

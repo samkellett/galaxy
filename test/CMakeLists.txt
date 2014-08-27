@@ -9,6 +9,8 @@ include_directories(
 
 set(UNIT_TESTS
   src/main.cpp
+
+  src/gametests.cpp
 )
 
 add_executable(${PROJECT_NAME} ${UNIT_TESTS})

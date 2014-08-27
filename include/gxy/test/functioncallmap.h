@@ -12,7 +12,7 @@ namespace {
 namespace gxy {
 namespace test {
 
-class FunctionCallMap
+class function_call_map
 {
 public:
   int &operator[] (const std::string &key);
@@ -25,14 +25,12 @@ private:
 };
 
 template <typename T>
-T FunctionCallMap::default_value(const std::string &method)
+T function_call_map::default_value(const std::string &method)
 {
   GXY_UNUSED(method);
 
   return T();
 }
-
-extern FunctionCallMap function_call_map;
 
 } // namespace test
 } // namespace gxy

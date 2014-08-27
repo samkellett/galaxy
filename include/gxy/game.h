@@ -2,7 +2,7 @@
 
 namespace gxy {
 
-class Game
+class game
 {
 public:
   void init();

@@ -10,6 +10,14 @@
 
 #include "gxy/test/functioncallmap.h"
 
+namespace gxy {
+namespace test {
+
+extern function_call_map gfmap;
+
+} // namespace test
+} // namespace gxy
+
 #define GXY_VOID_GLFW(M, m,ethod) GXY_AUTO_GL(M, m,ethod, void)
 #define GXY_AUTO_GLFW(M, m,ethod, return_type) GXY_AUTO_GL(M, m,ethod, return_type)
 
@@ -19,8 +27,8 @@
  template <typename... Args> \
  inline return_type m##ethod (Args&&...) \
  { \
-   ++test::function_call_map[GXY_STR( m##ethod )]; \
-   return test::function_call_map.default_value<return_type>(GXY_STR( m##ethod )); \
+   ++gxy::test::gfmap[GXY_STR( m##ethod )]; \
+   return gxy::test::gfmap.default_value<return_type>(GXY_STR( m##ethod )); \
  }
 
 #else
