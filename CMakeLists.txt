@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
 project(galaxy)
 
-# FIXME
-cmake_policy(SET CMP0042 OLD)
+if(NOT ${CMAKE_VERSION} VERSION_LESS "3.0.1")
+  cmake_policy(SET CMP0042 OLD)
+endif()
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
@@ -33,12 +34,13 @@ add_cxxflag("-Wredundant-decls")
 
 add_cxxflag("-Werror")
 
-add_cxxflag("-Wno-#pragma-messages")
+add_cxxflag("-Wno-missing-declarations")
 add_cxxflag("-Wno-missing-field-initializers")
-
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   add_cxxflag("-stdlib=libc++")
+
+  add_cxxflag("-Wno-#pragma-messages")
 endif()
 
 include_directories(
@@ -57,7 +59,7 @@ set(GALAXY_SOURCES
 add_library(${PROJECT_NAME} SHARED ${GALAXY_SOURCES})
 
 target_link_libraries(${PROJECT_NAME}
-  ${GLXW}
+  ${GLXW_LIBRARY}
 )
 
 # Tests

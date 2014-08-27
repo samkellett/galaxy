@@ -3,10 +3,11 @@
 #define GLFW_INCLUDE_GLCOREARB
 #include <GLFW/glfw3.h>
 
+#include "gxy/macros.h"
+
 #ifdef GXY_MOCK_OPENGL
 #pragma message("Defining mock OpenGL functions")
 
-#include "gxy/macros.h"
 #include "gxy/test/functioncallmap.h"
 
 #define GXY_VOID_GLFW(M, m,ethod) GXY_AUTO_GL(M, m,ethod, void)
@@ -28,7 +29,9 @@
 #include <cassert>
 #include <functional>
 
-//#include <GLXW/glxw.h>
+#ifdef GXY_OS_LINUX
+  #include <GLXW/glxw.h>
+#endif
 
 #define GXY_VOID_GLFW(M, m,ethod) GXY_AUTO_GLFW(M, m,ethod, void)
 #define GXY_AUTO_GLFW(M, m,ethod, return_type) \
