@@ -15,6 +15,14 @@ void game::tick()
 {
 }
 
+void game::initialise()
+{
+}
+
+void game::teardown()
+{
+}
+
 void game::quit(const unsigned int error_code)
 {
   quitting_ = true;
@@ -29,6 +37,11 @@ bool game::quitting() const
 unsigned int game::error_code() const
 {
   return error_code_;
+}
+
+const std::chrono::nanoseconds &game::dt() const
+{
+  return dt_;
 }
 
 } // namespace gxy

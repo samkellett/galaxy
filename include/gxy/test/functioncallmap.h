@@ -17,6 +17,9 @@ class function_call_map
 public:
   int &operator[] (const std::string &key);
 
+  bool empty() const;
+  void clear();
+
   template <typename T>
   T default_value(const std::string &method);
 
