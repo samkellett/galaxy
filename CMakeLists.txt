@@ -20,7 +20,9 @@ endif()
 
 # Compiler Flags:
 add_cxxflag("-std=c++11")
+add_cxxflag("-fno-rtti")
 
+# Warnings
 add_cxxflag("-Wall")
 add_cxxflag("-Wextra")
 add_cxxflag("-Wuninitialized")
